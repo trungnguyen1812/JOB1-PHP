@@ -1,0 +1,61 @@
+.formLogin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 50px;
+    background-color: rgb(211, 211, 208);
+    width: 700px;
+    margin: 0 auto;
+    border: none;
+}
+
+.formLogin div {
+    flex: 1;
+}
+
+.formLogin img {
+    margin-right: 50px;
+    margin-left: 10px;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 85%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+.btnRegister{
+    padding: 10px 20px;
+    background-color: #4582a0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 44px;
+    
+}
+
+.btnRegister:hover {
+    background-color: #3c6d86;
+}
