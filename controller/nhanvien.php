@@ -1,6 +1,7 @@
-<?php 
-    include '../lib/session.php';
-    include '../lib/database.php';
+<?php
+$filepath = realpath(dirname(__FILE__));
+include $filepath . '/../lib/session.php';
+include $filepath . '/../lib/database.php';
 ?>
 <?php
 class NhanVien
@@ -20,6 +21,7 @@ class NhanVien
             Session::set('username', $value['HoTenNhanVien']);
             Session::set('userid', $value['IDNhanVien']);
             header("Location:dashboard.php");
+            return true;
         } else {
             $alert = "Tên đăng nhập hoặc mật khẩu không đúng!";
             ?>
@@ -29,24 +31,34 @@ class NhanVien
         }
     }
 
-    public function register($data)
+    //Lay toan bo nhan vien
+    public function getAll()
+    {
+        $query =
+            "SELECT * FROM nhanvien";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function insert($data)
     {
         $hoten = $data['hoten'];
         $email = $data['email'];
         $password = $data['password'];
-        $query = "INSERT INTO nhanvien(hoten, email, matkhau) VALUES ('$hoten', '$email', '$password')";
+        $sdt = $data['sdt'];
+        $namsinh = $data['namsinh'];
+        $gioitinh = $data['gioitinh'];
+        $diachi = $data['diachi'];
+        
+        $query = "INSERT INTO nhanvien(HoTenNhanVien, Email, MatKhau, SĐT, NamSinh, GioiTinh, DiaChi) ".
+                        "VALUES ('$hoten', '$email', '$password', '$sdt', '$namsinh', '$gioitinh', '$diachi')";
         $result = $this->db->insert($query);
         if ($result) {
-            ?>
-            <script>alert("Thêm tài khoản thành công!")</script>
-            <?php
-            header("Location: login.php");
-            return true;
+            header("Location: index.php");
+            $alert = "Thêm mới thành công!";
+            return $alert;
         } else {
             $alert = "Đăng ký không thành công!";
-            ?>
-            <script>alert("Đăng ký không thành công! Thử lại...")</script>
-            <?php
             return $alert;
         }
     }
