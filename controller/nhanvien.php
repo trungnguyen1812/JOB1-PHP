@@ -20,7 +20,7 @@ class NhanVien
             $value = $result->fetch_assoc();
             Session::set('username', $value['HoTenNhanVien']);
             Session::set('userid', $value['IDNhanVien']);
-            header("Location:dashboard.php");
+            header("Location:pages/dashboard/dashboard.php");
             return true;
         } else {
             $alert = "Tên đăng nhập hoặc mật khẩu không đúng!";
@@ -93,6 +93,20 @@ class NhanVien
             return $alert;
         } else {
             $alert = "Cập nhật không thành công!";
+            return $alert;
+        }
+    }
+
+    //Xoa nhan vien
+    public function delete($id) {
+        $query = "DELETE FROM NhanVien WHERE IDNhanVien = '$id'";
+        $result = $this->db->update($query);
+        if ($result) {
+            $alert = "Đã xoá!";
+            header("Location: index.php");
+            return $alert;
+        } else {
+            $alert = "Xoá không thành công!";
             return $alert;
         }
     }

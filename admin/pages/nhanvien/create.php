@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input style="width: 40%" id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" required/>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <label for="password" class="form-label p-2">Email:</label>
+                                        <label for="password" class="form-label p-2">Mật khẩu:</label>
                                         <input style="width: 40%" id="password" name="password" class="form-control" type="password" placeholder="Nhập email nhân viên" required/>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">

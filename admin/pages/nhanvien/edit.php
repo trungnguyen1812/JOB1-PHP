@@ -187,7 +187,7 @@ $nhanvienUpdate = mysqli_fetch_assoc($nhanvien->getById($_GET['id']));
                                         <input style="width: 40%" id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" value="<?= $nhanvienUpdate['Email'] ?>" required/>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <label for="password" class="form-label p-2">Email:</label>
+                                        <label for="password" class="form-label p-2">Mật khẩu:</label>
                                         <input style="width: 40%" id="password" name="password" class="form-control" type="password" placeholder="Nhập password nhân viên" value="<?= $nhanvienUpdate['MatKhau'] ?>" required/>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">
