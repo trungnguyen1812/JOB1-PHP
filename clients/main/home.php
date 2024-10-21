@@ -1,11 +1,16 @@
-<section id="banner" style="background: #F9F3EC;">
+<?php
+session_start();
+include '../layouts/header.php';
+?>
+<div id="main-content">
+  <section id="banner" style="background: #F9F3EC;">
     <div class="container">
       <div class="swiper main-swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide py-5">
             <div class="row banner-content align-items-center">
               <div class="img-wrapper col-md-5">
-                <img src="images/banner-img.png" class="img-fluid">
+                <img src="../images/banner-img.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
@@ -24,7 +29,7 @@
           <div class="swiper-slide py-5">
             <div class="row banner-content align-items-center">
               <div class="img-wrapper col-md-5">
-                <img src="images//banner-img3.png" class="img-fluid">
+                <img src="../images//banner-img3.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
@@ -43,7 +48,7 @@
           <div class="swiper-slide py-5">
             <div class="row banner-content align-items-center">
               <div class="img-wrapper col-md-5">
-                <img src="images/banner-img4.png" class="img-fluid">
+                <img src="../images/banner-img4.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
@@ -126,7 +131,7 @@
               New
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -163,7 +168,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item2.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item2.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -199,7 +204,7 @@
               -10%
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -236,7 +241,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -273,7 +278,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -310,7 +315,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -380,7 +385,7 @@
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item9.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item9.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -418,7 +423,7 @@
             New
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item10.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item10.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -456,7 +461,7 @@
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item11.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item11.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -494,7 +499,7 @@
             Sold
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item12.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item12.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -532,7 +537,7 @@
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item13.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item13.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -570,7 +575,7 @@
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item14.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item14.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -608,7 +613,7 @@
             Sale
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item15.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item15.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -646,7 +651,7 @@
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item16.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img src="../images/item16.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -690,7 +695,7 @@
     <div class="container">
       <div class="row flex-row-reverse banner-content align-items-center">
         <div class="img-wrapper col-12 col-md-6">
-          <img src="images/banner-img2.png" class="img-fluid">
+          <img src="../images/banner-img2.png" class="img-fluid">
         </div>
         <div class="content-wrapper col-12 offset-md-1 col-md-5 p-5">
           <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
@@ -787,7 +792,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item5.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item5.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -824,7 +829,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item6.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item6.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -860,7 +865,7 @@
               Sale
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -897,7 +902,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -934,7 +939,7 @@
               -10%
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -971,7 +976,7 @@
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img src="../images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -1013,7 +1018,7 @@
     </div>
   </section>
 
-  <section id="register" style="background: url('images/background-img.png') no-repeat;">
+  <section id="register" style="background: url('../images/background-img.png') no-repeat;">
     <div class="container ">
       <div class="row my-5 py-5">
         <div class="offset-md-3 col-md-6 my-5 ">
@@ -1064,7 +1069,7 @@
 
           </div>
           <div class="card position-relative">
-            <a href="single-post.html"><img src="images/blog1.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-post.html"><img src="../images/blog1.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">10 Reasons to be helpful towards any animals</h3>
@@ -1087,7 +1092,7 @@
 
           </div>
           <div class="card position-relative">
-            <a href="single-post.html"><img src="images/blog2.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-post.html"><img src="../images/blog2.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">How to know your pet is hungry</h3>
@@ -1110,7 +1115,7 @@
 
           </div>
           <div class="card position-relative">
-            <a href="single-post.html"><img src="images/blog3.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-post.html"><img src="../images/blog3.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">Best home for your pets</h3>
@@ -1189,7 +1194,7 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
       <div class="col instagram-item  text-center position-relative">
@@ -1197,7 +1202,7 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
       <div class="col instagram-item  text-center position-relative">
@@ -1205,7 +1210,7 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
       <div class="col instagram-item  text-center position-relative">
@@ -1213,7 +1218,7 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
       <div class="col instagram-item  text-center position-relative">
@@ -1221,7 +1226,7 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
       <div class="col instagram-item  text-center position-relative">
@@ -1229,8 +1234,10 @@
           <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
         </div>
         <a href="#">
-          <img src="images/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
+          <img src="../images/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
         </a>
       </div>
     </div>
   </section>
+</div>
+<?php include '../layouts/footer.php'; ?>
