@@ -1,10 +1,16 @@
 <?php
 include "../../../controller/nhanvien.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nhanvien = new NhanVien();
+    $result = $nhanvien->update($_POST);
+}
+
 $nhanvien = new NhanVien();
-$dsnhanvien = $nhanvien->getAll();
+$nhanvienUpdate = mysqli_fetch_assoc($nhanvien->getById($_GET['id']));
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8" />
@@ -165,79 +171,45 @@ $dsnhanvien = $nhanvien->getAll();
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Danh sách nhân viên</h6>
-                            <a class="btn btn-primary" href="create.php">Thêm Mới</a>
+                            <h6>Chỉnh sửa thông tin nhân viên</h6>
                         </div>
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9" width="10%">
-                                                Mã nhân viên</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9 ps-2">
-                                                Tên nhân viên</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                SĐT</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Năm sinh</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Giới tính</th>
-                                            <th class="text-secondary opacity-9"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if ($dsnhanvien) {
-                                            foreach ($dsnhanvien as $key => $value) {
-                                                ?>
-                                                <tr>
-                                                    <td class="align-middle text-center text-sm">
-                                                        <p class="text-xs font-weight-bold mb-0">
-                                                            <?= $value['IDNhanVien'] ?>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div>
-                                                                <img src="" class="avatar avatar-sm me-3" alt="user1">
-                                                            </div>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"><?= $value['HoTenNhanVien'] ?></h6>
-                                                                <p class="text-xs text-secondary mb-0"><?= $value['Email'] ?>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SĐT'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['NamSinh'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['GioiTinh'] == 0 ? "Nữ" : "Nam" ?></span>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <a href="edit.php?id=<?= $value['IDNhanVien'] ?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Chỉnh sửa
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <hr>
+                        <div class="card-body pt-0 pb-2 text-center">
+                            <form action="edit.php" method="POST">
+                                <div>
+                                    <input type="hidden" name="id" value="<?= $nhanvienUpdate['IDNhanVien'] ?>"/>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="hoten" class="form-label p-2">Họ tên:</label>
+                                        <input style="width: 40%" id="hoten" name="hoten" class="form-control" type="text" placeholder="Nhập họ tên" value="<?= $nhanvienUpdate['HoTenNhanVien'] ?>" required/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="email" class="form-label p-2">Email:</label>
+                                        <input style="width: 40%" id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" value="<?= $nhanvienUpdate['Email'] ?>" required/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="password" class="form-label p-2">Email:</label>
+                                        <input style="width: 40%" id="password" name="password" class="form-control" type="password" placeholder="Nhập password nhân viên" value="<?= $nhanvienUpdate['MatKhau'] ?>" required/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="sdt" class="form-label p-2">SĐT:</label>
+                                        <input style="width: 40%" id="sdt" name="sdt" class="form-control" type="text" placeholder="Nhập số điện thoại liên lạc" value="<?= $nhanvienUpdate['SĐT'] ?>"/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="namsinh" class="form-label p-2">Năm sinh:</label>
+                                        <input style="width: 40%" id="namsinh" name="namsinh" class="form-control" type="text" placeholder="Nhập năm sinh" value="<?= $nhanvienUpdate['NamSinh'] ?>"/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="gioitinh" class="form-label p-2">Giới tính:</label>
+                                        <input style="width: 40%" id="gioitinh" name="gioitinh" class="form-control" type="text" placeholder="Nhập giới tính" value="<?= $nhanvienUpdate['GioiTinh']==1?"Nam":"Nữ" ?>"/>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <label for="diachi" class="form-label p-2">Địa chỉ:</label>
+                                        <input style="width: 40%" id="diachi" name="diachi" class="form-control" type="text" placeholder="Nhập địa chỉ" value="<?= $nhanvienUpdate['DiaChi'] ?>"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <input type="submit" class="btn btn-success" value="Lưu"/>
+                            </form>
                         </div>
                     </div>
                 </div>
