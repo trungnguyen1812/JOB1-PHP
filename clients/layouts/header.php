@@ -1,6 +1,6 @@
 <?php
-    // Hiển thị tên người dùng
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Người dùng';
+// Hiển thị tên người dùng
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Dang nhap';
 // Đặt code này trong một file helper, ví dụ: helpers.php
 
 define('BASE_PATH', '/');
@@ -26,8 +26,10 @@ define('BASE_PATH', '/');
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>clients/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>clients/style.css">
+<!-- <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/css/vendor.css">
+<link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/style.css"> -->
+<link rel="stylesheet" type="text/css" href="../css/vendor.css">
+<link rel="stylesheet" type="text/css" href="../style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +38,8 @@ define('BASE_PATH', '/');
 
 <style>
   /* Thêm CSS cho sticky header */
-  html, body {
+  html,
+  body {
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -137,11 +140,10 @@ define('BASE_PATH', '/');
   <header>
     <div class="container py-2">
       <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
-
         <div class="col-sm-4 col-lg-3 text-center text-sm-start">
           <div class="main-logo">
             <a href="index.html">
-              <img src="images/logo.png" alt="logo" class="img-fluid">
+              <img src="../images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
         </div>
@@ -275,12 +277,17 @@ define('BASE_PATH', '/');
             <div class="d-none d-lg-flex align-items-end">
               <ul class="d-flex justify-content-end list-unstyled m-0">
                 <li>
-                  <a href="?page=login" class="mx-3">
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                  </a>
+                  <?php
+                  if (isset($_SESSION['username'])) { ?>
+                    <a href="logout.php">
+                        Đăng xuất
+                    </a>
+                  <?php } else { ?>
+                    <a href="login.php" class="mx-3">
+                      <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                    </a>
+                  <?php } ?>
                 </li>
-            
-
                 <li class="">
                   <a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                     aria-controls="offcanvasCart">

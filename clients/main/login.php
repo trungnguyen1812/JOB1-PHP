@@ -1,3 +1,14 @@
+<?php
+    include '../../controller/khachhang.php';
+    $khachhang = new khachhang();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $login_check = $khachhang->login($email, $password);
+    }
+?>
+<!-- Xu ly php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,48 +16,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/clients/css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
-
 <body>
-    <hr>
-    <div style="text-align: center;">
-        <h3>ĐĂNG NHẬP</h3>
-    </div>
-    <div class="formLogin">
-
-        <div>
-            <img width="250" height="180" src="/clients/images/logoLogin.png " alt="">
+<?php
+include '../layouts/header.php';
+?>
+    <div id="main-content">
+        <hr>
+        <div style="text-align: center;">
+            <h3>ĐĂNG NHẬP</h3>
         </div>
-        <div>
-            <form action="">
-                <br>
-                <div>
-                    <label for="username">Tên đăng nhập:</label><br>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div>
-                    <label for="password">Mật khẩu:</label><br>
-                    <input type="password" id="password" name="password" required>
-                </div>
+        <div class="formLogin">
 
-                <div>
-                    <input type="submit" value="Đăng Nhập">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div>
+                <img width="250" height="180" src="../images/logoLogin.png " alt="">
+            </div>
+            <div>
+                <form action="login.php" method="POST">
+                    <br>
+                    <div>
+                        <label for="username">Tên Email:</label><br>
+                        <input type="text" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="password">Mật khẩu:</label><br>
+                        <input type="password" id="password" name="password" required>
+                    </div>
 
+                    <div>
+                        <input type="submit" value="Đăng Nhập">
+                    </div>
+                    <br>
+                </form>
+                <div>
+                    <div>Bạn chưa có tài khoản?</div>
+                </div>
+                <a style="color: white;" href="register.php">
                     <button class="btnRegister">
-                        <a style="color: white;" href="?page=register">
-                            Đăng Ký
-                        </a>
+                        Đăng Ký Ngay
                     </button>
-
-                </div>
-                <br>
-            </form>
-
+                </a>
+            </div>
         </div>
-    </div>
-    <hr>
+        <hr>
 </body>
+<?php
+include '../layouts/footer.php';
+?>
 
 </html>

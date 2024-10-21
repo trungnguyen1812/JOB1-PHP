@@ -52,7 +52,7 @@ input[type="submit"]:hover {
     color: white;
     border: none;
     cursor: pointer;
-    margin-left: 44px;
+    /* margin-left: 44px; */
     
 }
 
