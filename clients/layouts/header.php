@@ -4,7 +4,16 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Dang nhap';
 // Đặt code này trong một file helper, ví dụ: helpers.php
 
 define('BASE_PATH', '/');
+
+// Dinh nghia duong dan cua file
+$filepath = realpath(dirname(__FILE__));
 // Trong file header.php
+if (isset($_SESSION['userId'])) {
+  include $filepath . '/../../controller/giohang.php';
+  $giohang = new GioHang();
+  $giohang_user = $giohang->getByID($_SESSION['userId']);
+  $giohang_soluong = $giohang_user==false ? 0 : mysqli_num_rows($giohang_user);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,12 +76,12 @@ define('BASE_PATH', '/');
 </head>
 
 <body>
-
   <div class="preloader-wrapper">
     <div class="preloader">
     </div>
   </div>
 
+  <!-- Gio hang khi duoc mo -->
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -80,34 +89,37 @@ define('BASE_PATH', '/');
     <div class="offcanvas-body">
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-circle pt-2">3</span>
+          <span class="text-primary">Giỏ hàng</span>
+          <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
         </h4>
         <ul class="list-group mb-3">
+          <?php 
+          if ($giohang_soluong==0) {
+            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
+          } else 
+          {
+            $tongtien = 0;
+            foreach ($giohang_user as $key => $value) 
+            {
+              ?>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Grey Hoodie</h6>
-              <small class="text-body-secondary">Brief description</small>
+              <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
+              <small class="text-body-secondary">Giá x Số lượng : <?php echo $value['Gia'].' x '.$value['SoLuong'] ?></small>
             </div>
-            <span class="text-body-secondary">$12</span>
+            <span class="text-body-secondary">
+              <?php 
+              $tongtien += $value['Gia']*$value['SoLuong'];
+              echo $value['Gia']*$value['SoLuong'];
+              ?> VNĐ
+            </span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Dog Food</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Soft Toy</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
+          <?php
+            }
+          } ?>
           <li class="list-group-item d-flex justify-content-between">
-            <span class="fw-bold">Total (USD)</span>
-            <strong>$20</strong>
+            <span class="fw-bold">Tổng tiền: </span>
+            <strong><?= $tongtien ?> VNĐ</strong>
           </li>
         </ul>
 
@@ -142,7 +154,7 @@ define('BASE_PATH', '/');
       <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
         <div class="col-sm-4 col-lg-3 text-center text-sm-start">
           <div class="main-logo">
-            <a href="index.html">
+            <a href="home.php">
               <img src="../images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
@@ -185,7 +197,7 @@ define('BASE_PATH', '/');
         <div class="d-flex d-lg-none align-items-end mt-3">
           <ul class="d-flex justify-content-end list-unstyled m-0">
             <li>
-              <a href="account.html" class="mx-3">
+              <a href="login.php" class="mx-3">
                 <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
               </a>
             </li>
@@ -222,7 +234,6 @@ define('BASE_PATH', '/');
         </button>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
           <div class="offcanvas-header justify-content-center">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
@@ -238,39 +249,39 @@ define('BASE_PATH', '/');
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
-                <a href="index.html" class="nav-link active">Home</a>
+                <a href="home.php" class="nav-link active">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
                   aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu" aria-labelledby="pages">
-                  <li><a href="index.html" class="dropdown-item">About Us</a></li>
-                  <li><a href="index.html" class="dropdown-item">Shop</a></li>
-                  <li><a href="index.html" class="dropdown-item">Single Product</a></li>
-                  <li><a href="index.html" class="dropdown-item">Cart</a></li>
-                  <li><a href="index.html" class="dropdown-item">Wishlist</a></li>
-                  <li><a href="index.html" class="dropdown-item">Checkout</a></li>
-                  <li><a href="index.html" class="dropdown-item">Blog</a></li>
-                  <li><a href="index.html" class="dropdown-item">Single Post</a></li>
-                  <li><a href="index.html" class="dropdown-item">Contact</a></li>
-                  <li><a href="index.html" class="dropdown-item">FAQs</a></li>
-                  <li><a href="index.html" class="dropdown-item">Account</a></li>
-                  <li><a href="index.html" class="dropdown-item">Thankyou</a></li>
-                  <li><a href="index.html" class="dropdown-item">Error 404</a></li>
-                  <li><a href="index.html" class="dropdown-item">Styles</a></li>
+                  <li><a href="home.php" class="dropdown-item">About Us</a></li>
+                  <li><a href="home.php" class="dropdown-item">Shop</a></li>
+                  <li><a href="home.php" class="dropdown-item">Single Product</a></li>
+                  <li><a href="home.php" class="dropdown-item">Cart</a></li>
+                  <li><a href="home.php" class="dropdown-item">Wishlist</a></li>
+                  <li><a href="home.php" class="dropdown-item">Checkout</a></li>
+                  <li><a href="home.php" class="dropdown-item">Blog</a></li>
+                  <li><a href="home.php" class="dropdown-item">Single Post</a></li>
+                  <li><a href="home.php" class="dropdown-item">Contact</a></li>
+                  <li><a href="home.php" class="dropdown-item">FAQs</a></li>
+                  <li><a href="home.php" class="dropdown-item">Account</a></li>
+                  <li><a href="home.php" class="dropdown-item">Thankyou</a></li>
+                  <li><a href="home.php" class="dropdown-item">Error 404</a></li>
+                  <li><a href="home.php" class="dropdown-item">Styles</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link">Shop</a>
+                <a href="home.php" class="nav-link">Shop</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link">Blog</a>
+                <a href="home.php" class="nav-link">Blog</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link">Contact</a>
+                <a href="home.php" class="nav-link">Contact</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link">Others</a>
+                <a href="home.php" class="nav-link">Others</a>
               </li>
             </ul>
 
@@ -280,7 +291,7 @@ define('BASE_PATH', '/');
                   <?php
                   if (isset($_SESSION['username'])) { ?>
                     <a href="logout.php">
-                        Đăng xuất
+                      Đăng xuất
                     </a>
                   <?php } else { ?>
                     <a href="login.php" class="mx-3">
@@ -289,11 +300,11 @@ define('BASE_PATH', '/');
                   <?php } ?>
                 </li>
                 <li class="">
-                  <a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                  <a href="home.php" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                     aria-controls="offcanvasCart">
                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                     <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      03
+                      <?= $giohang_soluong ?>
                     </span>
                   </a>
                 </li>
