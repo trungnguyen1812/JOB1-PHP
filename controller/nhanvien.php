@@ -40,6 +40,15 @@ class NhanVien
         return $result;
     }
 
+    //Lay tt nhan vien
+    public function getByID($id)
+    {
+        $query =
+            "SELECT * FROM nhanvien WHERE IDNhanVien = '$id'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function insert($data)
     {
         $hoten = $data['hoten'];
@@ -59,6 +68,45 @@ class NhanVien
             return $alert;
         } else {
             $alert = "Đăng ký không thành công!";
+            return $alert;
+        }
+    }
+
+    // Cap nhat tt nhan vien
+    public function update($data)
+    {
+        $id = $data['id'];
+        $hoten = $data['hoten'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $sdt = $data['sdt'];
+        $namsinh = $data['namsinh'];
+        $gioitinh = $data['gioitinh'];
+        $diachi = $data['diachi'];
+        
+        $query = "UPDATE NhanVien SET HoTenNhanVien = '$hoten', Email = '$email', MatKhau = '$password', SĐT ='$sdt', NamSinh = '$namsinh', GioiTinh = '$gioitinh', DiaChi = '$diachi' ".
+                            "WHERE IDNhanVien = '$id'";
+        $result = $this->db->update($query);
+        if ($result) {
+            header("Location: index.php");
+            $alert = "Cập nhật thành công!";
+            return $alert;
+        } else {
+            $alert = "Cập nhật không thành công!";
+            return $alert;
+        }
+    }
+
+    //Xoa nhan vien
+    public function delete($id) {
+        $query = "DELETE FROM NhanVien WHERE IDNhanVien = '$id'";
+        $result = $this->db->update($query);
+        if ($result) {
+            $alert = "Đã xoá!";
+            header("Location: index.php");
+            return $alert;
+        } else {
+            $alert = "Xoá không thành công!";
             return $alert;
         }
     }

@@ -2,6 +2,10 @@
 include "../../../controller/nhanvien.php";
 $nhanvien = new NhanVien();
 $dsnhanvien = $nhanvien->getAll();
+
+if (isset($_GET['delete-id'])) {
+    $result = $nhanvien->delete($_GET['delete-id']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -227,9 +231,14 @@ $dsnhanvien = $nhanvien->getAll();
                                                             class="text-secondary text-xs font-weight-bold"><?= $value['GioiTinh'] == 0 ? "Nữ" : "Nam" ?></span>
                                                     </td>
                                                     <td class="align-middle">
-                                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                        <a href="edit.php?id=<?= $value['IDNhanVien'] ?>" class="text-secondary font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Edit user">
-                                                            Edit
+                                                            Chỉnh sửa
+                                                        </a>
+                                                        |
+                                                        <a href="?delete-id=<?= $value['IDNhanVien']?>" class="text-secondary font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Edit user">
+                                                            Xoá
                                                         </a>
                                                     </td>
                                                 </tr>
