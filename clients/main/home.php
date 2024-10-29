@@ -14,11 +14,10 @@ include '../layouts/header.php';
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
+                <h2 class="banner-title display-1 fw-normal">Điểm đên tốt nhất <span class="text-primary">cho bạn</span>
                 </h2>
                 <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
+                  Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
                   </svg></a>
@@ -33,11 +32,11 @@ include '../layouts/header.php';
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
+                <h2 class="banner-title display-1 fw-normal">Điểm đên tốt nhất <span class="text-primary">cho bạn</span>
+                </h2>
                 </h2>
                 <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
+                  Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
                   </svg></a>
@@ -52,11 +51,11 @@ include '../layouts/header.php';
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
-                    pets</span>
+                <h2 class="banner-title display-1 fw-normal">Điểm đên tốt nhất <span class="text-primary">cho bạn</span>
+                </h2>
                 </h2>
                 <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  shop now
+                  Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
                   </svg></a>
@@ -75,34 +74,36 @@ include '../layouts/header.php';
   <section id="categories">
     <div class="container my-3 py-5">
       <div class="row my-5">
+
         <div class="col text-center">
           <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:bowl-food"></iconify-icon>
-            <h5>Foodies</h5>
+            <iconify-icon class="category-icon" icon="mingcute:toy-horse-line"></iconify-icon>
+            <h5>Đồ Gỗ</h5>
           </a>
         </div>
         <div class="col text-center">
           <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:bird"></iconify-icon>
-            <h5>Bird Shop</h5>
+            <iconify-icon class="category-icon" icon="material-symbols:smart-toy-outline"></iconify-icon>
+            <h5>Đồ Điện</h5>
           </a>
         </div>
         <div class="col text-center">
           <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:dog"></iconify-icon>
-            <h5>Dog Shop</h5>
+
+            <iconify-icon class="category-icon" icon="svg-spinners:wind-toy"></iconify-icon>
+            <h5>Đồ Thủ Công</h5>
           </a>
         </div>
         <div class="col text-center">
           <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:fish"></iconify-icon>
-            <h5>Fish Shop</h5>
+            <iconify-icon class="category-icon" icon="ic:twotone-toys"></iconify-icon>
+            <h5>Xe</h5>
           </a>
         </div>
         <div class="col text-center">
           <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:cat"></iconify-icon>
-            <h5>Cat Shop</h5>
+            <iconify-icon class="category-icon" icon="mdi:child-toy"></iconify-icon>
+            <h5>Gấu Bông</h5>
           </a>
         </div>
       </div>
@@ -113,10 +114,10 @@ include '../layouts/header.php';
     <div class="container pb-5">
 
       <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-        <h2 class="display-3 fw-normal">Pet Clothing</h2>
+        <h2 class="display-3 fw-normal">Bán Chạy</h2>
         <div>
           <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
+            Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
             </svg></a>
@@ -131,10 +132,10 @@ include '../layouts/header.php';
               New
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img style="width: 301px; height: 295px;" src="../images/sanpham1.png" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
+                  <h3 class="card-title pt-4 m-0">Labubu áo jean</h3>
                 </a>
 
                 <div class="card-text">
@@ -150,7 +151,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -168,10 +169,10 @@ include '../layouts/header.php';
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item2.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img style="width: 301px; height: 295px;" src="../images/item2.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
+                  <h3 class="card-title pt-4 m-0">Labubu Halloween</h3>
                 </a>
 
                 <div class="card-text">
@@ -187,7 +188,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -204,10 +205,10 @@ include '../layouts/header.php';
               -10%
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img style="width: 301px; height: 295px;" src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
+                  <h3 class="card-title pt-4 m-0">labubu mẫu 1</h3>
                 </a>
 
                 <div class="card-text">
@@ -223,7 +224,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -241,10 +242,10 @@ include '../layouts/header.php';
               New
             </div> -->
             <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="single-product.html"><img style="width: 301px; height: 295px;" src="../images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
+                  <h3 class="card-title pt-4 m-0">Labubu Mẫu 2</h3>
                 </a>
 
                 <div class="card-text">
@@ -260,7 +261,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -277,7 +278,7 @@ include '../layouts/header.php';
             <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
               New
             </div> -->
-            <div class="card position-relative">
+            <!-- <div class="card position-relative">
               <a href="single-product.html"><img src="../images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
@@ -297,7 +298,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -308,13 +309,13 @@ include '../layouts/header.php';
                 </div>
 
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="swiper-slide">
             <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
               New
             </div> -->
-            <div class="card position-relative">
+            <!-- <div class="card position-relative">
               <a href="single-product.html"><img src="../images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
                 <a href="single-product.html">
@@ -334,7 +335,7 @@ include '../layouts/header.php';
 
                   <div class="d-flex flex-wrap mt-3">
                     <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
+                      <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                     </a>
                     <a href="#" class="btn-wishlist px-4 pt-3 ">
                       <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -345,7 +346,7 @@ include '../layouts/header.php';
                 </div>
 
               </div>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -360,18 +361,18 @@ include '../layouts/header.php';
     <div class="container my-5 py-5">
 
       <div class="section-header d-md-flex justify-content-between align-items-center">
-        <h2 class="display-3 fw-normal">Pet Foodies</h2>
+        <h2 class="display-3 fw-normal">Đồ Thủ Công</h2>
         <div class="mb-4 mb-md-0">
-          <p class="m-0">
+          <!-- <p class="m-0">
             <button class="filter-button me-4  active" data-filter="*">ALL</button>
             <button class="filter-button me-4 " data-filter=".cat">CAT</button>
             <button class="filter-button me-4 " data-filter=".dog">DOG</button>
             <button class="filter-button me-4 " data-filter=".bird">BIRD</button>
-          </p>
+          </p> -->
         </div>
         <div>
           <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
+            Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
             </svg></a>
@@ -385,10 +386,10 @@ include '../layouts/header.php';
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item9.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item9.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
+                <h3 class="card-title pt-4 m-0">Grey1 hoodie</h3>
               </a>
 
               <div class="card-text">
@@ -404,7 +405,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -423,7 +424,7 @@ include '../layouts/header.php';
             New
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item10.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item10.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -442,7 +443,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -461,7 +462,7 @@ include '../layouts/header.php';
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item11.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item11.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -480,7 +481,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -499,7 +500,7 @@ include '../layouts/header.php';
             Sold
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item12.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item12.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -518,7 +519,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -537,7 +538,7 @@ include '../layouts/header.php';
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item13.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item13.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -556,7 +557,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -575,7 +576,7 @@ include '../layouts/header.php';
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item14.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item14.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -594,7 +595,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -613,7 +614,7 @@ include '../layouts/header.php';
             Sale
           </div>
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item15.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item15.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -632,7 +633,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -651,7 +652,7 @@ include '../layouts/header.php';
             New
           </div> -->
           <div class="card position-relative">
-            <a href="single-product.html"><img src="../images/item16.jpg" class="img-fluid rounded-4" alt="image"></a>
+            <a href="single-product.html"><img style="width: 306px; height: 279px;" src="../images/item16.jpg" class="img-fluid rounded-4" alt="image"></a>
             <div class="card-body p-0">
               <a href="single-product.html">
                 <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
@@ -670,7 +671,7 @@ include '../layouts/header.php';
 
                 <div class="d-flex flex-wrap mt-3">
                   <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                   </a>
                   <a href="#" class="btn-wishlist px-4 pt-3 ">
                     <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
@@ -699,10 +700,10 @@ include '../layouts/header.php';
         </div>
         <div class="content-wrapper col-12 offset-md-1 col-md-5 p-5">
           <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
-          <h2 class="banner-title display-1 fw-normal">Clearance sale !!!
+          <h2 class="banner-title display-1 fw-normal">Thanh Lý !!!
           </h2>
           <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
+            Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
             </svg></a>
@@ -725,9 +726,9 @@ include '../layouts/header.php';
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">At the core of our practice is the idea that cities are the
-                      incubators of our
-                      greatest achievements, and the best hope for a sustainable future.</p>
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                      nơi ươm mầm cho
+                      những thành tựu vĩ đại nhất của chúng tôi, và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>
                   </div>
                 </div>
@@ -770,253 +771,6 @@ include '../layouts/header.php';
 
   </section>
 
-  <section id="bestselling" class="my-5 overflow-hidden">
-    <div class="container py-5 mb-5">
-
-      <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-        <h2 class="display-3 fw-normal">Best selling products</h2>
-        <div>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
-        </div>
-      </div>
-
-      <div class=" swiper bestselling-swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item5.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item6.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              Sale
-            </div>
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              -10%
-            </div>
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="../images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-      <!-- / category-carousel -->
-
-
-    </div>
-  </section>
 
   <section id="register" style="background: url('../images/background-img.png') no-repeat;">
     <div class="container ">
@@ -1047,7 +801,7 @@ include '../layouts/header.php';
     </div>
   </section>
 
-  <section id="latest-blog" class="my-5">
+  <!-- <section id="latest-blog" class="my-5">
     <div class="container py-5 my-5">
       <div class="row mt-5">
         <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
@@ -1133,8 +887,8 @@ include '../layouts/header.php';
         </div>
       </div>
     </div>
-  </section>
-
+  </section> -->
+<!-- 
   <section id="service">
     <div class="container py-5 my-5">
       <div class="row g-md-5 pt-4">
@@ -1238,6 +992,6 @@ include '../layouts/header.php';
         </a>
       </div>
     </div>
-  </section>
+  </section> -->
 </div>
 <?php include '../layouts/footer.php'; ?>
