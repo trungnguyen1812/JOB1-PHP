@@ -12,7 +12,7 @@ if (isset($_SESSION['userId'])) {
   include $filepath . '/../../controller/giohang.php';
   $giohang = new GioHang();
   $giohang_user = $giohang->getByID($_SESSION['userId']);
-  $giohang_soluong = $giohang_user == false ? 0 : mysqli_num_rows($giohang_user);
+  $giohang_soluong = $giohang_user==false ? 0 : mysqli_num_rows($giohang_user);
 }
 ?>
 <!DOCTYPE html>
@@ -182,7 +182,7 @@ if (isset($_SESSION['userId'])) {
           <div class="search-bar border rounded-2 px-3 border-dark-subtle">
             <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
               <input type="text" class="form-control border-0 bg-transparent"
-                placeholder="Search for more than 10,000 products" />
+                placeholder="Tìm kiếm hơn 10.000 sản phẩm" />
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                   d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
@@ -199,7 +199,7 @@ if (isset($_SESSION['userId'])) {
           </div>
           <div class="support-box text-end d-none d-xl-block">
             <span class="fs-6 secondary-font text-muted">Email</span>
-            <h5 class="mb-0">waggy@gmail.com</h5>
+            <h5 class="mb-0">Teddy@gmail.com</h5>
           </div>
 
         </div>
@@ -258,11 +258,11 @@ if (isset($_SESSION['userId'])) {
 
           <div class="offcanvas-body justify-content-between">
             <select class="filter-categories border-0 mb-0 me-5">
-              <option>Shop by Category</option>
-              <option>Clothes</option>
-              <option>Food</option>
-              <option>Food</option>
-              <option>Toy</option>
+              <option>Lọc theo loại</option>
+              <option>Mô Hình</option>
+              <option>cho bé nam</option>
+              <option>Cho bé nữ</option>
+            
             </select>
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
@@ -271,7 +271,7 @@ if (isset($_SESSION['userId'])) {
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                  aria-expanded="false">Pages</a>
+                  aria-expanded="false">Trang</a>
                 <ul class="dropdown-menu" aria-labelledby="pages">
                   <li><a href="home.php" class="dropdown-item">About Us</a></li>
                   <li><a href="home.php" class="dropdown-item">Shop</a></li>
@@ -298,9 +298,11 @@ if (isset($_SESSION['userId'])) {
               <li class="nav-item">
                 <a href="home.php" class="nav-link">Contact</a>
               </li>
+
               <li class="nav-item">
                 <a href="home.php" class="nav-link">Others</a>
               </li>
+              
             </ul>
 
             <div class="d-none d-lg-flex align-items-end">

@@ -1,11 +1,11 @@
 <?php
-    include '../../controller/khachhang.php';
-    $khachhang = new khachhang();
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $login_check = $khachhang->login($email, $password);
-    }
+include '../../controller/khachhang.php';
+$khachhang = new khachhang();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $login_check = $khachhang->login($email, $password);
+}
 ?>
 <!-- Xu ly php -->
 
@@ -18,10 +18,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
-<?php
-include '../layouts/header.php';
-?>
+    <?php
+    include '../layouts/header.php';
+    ?>
     <div id="main-content">
         <hr>
         <div style="text-align: center;">
@@ -45,18 +46,21 @@ include '../layouts/header.php';
                     </div>
 
                     <div>
-                        <input type="submit" value="Đăng Nhập">
+                        <input type="submit" value="Đăng Nhập" />
+
+                        <button class="btnRegister">
+                            <a style="color: white;" href="register.php">&nbsp;&nbsp;&nbsp;
+                                Đăng Ký Ngay
+                            </a>
+                        </button>
+
                     </div>
                     <br>
                 </form>
-                <div>
+                <!-- <div>
                     <div>Bạn chưa có tài khoản?</div>
-                </div>
-                <a style="color: white;" href="register.php">
-                    <button class="btnRegister">
-                        Đăng Ký Ngay
-                    </button>
-                </a>
+                </div> -->
+
             </div>
         </div>
         <hr>
