@@ -7,11 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login_check = $nhanvien->login($email, $password);
 }
 ?>
-  <form class="login">
-        <input  type="text" >
-        <input type="password" >
-        <button>Login</button>
-    </form>
+
     <!DOCTYPE html>
 <html lang="en">
 <head>
