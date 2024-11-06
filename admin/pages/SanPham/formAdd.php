@@ -1,10 +1,10 @@
 <?php
-include "../../../controller/nhanvien.php";
-$nhanvien = new NhanVien();
-$dsnhanvien = $nhanvien->getAll();
-
-if (isset($_GET['delete-id'])) {
-    $result = $nhanvien->delete($_GET['delete-id']);
+include "../../../controller/sanpham.php";
+$sanpham = new sanpham();
+$loaisanpham  = $sanpham->getLoaiSanPham();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $sanpham = new SanPham();
+    $result = $sanpham->insert($_POST);
 }
 ?>
 <!DOCTYPE html>
@@ -28,12 +28,120 @@ if (isset($_GET['delete-id'])) {
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+    <style>
+        /* Container chính của form */
+        .form-container {
+            display: flex;
+            gap: 2rem;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cột bên trái - chứa các input */
+        .form-column {
+            width: 50%;
+            flex: 0 0 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            float: left;
+        }
+
+        /* Cột bên phải - chứa upload và preview ảnh */
+        .form-column-right {
+
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        /* Style cho các label */
+        .form-column label,
+        .form-column-right label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #344767;
+        }
+
+        /* Style cho các input text, number, textarea */
+        .form-column input[type="text"],
+        .form-column input[type="number"],
+        .form-column textarea,
+        .form-column select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d2d6da;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Style cho input file */
+        .form-column-right input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #d2d6da;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Style cho preview image */
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+            /* Ẩn ban đầu, sẽ hiện khi có ảnh được chọn */
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style cho nút submit */
+        .submit-btn {
+            margin-top: auto;
+        }
+
+        .submit-btn button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #82d616;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn button:hover {
+            background-color: #1a223f;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-container {
+                flex-direction: column;
+            }
+
+            .form-column,
+            .form-column-right {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
     <?php
     include "../../layouts/sidebar.php";
     ?>
+
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -41,11 +149,11 @@ if (isset($_GET['delete-id'])) {
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nhân Viên</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tables</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Nhân Viên</h6>
+                    <h6 class="font-weight-bolder mb-0">Tables</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -165,90 +273,68 @@ if (isset($_GET['delete-id'])) {
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Danh sách nhân viên</h6>
-                            <a class="btn btn-primary" href="create.php">Thêm Mới</a>
-                        </div>
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9" width="10%">
-                                                Mã nhân viên</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9 ps-2">
-                                                Tên nhân viên</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                SĐT</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Năm sinh</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Giới tính</th>
-                                            <th class="text-secondary opacity-9"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if ($dsnhanvien) {
-                                            foreach ($dsnhanvien as $key => $value) {
-                                                ?>
-                                                <tr>
-                                                    <td class="align-middle text-center text-sm">
-                                                        <p class="text-xs font-weight-bold mb-0">
-                                                            <?= $value['IDNhanVien'] ?>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                          
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"><?= $value['HoTenNhanVien'] ?></h6>
-                                                                <p class="text-xs text-secondary mb-0"><?= $value['Email'] ?>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SĐT'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['NamSinh'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['GioiTinh'] == 0 ? "Nữ" : "Nam" ?></span>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <a href="edit.php?id=<?= $value['IDNhanVien'] ?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Chỉnh sửa
-                                                        </a>
-                                                        |
-                                                        <a href="?delete-id=<?= $value['IDNhanVien']?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Xoá
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="card-header pb-0 d-flex justify-content-between">
+                <h6>Thêm mới thông tin sản phẩm</h6>
             </div>
+            <hr>
+            <div class="form-container">
+                <form style="width: 100%;" action="formAdd.php" method="POST" enctype="multipart/form-data">
+                    <!-- Cột bên trái: Các ô nhập văn bản -->
+                    <div class="form-column">
+                        <label for="TenSanPham">Tên sản phẩm</label>
+                        <input type="text" id="TenSanPham" name="TenSanPham" required>
+
+                        <label for="Gia">Giá</label>
+                        <input type="number" id="Gia" name="Gia" required>
+
+                        <label for="SoLuong">Số lượng</label>
+                        <input type="number" id="SoLuong" name="SoLuong" required>
+
+                        <label for="MoTa">Mô tả</label>
+                        <textarea id="MoTa" name="MoTa" rows="4" required></textarea>
+
+                        <label for="IDLoaiSanPham">Loại sản phẩm</label>
+                        <select class="form-select" id="IDLoaiSanPham " name="IDLoaiSanPham " required>
+                            <?php foreach ($loaisanpham as $loaisanpham): ?>
+                                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
+                    <div class="form-column-right">
+                        <label for="HinhAnh">Hình ảnh sản phẩm</label>
+                        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
+
+                        <!-- Xem trước ảnh -->
+                        <img id="image-preview" alt="Xem trước hình ảnh sản phẩm" style="max-width: 500px; max-height: 370px; display: none; object-fit: contain;">
+
+                        <input type="submit" class="btn btn-success" value="Lưu" />
+                    </div>
+
+                </form>
+            </div>
+
+            <script>
+                function previewImage(event) {
+                    const imagePreview = document.getElementById('image-preview');
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = 'block'; // Hiện ảnh preview
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        imagePreview.style.display = 'none'; // Ẩn ảnh preview nếu không có ảnh nào được chọn
+                    }
+                }
+            </script>
+
+
+
             <footer class="footer pt-3  ">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
@@ -289,6 +375,7 @@ if (isset($_GET['delete-id'])) {
             </footer>
         </div>
     </main>
+
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"> </i>
