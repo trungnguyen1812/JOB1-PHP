@@ -5,6 +5,7 @@ $loaisanpham  = $sanpham->getLoaiSanPham();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sanpham = new SanPham();
     $result = $sanpham->insert($_POST);
+
 }
 ?>
 <!DOCTYPE html>
@@ -295,9 +296,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <textarea id="MoTa" name="MoTa" rows="4" required></textarea>
 
                         <label for="IDLoaiSanPham">Loại sản phẩm</label>
-                        <select class="form-select" id="IDLoaiSanPham " name="IDLoaiSanPham " required>
-                            <?php foreach ($loaisanpham as $loaisanpham): ?>
-                                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
+                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
+                            <?php foreach ($loaisanpham as $loaisp): ?>
+                                <option value="<?= $loaisp['IDLoaiSanPham'] ?>"><?= $loaisp['TenLoaiSanPham'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
