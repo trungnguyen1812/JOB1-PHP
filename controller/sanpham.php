@@ -46,49 +46,49 @@ class SanPham
 
     public function insert($data)
     {
-        $tenSanPham = $data['TenSanPham'] ?? '';
-        $gia = $data['Gia'] ?? '';
-        $soLuong = $data['SoLuong'] ?? '';
-        $moTa = $data['MoTa'] ?? '';
-        $idLoaiSanPham = $data['IDLoaiSanPham'] ?? '';
+        $tenSanPham = addslashes(trim($data['TenSanPham'] ?? ''));
+        $gia = floatval($data['Gia'] ?? 0);
+        $soLuong = intval($data['SoLuong'] ?? 0);
+        $moTa = addslashes(trim($data['MoTa'] ?? ''));
+        $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
-
-        if (empty($tenSanPham) || empty($gia) || empty($soLuong) || empty($moTa) || empty($idLoaiSanPham)) {
-            return "Vui lòng điền đầy đủ thông tin!";
+    
+        if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0) {
+            return "Vui lòng điền đầy đủ thông tin hợp lệ!";
         }
-
-        // Đường dẫn đến thư mục lưu hình ảnh
-        $targetDir = __DIR__ . '/../assets/imgUpload/';
-
-        // Kiểm tra xem thư mục uploads có tồn tại không
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-
+    
         // Xử lý upload file hình ảnh
         $relativePath = '';
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
-            $targetFile = $targetDir . uniqid() . '_' . basename($hinhAnh["name"]);
+            $targetDir = __DIR__ . '/../imgUploads/';
+    
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+    
+            $uniqueFileName = uniqid() . '_' . basename($hinhAnh["name"]);
+            $targetFile = $targetDir . $uniqueFileName;
+    
             if (move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
-                $relativePath = 'assets/imgUpload/' . basename($targetFile);
+                $relativePath = 'imgUploads/' . $uniqueFileName;
             } else {
                 return "Có lỗi xảy ra khi upload hình ảnh!";
             }
         }
-
-        // Câu truy vấn
-        $query = "INSERT INTO sanpham(TenSanPham, Gia, SoLuong, MoTa, HinhAnh, IDLoaiSanPham) " .
-            "VALUES ('$tenSanPham', '$gia', '$soLuong', '$moTa', '$relativePath', '$idLoaiSanPham')";
-
+    
+        $query = "INSERT INTO sanpham (TenSanPham, Gia, SoLuong, MoTa, IDLoaiSanPham, HinhAnh) " .
+            "VALUES ('$tenSanPham', '$gia', '$soLuong', '$moTa', '$idLoaiSanPham', '$relativePath')";
         $result = $this->db->insert($query);
-        
+    
         if ($result) {
+            echo "Thêm mới thành công!";
             header("Location: index.php");
-            exit; // Thêm exit để dừng script
+            exit(); // Dừng lại sau khi chuyển hướng
         } else {
-            return "Thêm sản phẩm không thành công!";
-        }
+            echo "Lỗi: " . $this->db->error;
+        }die();
     }
+    
 
     // Cap nhat tt nhan vien
     public function update($data)
