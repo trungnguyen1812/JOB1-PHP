@@ -3,8 +3,14 @@ include "../../../controller/sanpham.php";
 $sanpham = new sanpham();
 $loaisanpham  = $sanpham->getLoaiSanPham();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    var_dump($_POST); // Kiểm tra dữ liệu được gửi
+    var_dump($_FILES); // Kiểm tra file được gửi
     $sanpham = new SanPham();
     $result = $sanpham->insert($_POST);
+    if ($result) {
+        echo "<script>alert('$result');</script>"; // Hiển thị thông báo thành công hoặc lỗi
+    }
+
 }
 ?>
 <!DOCTYPE html>
@@ -295,9 +301,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <textarea id="MoTa" name="MoTa" rows="4" required></textarea>
 
                         <label for="IDLoaiSanPham">Loại sản phẩm</label>
-                        <select class="form-select" id="IDLoaiSanPham " name="IDLoaiSanPham " required>
+                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
                             <?php foreach ($loaisanpham as $loaisanpham): ?>
                                 <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
+                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
+                            <?php foreach ($loaisanpham as $loaisp): ?>
+                                <option value="<?= $loaisp['IDLoaiSanPham'] ?>"><?= $loaisp['TenLoaiSanPham'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

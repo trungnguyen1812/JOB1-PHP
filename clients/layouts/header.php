@@ -11,7 +11,7 @@ $filepath = realpath(dirname(__FILE__));
 if (isset($_SESSION['userId'])) {
   include $filepath . '/../../controller/giohang.php';
   $giohang = new GioHang();
-  $giohang_user = $giohang->getByID($_SESSION['userId']);
+  $giohang_user = $giohang->getByIDKhachHang($_SESSION['userId']);
   $giohang_soluong = $giohang_user==false ? 0 : mysqli_num_rows($giohang_user);
 }
 ?>
@@ -101,12 +101,6 @@ if (isset($_SESSION['userId'])) {
       <!-- Neu dang dang nhap -->
       <?php } else { ?>
       <div class="order-md-last"> 
-        <h4 class="text-center mb-3">
-          <div class="text-primary">Bạn chưa đăng nhập.</div>
-          <div>
-            <a href="login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
-          </div>
-        </h4>
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Giỏ hàng</span>
           <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
