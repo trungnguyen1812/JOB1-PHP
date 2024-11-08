@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         echo "<script>alert('$result');</script>"; // Hiển thị thông báo thành công hoặc lỗi
     }
+
 }
 ?>
 <!DOCTYPE html>
@@ -303,6 +304,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
                             <?php foreach ($loaisanpham as $loaisanpham): ?>
                                 <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
+                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
+                            <?php foreach ($loaisanpham as $loaisp): ?>
+                                <option value="<?= $loaisp['IDLoaiSanPham'] ?>"><?= $loaisp['TenLoaiSanPham'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
