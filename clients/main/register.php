@@ -2,7 +2,10 @@
     include '../../controller/khachhang.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $khachhang = new khachhang();
-        $register_check = $khachhang->register($_POST);
+        $result_register = $khachhang->register($_POST);
+
+            echo "<script>alert('".$result_register."')</script>";
+
     }
 ?>
 

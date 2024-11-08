@@ -20,7 +20,7 @@ class NhanVien
             $value = $result->fetch_assoc();
             Session::set('username', $value['HoTenNhanVien']);
             Session::set('userid', $value['IDNhanVien']);
-            header("Location: /admin/pages/dashboard/dashboard.php");
+            header("Location: pages/dashboard/dashboard.php");
             return true;
         } else {
             $alert = "Tên đăng nhập hoặc mật khẩu không đúng!";

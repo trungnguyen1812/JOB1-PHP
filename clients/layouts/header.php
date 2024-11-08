@@ -11,7 +11,7 @@ $filepath = realpath(dirname(__FILE__));
 if (isset($_SESSION['userId'])) {
   include $filepath . '/../../controller/giohang.php';
   $giohang = new GioHang();
-  $giohang_user = $giohang->getByID($_SESSION['userId']);
+  $giohang_user = $giohang->getByIDKhachHang($_SESSION['userId']);
   $giohang_soluong = $giohang_user==false ? 0 : mysqli_num_rows($giohang_user);
 }
 ?>
@@ -70,8 +70,8 @@ if (isset($_SESSION['userId'])) {
 
   body.sticky-padding {
     padding-top: 160px;
-    /* Điều chỉnh giá trị này tùy theo chiều cao của header */
   }
+
 </style>
 </head>
 
@@ -87,34 +87,46 @@ if (isset($_SESSION['userId'])) {
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div class="order-md-last">
+      <!-- Xu ly tai khoan dang nhap hay chua -->
+      <?php 
+      if (!isset($_SESSION['username'])) { ?>
+      <div class="order-md-last"> 
+        <h4 class="text-center mb-3">
+          <div class="text-primary">Bạn chưa đăng nhập.</div>
+          <div>
+            Hãy <a class="btn btn-primary p-1" href="login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
+          </div>
+        </h4>
+      </div>
+      <!-- Neu dang dang nhap -->
+      <?php } else { ?>
+      <div class="order-md-last"> 
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Giỏ hàng</span>
           <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
         </h4>
         <ul class="list-group mb-3">
-          <?php 
-          if ($giohang_soluong==0) {
-            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
-          } else 
-          {
-            $tongtien = 0;
-            foreach ($giohang_user as $key => $value) 
-            {
-              ?>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
-              <small class="text-body-secondary">Giá x Số lượng : <?php echo $value['Gia'].' x '.$value['SoLuong'] ?></small>
-            </div>
-            <span class="text-body-secondary">
-              <?php 
-              $tongtien += $value['Gia']*$value['SoLuong'];
-              echo $value['Gia']*$value['SoLuong'];
-              ?> VNĐ
-            </span>
-          </li>
           <?php
+          if ($giohang_soluong == 0) {
+            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
+          } else {
+            $tongtien = 0;
+            foreach ($giohang_user as $key => $value) {
+              ?>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
+                  <small class="text-body-secondary">Giá x Số lượng :
+                    <?php echo $value['Gia'] . ' x ' . $value['SoLuong'] ?></small>
+                </div>
+                <span class="text-body-secondary">
+                  <?php
+                  $tongtien += $value['Gia'] * $value['SoLuong'];
+                  echo $value['Gia'] * $value['SoLuong'];
+                  ?> VNĐ
+                </span>
+              </li>
+              <?php
             }
           } ?>
           <li class="list-group-item d-flex justify-content-between">
@@ -122,9 +134,9 @@ if (isset($_SESSION['userId'])) {
             <strong><?= $tongtien ?> VNĐ</strong>
           </li>
         </ul>
-
         <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
       </div>
+      <?php } ?>
     </div>
   </div>
 
@@ -292,8 +304,10 @@ if (isset($_SESSION['userId'])) {
                 <li>
                   <?php
                   if (isset($_SESSION['username'])) { ?>
-                    <a href="logout.php">
-                      Đăng xuất
+                    <a href=""><?= $_SESSION['username'] ?></a> |
+                    
+                    <a href="logout.php" title="Đăng xuất">
+                      <?php include '../images/logout.svg' ?>
                     </a>
                   <?php } else { ?>
                     <a href="login.php" class="mx-3">
@@ -306,7 +320,7 @@ if (isset($_SESSION['userId'])) {
                     aria-controls="offcanvasCart">
                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                     <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      <?= $giohang_soluong ?>
+                      <?= $giohang_soluong ?? 0 ?>
                     </span>
                   </a>
                 </li>

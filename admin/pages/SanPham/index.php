@@ -208,7 +208,7 @@ if (isset($_GET['delete-id'])) {
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-2 py-1">
-                                                            <img width="70" height="70" src="/admin/assets/images/img-01.png" alt="">
+                                                            <img width="70" height="70" src="<?= $value['HinhAnh'] ?>" alt="">
                                                             <div class="d-flex flex-column justify-content-center">
                                                                 <h6 class="mb-0 text-sm"><?= $value['TenSanPham'] ?></h6>
                                                                 <p class="text-xs text-secondary mb-0"><?= $value['TenLoaiSanPham'] ?>
