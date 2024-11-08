@@ -304,9 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
                             <?php foreach ($loaisanpham as $loaisanpham): ?>
                                 <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
-                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
-                            <?php foreach ($loaisanpham as $loaisp): ?>
-                                <option value="<?= $loaisp['IDLoaiSanPham'] ?>"><?= $loaisp['TenLoaiSanPham'] ?></option>
+                       
                             <?php endforeach; ?>
                         </select>
                     </div>
