@@ -7,8 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login_check = $nhanvien->login($email, $password);
 }
 
-// Dinh nghia duong dan cua file
-$filepath = realpath(dirname(__FILE__));
 ?>
 
     <!DOCTYPE html>
