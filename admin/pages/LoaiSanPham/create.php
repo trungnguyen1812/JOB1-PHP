@@ -1,10 +1,9 @@
 <?php
-include_once __DIR__ . '../../../../controller/sanpham.php';
-$sanpham = new sanpham();
-$dssanpham = $sanpham->getAll();
+include "../../../controller/loaisanpham.php";
 
-if (isset($_GET['delete-id'])) {
-    $result = $sanpham->delete($_GET['delete-id']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $loaisanpham = new LoaiSanPham();
+    $result = $loaisanpham->insert($_POST);
 }
 ?>
 <!DOCTYPE html>
@@ -28,6 +27,32 @@ if (isset($_GET['delete-id'])) {
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <style>
+        /* Đảm bảo các form-group có display flex để label và input trên cùng một hàng */
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            /* Thêm khoảng cách giữa các dòng */
+        }
+
+        /* Đặt độ rộng cố định cho label để các cột luôn thẳng hàng */
+        .form-label {
+            width: 150px;
+            /* Đặt độ rộng phù hợp để đủ chứa nội dung dài nhất */
+            padding-right: 10px;
+            /* Khoảng cách giữa label và input */
+            text-align: right;
+            /* Căn phải label để đẹp hơn */
+        }
+
+        /* Đặt độ rộng input theo nhu cầu */
+        .form-control {
+            width: 60%;
+            /* Điều chỉnh độ rộng input theo ý muốn */
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -41,11 +66,11 @@ if (isset($_GET['delete-id'])) {
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản Phẩm</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tables</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Sản Phẩm</h6>
+                    <h6 class="font-weight-bolder mb-0">Tables</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -169,83 +194,25 @@ if (isset($_GET['delete-id'])) {
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Danh sách sản phẩm</h6>
-                            <a class="btn btn-primary" href="create.php">Thêm Mới</a>
+                            <h6>Thêm mới thông tin loại sản phẩm</h6>
                         </div>
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9" width="10%">
-                                                Mã sản phẩm</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9 ps-2">
-                                                Tên sản phẩm</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Giá</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Số lượng</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Mô tả</th>
-                                            <th class="text-secondary opacity-9"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if ($dssanpham) {
-                                            foreach ($dssanpham as $key => $value) {
-                                                ?>
-                                                <tr>
-                                                    <td class="align-middle text-center text-sm">
-                                                        <p class="text-xs font-weight-bold mb-0">
-                                                            <?= $value['IDSanPham'] ?>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <img width="70" height="70" src="/<?= $value['HinhAnh'] ?>" alt="">
-                                                            &nbsp; &nbsp;
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"><?= $value['TenSanPham'] ?></h6>
-                                                                <p class="text-xs text-secondary mb-0"><?= $value['TenLoaiSanPham'] ?>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['Gia'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SoLuong'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['MoTa'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <a href="edit.php?id=<?= $value['IDSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Chỉnh sửa
-                                                        </a>
-                                                        |
-                                                        <a href="?delete-id=<?= $value['IDSanPham']?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Xoá
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <hr>
+                        <div class="card-body pt-0 pb-2 text-center">
+                            <form action="create.php" method="POST">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="TenLoaiSanPham" class="form-label">Tên Loại sản Phẩm:</label>
+                                        <input id="TenLoaiSanPham" name="TenLoaiSanPham" class="form-control" type="text" placeholder="Nhập tên loại sản phẩm..." required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="MoTa" class="form-label">Mô Tả:</label>
+                                        <input id="MoTa" name="MoTa" class="form-control" type="text" placeholder="Nhập mô tả ...." required />
+                                    </div>
+                                </div>
+                                <br>
+                                <input type="submit" class="btn btn-success" value="Lưu" />
+                            </form>
+
                         </div>
                     </div>
                 </div>

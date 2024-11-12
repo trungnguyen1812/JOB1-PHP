@@ -1,10 +1,10 @@
 <?php
-include_once __DIR__ . '../../../../controller/sanpham.php';
-$sanpham = new sanpham();
-$dssanpham = $sanpham->getAll();
+include_once __DIR__ . '../../../../controller/loaisanpham.php';
+$loaisanpham = new LoaiSanPham();
+$dsloaisanpham = $loaisanpham->getAll();
 
 if (isset($_GET['delete-id'])) {
-    $result = $sanpham->delete($_GET['delete-id']);
+    $result = $loaisanpham->delete($_GET['delete-id']);
 }
 ?>
 <!DOCTYPE html>
@@ -43,9 +43,9 @@ if (isset($_GET['delete-id'])) {
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản Phẩm</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Loại Sản Phẩm</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Sản Phẩm</h6>
+                    <h6 class="font-weight-bolder mb-0">Loại Sản Phẩm</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -169,7 +169,7 @@ if (isset($_GET['delete-id'])) {
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Danh sách sản phẩm</h6>
+                            <h6>Danh sách loại sản phẩm</h6>
                             <a class="btn btn-primary" href="create.php">Thêm Mới</a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -183,12 +183,7 @@ if (isset($_GET['delete-id'])) {
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9 ps-2">
                                                 Tên sản phẩm</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Giá</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Số lượng</th>
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                                 Mô tả</th>
@@ -197,51 +192,41 @@ if (isset($_GET['delete-id'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if ($dssanpham) {
-                                            foreach ($dssanpham as $key => $value) {
-                                                ?>
+                                        if ($dsloaisanpham) {
+                                            foreach ($dsloaisanpham as $key => $value) {
+                                        ?>
                                                 <tr>
                                                     <td class="align-middle text-center text-sm">
                                                         <p class="text-xs font-weight-bold mb-0">
-                                                            <?= $value['IDSanPham'] ?>
+                                                            <?= $value['IDLoaiSanPham'] ?>
                                                         </p>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-2 py-1">
-                                                            <img width="70" height="70" src="/<?= $value['HinhAnh'] ?>" alt="">
-                                                            &nbsp; &nbsp;
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"><?= $value['TenSanPham'] ?></h6>
-                                                                <p class="text-xs text-secondary mb-0"><?= $value['TenLoaiSanPham'] ?>
-                                                                </p>
+                                                                <h6 class="mb-0 text-sm"><?= $value['TenLoaiSanPham'] ?></h6>
+
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['Gia'] ?></span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SoLuong'] ?></span>
-                                                    </td>
+                                     
                                                     <td class="align-middle text-center">
                                                         <span
                                                             class="text-secondary text-xs font-weight-bold"><?= $value['MoTa'] ?></span>
                                                     </td>
                                                     <td class="align-middle">
-                                                        <a href="edit.php?id=<?= $value['IDSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
+                                                        <a href="edit.php?id=<?= $value['IDLoaiSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Edit user">
                                                             Chỉnh sửa
                                                         </a>
                                                         |
-                                                        <a href="?delete-id=<?= $value['IDSanPham']?>" class="text-secondary font-weight-bold text-xs"
+                                                        <a href="?delete-id=<?= $value['IDLoaiSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Edit user">
                                                             Xoá
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </tbody>
                                 </table>

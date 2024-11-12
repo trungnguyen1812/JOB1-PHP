@@ -58,6 +58,55 @@ class Database extends PDO
     }
   }
 
+  //Inser san pham 
+  public function insertSP($query, $params)
+  {
+    $stmt = $this->link->prepare($query);
+    if ($stmt === false) {
+      return false;
+    }
+
+    // Xác định kiểu dữ liệu của các tham số
+    $types = '';
+    foreach ($params as $param) {
+      $types .= is_int($param) ? 'i' : (is_double($param) ? 'd' : 's');
+    }
+
+    // Gọi bind_param và truyền các tham số
+    $stmt->bind_param($types, ...$params);
+
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  //update có ảnh 
+  public function updateSP($query, $params)
+  {
+    $stmt = $this->link->prepare($query);
+    if ($stmt === false) {
+      return false;
+    }
+
+    // Xác định kiểu dữ liệu của các tham số
+    $types = '';
+    foreach ($params as $param) {
+      $types .= is_int($param) ? 'i' : (is_double($param) ? 'd' : 's');
+    }
+
+    // Gọi bind_param và truyền các tham số
+    $stmt->bind_param($types, ...$params);
+
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Update data
   public function update($query)
   {

@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <hr>
             <div class="form-container">
-                <form style="width: 100%;" action="formAdd.php" method="POST" enctype="multipart/form-data">
+                <form style="width: 100%;" action="create.php" method="POST" enctype="multipart/form-data">
                     <!-- Cột bên trái: Các ô nhập văn bản -->
                     <div class="form-column">
                         <label for="TenSanPham">Tên sản phẩm</label>
@@ -304,7 +304,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
                             <?php foreach ($loaisanpham as $loaisanpham): ?>
                                 <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>"><?= $loaisanpham['TenLoaiSanPham'] ?></option>
-                       
                             <?php endforeach; ?>
                         </select>
                     </div>

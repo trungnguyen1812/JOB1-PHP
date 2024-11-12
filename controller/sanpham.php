@@ -37,7 +37,7 @@ class SanPham
     public function getByID($id)
     {
         $query =
-            "SELECT * FROM nhanvien WHERE IDNhanVien = '$id'";
+            "SELECT * FROM sanpham WHERE IDSanPham = '$id'";
         $result = $this->db->select($query);
         return $result;
     }
@@ -46,11 +46,16 @@ class SanPham
 
     public function insert($data)
     {
-        $tenSanPham = addslashes(trim($data['TenSanPham'] ?? ''));
+        $targetDir = __DIR__ . '/../imgUploads/';
+        $uniqueFileName = '';
+        $relativePath = '';
+        $targetFile = '';  // Thêm biến này để lưu đường dẫn đầy đủ của file
+    
+        $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
+        $tenSanPham = trim($data['TenSanPham'] ?? '');
         $gia = floatval($data['Gia'] ?? 0);
         $soLuong = intval($data['SoLuong'] ?? 0);
-        $moTa = addslashes(trim($data['MoTa'] ?? ''));
-        $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
+        $moTa = trim($data['MoTa'] ?? '');
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
     
         if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0) {
@@ -58,67 +63,189 @@ class SanPham
         }
     
         // Xử lý upload file hình ảnh
-        $relativePath = '';
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
-            $targetDir = __DIR__ . '/../imgUploads/';
-    
-            if (!file_exists($targetDir)) {
-                mkdir($targetDir, 0777, true);
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            if (!is_dir($targetDir)) {
+                if (!mkdir($targetDir, 0755, true)) {
+                    return "Không thể tạo thư mục upload!";
+                }
             }
     
-            $uniqueFileName = uniqid() . '_' . basename($hinhAnh["name"]);
-            $targetFile = $targetDir . $uniqueFileName;
+            // Kiểm tra định dạng file
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!in_array($hinhAnh['type'], $allowedTypes)) {
+                return "Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc GIF!";
+            }
     
-            if (move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
-                $relativePath = 'imgUploads/' . $uniqueFileName;
-            } else {
+            // Giới hạn kích thước file (5MB)
+            $maxFileSize = 5 * 1024 * 1024;
+            if ($hinhAnh["size"] > $maxFileSize) {
+                return "Kích thước file ảnh không được vượt quá 5MB!";
+            }
+    
+            // Tạo tên file ngẫu nhiên
+            $fileExtension = strtolower(pathinfo($hinhAnh["name"], PATHINFO_EXTENSION));
+            $uniqueFileName = uniqid() . '_' . time() . '.' . $fileExtension;
+            $targetFile = $targetDir . $uniqueFileName;  // Lưu đường dẫn đầy đủ
+    
+            // Thử upload file
+            if (!move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
                 return "Có lỗi xảy ra khi upload hình ảnh!";
             }
+    
+            $relativePath = 'imgUploads/' . $uniqueFileName;
         }
     
-        $query = "INSERT INTO sanpham (TenSanPham, Gia, SoLuong, MoTa, IDLoaiSanPham, HinhAnh) " .
-            "VALUES ('$tenSanPham', '$gia', '$soLuong', '$moTa', '$idLoaiSanPham', '$relativePath')";
-        $result = $this->db->insert($query);
+        try {
+        
     
-        if ($result) {
-            echo "Thêm mới thành công!";
-            header("Location: index.php");
-            exit(); // Dừng lại sau khi chuyển hướng
-        } else {
-            echo "Lỗi: " . $this->db->error;
-        }die();
+            $query = "INSERT INTO sanpham (IDLoaiSanPham, TenSanPham, Gia, SoLuong, MoTa, HinhAnh) 
+                     VALUES (?, ?, ?, ?, ?, ?)";
+    
+            $params = [
+                $idLoaiSanPham,
+                $tenSanPham,
+                $gia,
+                $soLuong,
+                $moTa,
+                $relativePath
+            ];
+    
+            $result = $this->db->insertSP($query, $params);
+    
+            if ($result) {
+               
+                $_SESSION['success_message'] = "Thêm mới sản phẩm thành công!";
+                header("Location: index.php");
+                exit();
+            } else {
+                // Nếu insert thất bại, xóa file đã upload (nếu có)
+                if (!empty($targetFile) && file_exists($targetFile)) {
+                    unlink($targetFile);
+                }
+                throw new Exception("Lỗi khi thêm sản phẩm vào database");
+            }
+        } catch (Exception $e) {
+           
+            // Xóa file ảnh nếu có lỗi xảy ra
+            if (!empty($targetFile) && file_exists($targetFile)) {
+                unlink($targetFile);
+            }
+            return "Lỗi: " . $e->getMessage();
+        }
     }
-    
 
     // Cap nhat tt nhan vien
     public function update($data)
     {
-        $id = $data['id'];
-        $hoten = $data['hoten'];
-        $email = $data['email'];
-        $password = $data['password'];
-        $sdt = $data['sdt'];
-        $namsinh = $data['namsinh'];
-        $gioitinh = $data['gioitinh'];
-        $diachi = $data['diachi'];
-
-        $query = "UPDATE NhanVien SET HoTenNhanVien = '$hoten', Email = '$email', MatKhau = '$password', SĐT ='$sdt', NamSinh = '$namsinh', GioiTinh = '$gioitinh', DiaChi = '$diachi' " .
-            "WHERE IDNhanVien = '$id'";
-        $result = $this->db->update($query);
-        if ($result) {
-            header("Location: index.php");
-            $alert = "Cập nhật thành công!";
-            return $alert;
-        } else {
-            $alert = "Cập nhật không thành công!";
-            return $alert;
+        // Đường dẫn đến thư mục chứa ảnh
+        $targetDir = __DIR__ . '/../imgUploads/';
+        $uniqueFileName = '';
+        $relativePath = '';
+        $targetFile = '';  // Biến lưu đường dẫn đầy đủ của file
+        
+        // Lấy thông tin từ dữ liệu gửi lên
+        $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
+        $tenSanPham = trim($data['TenSanPham'] ?? '');
+        $gia = floatval($data['Gia'] ?? 0);
+        $soLuong = intval($data['SoLuong'] ?? 0);
+        $moTa = trim($data['MoTa'] ?? '');
+        $idSanPham = intval($data['IDSanPham'] ?? 0);  // IDSanPham là tham số cần thiết để cập nhật
+        
+        $hinhAnh = $_FILES['HinhAnh'] ?? null;
+    
+        // Kiểm tra dữ liệu nhập
+        if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0 || $idSanPham <= 0) {
+            return "Vui lòng điền đầy đủ thông tin hợp lệ!";
+        }
+    
+        // Kiểm tra nếu có hình ảnh mới được tải lên
+        if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            if (!is_dir($targetDir)) {
+                if (!mkdir($targetDir, 0755, true)) {
+                    return "Không thể tạo thư mục upload!";
+                }
+            }
+    
+            // Kiểm tra định dạng file
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!in_array($hinhAnh['type'], $allowedTypes)) {
+                return "Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc GIF!";
+            }
+    
+            // Giới hạn kích thước file (5MB)
+            $maxFileSize = 5 * 1024 * 1024;
+            if ($hinhAnh["size"] > $maxFileSize) {
+                return "Kích thước file ảnh không được vượt quá 5MB!";
+            }
+    
+            // Tạo tên file ngẫu nhiên
+            $fileExtension = strtolower(pathinfo($hinhAnh["name"], PATHINFO_EXTENSION));
+            $uniqueFileName = uniqid() . '_' . time() . '.' . $fileExtension;
+            $targetFile = $targetDir . $uniqueFileName;  // Lưu đường dẫn đầy đủ
+    
+            // Thử upload file
+            if (!move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
+                return "Có lỗi xảy ra khi upload hình ảnh!";
+            }
+    
+            $relativePath = 'imgUploads/' . $uniqueFileName;
+        }
+    
+        try {
+            // Nếu có hình ảnh mới, cập nhật cả đường dẫn hình ảnh
+            if ($relativePath) {
+                $query = "UPDATE sanpham 
+                          SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ?, HinhAnh = ? 
+                          WHERE IDSanPham = ?";
+                $params = [
+                    $idLoaiSanPham,
+                    $tenSanPham,
+                    $gia,
+                    $soLuong,
+                    $moTa,
+                    $relativePath,
+                    $idSanPham  // Thêm IDSanPham vào để cập nhật
+                ];
+            } else {
+                // Nếu không có hình ảnh mới, chỉ cập nhật các trường khác
+                $query = "UPDATE sanpham 
+                          SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ? 
+                          WHERE IDSanPham = ?";
+                $params = [
+                    $idLoaiSanPham,
+                    $tenSanPham,
+                    $gia,
+                    $soLuong,
+                    $moTa,
+                    $idSanPham  // Thêm IDSanPham vào để cập nhật
+                ];
+            }
+    
+            $result = $this->db->insertSP($query, $params);
+    
+            if ($result) {
+                $_SESSION['success_message'] = "Cập nhật sản phẩm thành công!";
+                header("Location: index.php");
+                exit();
+            } else {
+                throw new Exception("Lỗi khi cập nhật sản phẩm vào database");
+            }
+        } catch (Exception $e) {
+            // Nếu có lỗi xảy ra, xóa file hình ảnh đã upload
+            if (!empty($targetFile) && file_exists($targetFile)) {
+                unlink($targetFile);
+            }
+            return "Lỗi: " . $e->getMessage();
         }
     }
+    
 
     //Xoa nhan vien
     public function delete($id)
     {
-        $query = "DELETE FROM NhanVien WHERE IDNhanVien = '$id'";
+        $query = "DELETE FROM sanpham WHERE IDSanPham = '$id'";
         $result = $this->db->update($query);
         if ($result) {
             $alert = "Đã xoá!";
