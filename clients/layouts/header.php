@@ -40,7 +40,7 @@ if (isset($_SESSION['userId'])) {
 <link rel="stylesheet" type="text/css" href="../css/vendor.css">
 <link rel="stylesheet" type="text/css" href="../style.css">
 
-<link rel="stylesheet" href="/clients/css/hieuung.css">
+<link rel="stylesheet" href="../css/hieuung.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

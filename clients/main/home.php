@@ -1,6 +1,17 @@
 <?php
 session_start();
-include '../layouts/header.php';
+
+include_once '../../controller/sanpham.php';
+
+include_once '../layouts/header.php';
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  include_once '../../controller/khachhang.php';
+  $khachhang = new KhachHang();
+  $result_register = $khachhang->register($_POST);
+  echo "<script>alert('" . $result_register . "')</script>";
+}
 ?>
 <div id="main-content">
   <section id="banner" style="background: #F9F3EC;">
@@ -606,15 +617,7 @@ include '../layouts/header.php';
 
 </section>
 
-<?php
-include '../../controller/khachhang.php';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $khachhang = new khachhang();
-  $result_register = $khachhang->register($_POST);
 
-  echo "<script>alert('" . $result_register . "')</script>";
-}
-?>
 <section id="register" style="background: url('../images/background-img.png') no-repeat;">
   <div class="container ">
     <div class="row my-5 py-5">
