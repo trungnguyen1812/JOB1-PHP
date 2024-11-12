@@ -45,7 +45,7 @@ $filepath = realpath(dirname(__FILE__));
 
 				<form  action="login.php" method="POST" class="login100-form validate-form">
 					<span class="login100-form-title">
-						Member Login
+						Đăng nhập <span style="color: antiquewhite;">Admin</span>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -66,7 +66,7 @@ $filepath = realpath(dirname(__FILE__));
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Login
+							Đăng nhập
 						</button>
 					</div>
 

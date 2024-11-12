@@ -1,0 +1,33 @@
+#wind-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Không ảnh hưởng đến thao tác chuột */
+}
+
+.leaf {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('/clients/images/leaf.png'); /* Hình ảnh lá */
+    background-size: cover;
+    opacity: 0.8;
+    animation: float 10s linear infinite;
+}
+
+/* Hiệu ứng di chuyển của lá */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(300px, 500px) rotate(360deg);
+        opacity: 0;
+    }
+}

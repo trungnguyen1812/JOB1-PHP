@@ -12,7 +12,7 @@ if (isset($_SESSION['userId'])) {
   include $filepath . '/../../controller/giohang.php';
   $giohang = new GioHang();
   $giohang_user = $giohang->getByIDKhachHang($_SESSION['userId']);
-  $giohang_soluong = $giohang_user==false ? 0 : mysqli_num_rows($giohang_user);
+  $giohang_soluong = $giohang_user == false ? 0 : mysqli_num_rows($giohang_user);
 }
 ?>
 <!DOCTYPE html>
@@ -39,6 +39,8 @@ if (isset($_SESSION['userId'])) {
 <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/style.css"> -->
 <link rel="stylesheet" type="text/css" href="../css/vendor.css">
 <link rel="stylesheet" type="text/css" href="../style.css">
+
+<link rel="stylesheet" href="/clients/css/hieuung.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,11 +73,14 @@ if (isset($_SESSION['userId'])) {
   body.sticky-padding {
     padding-top: 160px;
   }
-
 </style>
 </head>
 
 <body>
+  <div id="wind-container">
+    <!-- Các hình ảnh lá sẽ được thêm vào đây qua JavaScript -->
+  </div>
+
   <div class="preloader-wrapper">
     <div class="preloader">
     </div>
@@ -88,54 +93,54 @@ if (isset($_SESSION['userId'])) {
     </div>
     <div class="offcanvas-body">
       <!-- Xu ly tai khoan dang nhap hay chua -->
-      <?php 
+      <?php
       if (!isset($_SESSION['username'])) { ?>
-      <div class="order-md-last"> 
-        <h4 class="text-center mb-3">
-          <div class="text-primary">Bạn chưa đăng nhập.</div>
-          <div>
-            Hãy <a class="btn btn-primary p-1" href="login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
-          </div>
-        </h4>
-      </div>
-      <!-- Neu dang dang nhap -->
+        <div class="order-md-last">
+          <h4 class="text-center mb-3">
+            <div class="text-primary">Bạn chưa đăng nhập.</div>
+            <div>
+              Hãy <a class="btn btn-primary p-1" href="login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
+            </div>
+          </h4>
+        </div>
+        <!-- Neu dang dang nhap -->
       <?php } else { ?>
-      <div class="order-md-last"> 
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Giỏ hàng</span>
-          <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
-        </h4>
-        <ul class="list-group mb-3">
-          <?php
-          if ($giohang_soluong == 0) {
-            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
-          } else {
-            $tongtien = 0;
-            foreach ($giohang_user as $key => $value) {
-              ?>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
-                  <small class="text-body-secondary">Giá x Số lượng :
-                    <?php echo $value['Gia'] . ' x ' . $value['SoLuong'] ?></small>
-                </div>
-                <span class="text-body-secondary">
-                  <?php
-                  $tongtien += $value['Gia'] * $value['SoLuong'];
-                  echo $value['Gia'] * $value['SoLuong'];
-                  ?> VNĐ
-                </span>
-              </li>
-              <?php
-            }
-          } ?>
-          <li class="list-group-item d-flex justify-content-between">
-            <span class="fw-bold">Tổng tiền: </span>
-            <strong><?= $tongtien ?> VNĐ</strong>
-          </li>
-        </ul>
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-      </div>
+        <div class="order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Giỏ hàng</span>
+            <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
+          </h4>
+          <ul class="list-group mb-3">
+            <?php
+            if ($giohang_soluong == 0) {
+              echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
+            } else {
+              $tongtien = 0;
+              foreach ($giohang_user as $key => $value) {
+            ?>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
+                    <small class="text-body-secondary">Giá x Số lượng :
+                      <?php echo $value['Gia'] . ' x ' . $value['SoLuong'] ?></small>
+                  </div>
+                  <span class="text-body-secondary">
+                    <?php
+                    $tongtien += $value['Gia'] * $value['SoLuong'];
+                    echo $value['Gia'] * $value['SoLuong'];
+                    ?> VNĐ
+                  </span>
+                </li>
+            <?php
+              }
+            } ?>
+            <li class="list-group-item d-flex justify-content-between">
+              <span class="fw-bold">Tổng tiền: </span>
+              <strong><?= $tongtien ?> VNĐ</strong>
+            </li>
+          </ul>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+        </div>
       <?php } ?>
     </div>
   </div>
@@ -205,6 +210,9 @@ if (isset($_SESSION['userId'])) {
     </div>
 
     <div class="containe sticky-nav" id="sticky-nav">
+      <div id="wind-container">
+        <!-- Các hình ảnh lá sẽ được thêm vào đây qua JavaScript -->
+      </div>
       <nav class="main-menu d-flex navbar navbar-expand-lg ">
         <div class="d-flex d-lg-none align-items-end mt-3">
           <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -251,52 +259,46 @@ if (isset($_SESSION['userId'])) {
           </div>
 
           <div class="offcanvas-body justify-content-between">
-            <select class="filter-categories border-0 mb-0 me-5">
-              <option>Lọc theo loại</option>
-              <option>Mô Hình</option>
-              <option>cho bé nam</option>
-              <option>Cho bé nữ</option>
-            
-            </select>
+            <div class="filter-categories border-0 mb-0 me-5">
+
+            </div>
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
-                <a href="home.php" class="nav-link active">Home</a>
+                <a href="home.php" class="nav-link active">Trang chủ</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                  aria-expanded="false">Trang</a>
-                <ul class="dropdown-menu" aria-labelledby="pages">
-                  <li><a href="home.php" class="dropdown-item">About Us</a></li>
-                  <li><a href="home.php" class="dropdown-item">Shop</a></li>
-                  <li><a href="home.php" class="dropdown-item">Single Product</a></li>
-                  <li><a href="home.php" class="dropdown-item">Cart</a></li>
-                  <li><a href="home.php" class="dropdown-item">Wishlist</a></li>
-                  <li><a href="home.php" class="dropdown-item">Checkout</a></li>
-                  <li><a href="home.php" class="dropdown-item">Blog</a></li>
-                  <li><a href="home.php" class="dropdown-item">Single Post</a></li>
-                  <li><a href="home.php" class="dropdown-item">Contact</a></li>
-                  <li><a href="home.php" class="dropdown-item">FAQs</a></li>
-                  <li><a href="home.php" class="dropdown-item">Account</a></li>
-                  <li><a href="home.php" class="dropdown-item">Thankyou</a></li>
-                  <li><a href="home.php" class="dropdown-item">Error 404</a></li>
-                  <li><a href="home.php" class="dropdown-item">Styles</a></li>
-                </ul>
-              </li>
+           
+
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a href="home.php" class="nav-link">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="home.php" class="nav-link">Contact</a>
+                <a href="home.php" class="nav-link">Gấu Bông</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Others</a>
+                <a href="home.php" class="nav-link">Điện Tử</a>
               </li>
-              
+
+              <li class="nav-item">
+                <a href="home.php" class="nav-link">Đồ Gỗ</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="home.php" class="nav-link">Đồ Thủ Công</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="home.php" class="nav-link">Xe</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="home.php" class="nav-link">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="home.php" class="nav-link">Liên hệ</a>
+              </li>
+
+
+
             </ul>
 
             <div class="d-none d-lg-flex align-items-end">
@@ -305,7 +307,7 @@ if (isset($_SESSION['userId'])) {
                   <?php
                   if (isset($_SESSION['username'])) { ?>
                     <a href=""><?= $_SESSION['username'] ?></a> |
-                    
+
                     <a href="logout.php" title="Đăng xuất">
                       <?php include '../images/logout.svg' ?>
                     </a>
@@ -332,5 +334,37 @@ if (isset($_SESSION['userId'])) {
 
         </div>
       </nav>
+
     </div>
   </header>
+  <script>
+    // script.js
+
+    // Hàm tạo lá và thêm hiệu ứng
+    let leafCount = 0;
+    const maxLeafCount = 19; // Số lượng lá tối đa
+
+    function createLeaf() {
+      if (leafCount < maxLeafCount) {
+        const leaf = document.createElement("div");
+        leaf.classList.add("leaf");
+
+        // Đặt vị trí ngẫu nhiên trong header
+        leaf.style.left = `${Math.random() * 100}vw`;
+        leaf.style.animationDuration = `${Math.random() * 5 + 7}s`; // Thời gian di chuyển ngẫu nhiên
+        leaf.style.animationDelay = `${Math.random() * 5}s`; // Độ trễ ngẫu nhiên
+
+        document.getElementById("wind-container").appendChild(leaf);
+        leafCount++; // Tăng số lượng lá
+
+        // Tự động xóa lá khi hoàn thành animation
+        leaf.addEventListener("animationend", () => {
+          leaf.remove();
+          leafCount--; // Giảm số lượng lá khi đã xóa
+        });
+      }
+    }
+
+    // Tạo lá mới sau mỗi khoảng thời gian (ví dụ 2 giây)
+    setInterval(createLeaf, 2000);
+  </script>

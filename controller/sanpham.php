@@ -256,4 +256,12 @@ class SanPham
             return $alert;
         }
     }
+
+    // show sản sản phẩm bán chạy 
+    public function showSanPhamHot()
+    {
+        $query = "SELECT * FROM sanpham ORDER BY SoLuongBan DESC LIMIT 5";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }

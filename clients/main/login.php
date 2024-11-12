@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/login.css">
+
 </head>
 
 <body>
@@ -24,46 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../layouts/header.php';
     ?>
     <div id="main-content">
-        <hr>
-        <div style="text-align: center;">
-            <h3>ĐĂNG NHẬP</h3>
-        </div>
-        <div class="formLogin">
+        <section id="register" style="background: url('../images/background-img.png') no-repeat;">
+            <div class="container ">
+                <div class="row my-5 py-5">
+                    <div class="offset-md-3 col-md-6 my-5 ">
+                        <h2 class="display-3 fw-normal text-center">Giảm 20% <span class="text-primary">cho lần mua đầu tiên
+                            </span>
+                        </h2>
+                        <form action="login.php" method="post">
+                         
+                            <div class="mb-3">
+                                <input type="email" class="form-control form-control-lg" name="email" id="email"
+                                    placeholder="Địa chỉ email của bạn ......" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control form-control-lg" name="password" id="password"
+                                    placeholder="Repeat Password" required >
+                            </div>
 
-            <div>
-                <img width="250" height="180" src="../images/logoLogin.png " alt="">
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-dark btn-lg rounded-1">Đăng Nhập</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div>
-                <form action="login.php" method="POST">
-                    <br>
-                    <div>
-                        <label for="email">Tên Email:</label><br>
-                        <input type="text" id="email" name="email" required>
-                    </div>
-                    <div>
-                        <label for="password">Mật khẩu:</label><br>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-
-                    <div>
-                        <input type="submit" value="Đăng Nhập" />
-
-                        <button class="btnRegister">
-                            <a style="color: white;" href="register.php">&nbsp;&nbsp;&nbsp;
-                                Đăng Ký Ngay
-                            </a>
-                        </button>
-
-                    </div>
-                    <br>
-                </form>
-                <!-- <div>
-                    <div>Bạn chưa có tài khoản?</div>
-                </div> -->
-
-            </div>
-        </div>
-        <hr>
+        </section>
+    </div>
 </body>
 <?php
 include '../layouts/footer.php';
