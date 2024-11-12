@@ -2,7 +2,6 @@
 include "../../../controller/loaisanpham.php";
 $loaisanpham = new LoaiSanPham();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $loaisanpham = new LoaiSanPham();
     $result = $loaisanpham->update($_POST);
 }
 
@@ -201,6 +200,7 @@ $loaisanphamUpdate = mysqli_fetch_assoc($loaisanpham->getById($_GET['id']));
                         <div class="card-body pt-0 pb-2 text-center">
                             <form action="edit.php" method="POST">
                                 <div>
+                                    <input name="id" type="hidden" value="<?= $loaisanphamUpdate['IDLoaiSanPham'] ?>" />
                                     <div class="form-group">
                                         <label for="TenLoaiSanPham" class="form-label">Tên Loại sản Phẩm:</label>
                                         <input id="TenLoaiSanPham" name="TenLoaiSanPham" class="form-control" type="text" value="<?=$loaisanphamUpdate['TenLoaiSanPham']?>" required />

@@ -27,6 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            width: 10%;
+            padding-right: 10px;
+            text-align: right;
+        }
+
+        .form-control {
+            width: 50%;
+        }
+    </style>  
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -174,33 +193,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="card-body pt-0 pb-2 text-center">
                             <form action="create.php" method="POST">
                                 <div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="hoten" class="form-label p-2">Họ tên:</label>
-                                        <input style="width: 40%" id="hoten" name="hoten" class="form-control" type="text" placeholder="Nhập họ tên" required/>
+                                        <input id="hoten" name="hoten" class="form-control" type="text" placeholder="Nhập họ tên" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="email" class="form-label p-2">Email:</label>
-                                        <input style="width: 40%" id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" required/>
+                                        <input id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="password" class="form-label p-2">Mật khẩu:</label>
-                                        <input style="width: 40%" id="password" name="password" class="form-control" type="password" placeholder="Nhập email nhân viên" required/>
+                                        <input id="password" name="password" class="form-control" type="password" placeholder="Nhập email nhân viên" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="sdt" class="form-label p-2">SĐT:</label>
-                                        <input style="width: 40%" id="sdt" name="sdt" class="form-control" type="text" placeholder="Nhập số điện thoại liên lạc"/>
+                                        <input id="sdt" name="sdt" class="form-control" type="text" placeholder="Nhập số điện thoại liên lạc"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="namsinh" class="form-label p-2">Năm sinh:</label>
-                                        <input style="width: 40%" id="namsinh" name="namsinh" class="form-control" type="text" placeholder="Nhập năm sinh"/>
+                                        <input id="namsinh" name="namsinh" class="form-control" type="text" placeholder="Nhập năm sinh"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="gioitinh" class="form-label p-2">Giới tính:</label>
-                                        <input style="width: 40%" id="gioitinh" name="gioitinh" class="form-control" type="text" placeholder="Nhập giới tính"/>
+                                        <input id="gioitinh" name="gioitinh" class="form-control" type="text" placeholder="Nhập giới tính"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="diachi" class="form-label p-2">Địa chỉ:</label>
-                                        <input style="width: 40%" id="diachi" name="diachi" class="form-control" type="text" placeholder="Nhập địa chỉ"/>
+                                        <input id="diachi" name="diachi" class="form-control" type="text" placeholder="Nhập địa chỉ"/>
                                     </div>
                                 </div>
                                 <br>

@@ -30,6 +30,32 @@ $nhanvienUpdate = mysqli_fetch_assoc($nhanvien->getById($_GET['id']));
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <style>
+        /* Đảm bảo các form-group có display flex để label và input trên cùng một hàng */
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            /* Thêm khoảng cách giữa các dòng */
+        }
+
+        /* Đặt độ rộng cố định cho label để các cột luôn thẳng hàng */
+        .form-label {
+            width: 150px;
+            /* Đặt độ rộng phù hợp để đủ chứa nội dung dài nhất */
+            padding-right: 10px;
+            /* Khoảng cách giữa label và input */
+            text-align: right;
+            /* Căn phải label để đẹp hơn */
+        }
+
+        /* Đặt độ rộng input theo nhu cầu */
+        .form-control {
+            width: 60%;
+            /* Điều chỉnh độ rộng input theo ý muốn */
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -178,33 +204,33 @@ $nhanvienUpdate = mysqli_fetch_assoc($nhanvien->getById($_GET['id']));
                             <form action="edit.php" method="POST">
                                 <div>
                                     <input type="hidden" name="id" value="<?= $nhanvienUpdate['IDNhanVien'] ?>"/>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="hoten" class="form-label p-2">Họ tên:</label>
-                                        <input style="width: 40%" id="hoten" name="hoten" class="form-control" type="text" placeholder="Nhập họ tên" value="<?= $nhanvienUpdate['HoTenNhanVien'] ?>" required/>
+                                        <input id="hoten" name="hoten" class="form-control" type="text" placeholder="Nhập họ tên" value="<?= $nhanvienUpdate['HoTenNhanVien'] ?>" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="email" class="form-label p-2">Email:</label>
-                                        <input style="width: 40%" id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" value="<?= $nhanvienUpdate['Email'] ?>" required/>
+                                        <input id="email" name="email" class="form-control" type="text" placeholder="Nhập email nhân viên" value="<?= $nhanvienUpdate['Email'] ?>" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="password" class="form-label p-2">Mật khẩu:</label>
-                                        <input style="width: 40%" id="password" name="password" class="form-control" type="password" placeholder="Nhập password nhân viên" value="<?= $nhanvienUpdate['MatKhau'] ?>" required/>
+                                        <input id="password" name="password" class="form-control" type="password" placeholder="Nhập password nhân viên" value="<?= $nhanvienUpdate['MatKhau'] ?>" required/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="sdt" class="form-label p-2">SĐT:</label>
-                                        <input style="width: 40%" id="sdt" name="sdt" class="form-control" type="text" placeholder="Nhập số điện thoại liên lạc" value="<?= $nhanvienUpdate['SĐT'] ?>"/>
+                                        <input id="sdt" name="sdt" class="form-control" type="text" placeholder="Nhập số điện thoại liên lạc" value="<?= $nhanvienUpdate['SĐT'] ?>"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="namsinh" class="form-label p-2">Năm sinh:</label>
-                                        <input style="width: 40%" id="namsinh" name="namsinh" class="form-control" type="text" placeholder="Nhập năm sinh" value="<?= $nhanvienUpdate['NamSinh'] ?>"/>
+                                        <input id="namsinh" name="namsinh" class="form-control" type="text" placeholder="Nhập năm sinh" value="<?= $nhanvienUpdate['NamSinh'] ?>"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="gioitinh" class="form-label p-2">Giới tính:</label>
-                                        <input style="width: 40%" id="gioitinh" name="gioitinh" class="form-control" type="text" placeholder="Nhập giới tính" value="<?= $nhanvienUpdate['GioiTinh']==1?"Nam":"Nữ" ?>"/>
+                                        <input id="gioitinh" name="gioitinh" class="form-control" type="text" placeholder="Nhập giới tính" value="<?= $nhanvienUpdate['GioiTinh']==1?"Nam":"Nữ" ?>"/>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
                                         <label for="diachi" class="form-label p-2">Địa chỉ:</label>
-                                        <input style="width: 40%" id="diachi" name="diachi" class="form-control" type="text" placeholder="Nhập địa chỉ" value="<?= $nhanvienUpdate['DiaChi'] ?>"/>
+                                        <input id="diachi" name="diachi" class="form-control" type="text" placeholder="Nhập địa chỉ" value="<?= $nhanvienUpdate['DiaChi'] ?>"/>
                                     </div>
                                 </div>
                                 <br>
