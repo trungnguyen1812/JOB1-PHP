@@ -1,7 +1,7 @@
 <?php
 $filepath = realpath(dirname(__FILE__));
-include $filepath . '/../lib/session.php';
-include $filepath . '/../lib/database.php';
+include_once $filepath . '/../lib/session.php';
+include_once $filepath . '/../lib/database.php';
 ?>
 <?php
 class SanPham
@@ -50,18 +50,18 @@ class SanPham
         $uniqueFileName = '';
         $relativePath = '';
         $targetFile = '';  // Thêm biến này để lưu đường dẫn đầy đủ của file
-    
+
         $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
         $tenSanPham = trim($data['TenSanPham'] ?? '');
         $gia = floatval($data['Gia'] ?? 0);
         $soLuong = intval($data['SoLuong'] ?? 0);
         $moTa = trim($data['MoTa'] ?? '');
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
-    
+
         if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0) {
             return "Vui lòng điền đầy đủ thông tin hợp lệ!";
         }
-    
+
         // Xử lý upload file hình ảnh
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
             // Kiểm tra và tạo thư mục nếu chưa tồn tại
@@ -70,38 +70,38 @@ class SanPham
                     return "Không thể tạo thư mục upload!";
                 }
             }
-    
+
             // Kiểm tra định dạng file
             $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
             if (!in_array($hinhAnh['type'], $allowedTypes)) {
                 return "Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc GIF!";
             }
-    
+
             // Giới hạn kích thước file (5MB)
             $maxFileSize = 5 * 1024 * 1024;
             if ($hinhAnh["size"] > $maxFileSize) {
                 return "Kích thước file ảnh không được vượt quá 5MB!";
             }
-    
+
             // Tạo tên file ngẫu nhiên
             $fileExtension = strtolower(pathinfo($hinhAnh["name"], PATHINFO_EXTENSION));
             $uniqueFileName = uniqid() . '_' . time() . '.' . $fileExtension;
             $targetFile = $targetDir . $uniqueFileName;  // Lưu đường dẫn đầy đủ
-    
+
             // Thử upload file
             if (!move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
                 return "Có lỗi xảy ra khi upload hình ảnh!";
             }
-    
+
             $relativePath = 'imgUploads/' . $uniqueFileName;
         }
-    
+
         try {
-        
-    
+
+
             $query = "INSERT INTO sanpham (IDLoaiSanPham, TenSanPham, Gia, SoLuong, MoTa, HinhAnh) 
                      VALUES (?, ?, ?, ?, ?, ?)";
-    
+
             $params = [
                 $idLoaiSanPham,
                 $tenSanPham,
@@ -110,11 +110,11 @@ class SanPham
                 $moTa,
                 $relativePath
             ];
-    
+
             $result = $this->db->insertSP($query, $params);
-    
+
             if ($result) {
-               
+
                 $_SESSION['success_message'] = "Thêm mới sản phẩm thành công!";
                 header("Location: index.php");
                 exit();
@@ -126,7 +126,7 @@ class SanPham
                 throw new Exception("Lỗi khi thêm sản phẩm vào database");
             }
         } catch (Exception $e) {
-           
+
             // Xóa file ảnh nếu có lỗi xảy ra
             if (!empty($targetFile) && file_exists($targetFile)) {
                 unlink($targetFile);
@@ -143,7 +143,7 @@ class SanPham
         $uniqueFileName = '';
         $relativePath = '';
         $targetFile = '';  // Biến lưu đường dẫn đầy đủ của file
-        
+
         // Lấy thông tin từ dữ liệu gửi lên
         $idLoaiSanPham = intval($data['IDLoaiSanPham'] ?? 0);
         $tenSanPham = trim($data['TenSanPham'] ?? '');
@@ -151,14 +151,14 @@ class SanPham
         $soLuong = intval($data['SoLuong'] ?? 0);
         $moTa = trim($data['MoTa'] ?? '');
         $idSanPham = intval($data['IDSanPham'] ?? 0);  // IDSanPham là tham số cần thiết để cập nhật
-        
+
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
-    
+
         // Kiểm tra dữ liệu nhập
         if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0 || $idSanPham <= 0) {
             return "Vui lòng điền đầy đủ thông tin hợp lệ!";
         }
-    
+
         // Kiểm tra nếu có hình ảnh mới được tải lên
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
             // Kiểm tra và tạo thư mục nếu chưa tồn tại
@@ -167,32 +167,32 @@ class SanPham
                     return "Không thể tạo thư mục upload!";
                 }
             }
-    
+
             // Kiểm tra định dạng file
             $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
             if (!in_array($hinhAnh['type'], $allowedTypes)) {
                 return "Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc GIF!";
             }
-    
+
             // Giới hạn kích thước file (5MB)
             $maxFileSize = 5 * 1024 * 1024;
             if ($hinhAnh["size"] > $maxFileSize) {
                 return "Kích thước file ảnh không được vượt quá 5MB!";
             }
-    
+
             // Tạo tên file ngẫu nhiên
             $fileExtension = strtolower(pathinfo($hinhAnh["name"], PATHINFO_EXTENSION));
             $uniqueFileName = uniqid() . '_' . time() . '.' . $fileExtension;
             $targetFile = $targetDir . $uniqueFileName;  // Lưu đường dẫn đầy đủ
-    
+
             // Thử upload file
             if (!move_uploaded_file($hinhAnh["tmp_name"], $targetFile)) {
                 return "Có lỗi xảy ra khi upload hình ảnh!";
             }
-    
+
             $relativePath = 'imgUploads/' . $uniqueFileName;
         }
-    
+
         try {
             // Nếu có hình ảnh mới, cập nhật cả đường dẫn hình ảnh
             if ($relativePath) {
@@ -222,9 +222,9 @@ class SanPham
                     $idSanPham  // Thêm IDSanPham vào để cập nhật
                 ];
             }
-    
+
             $result = $this->db->insertSP($query, $params);
-    
+
             if ($result) {
                 $_SESSION['success_message'] = "Cập nhật sản phẩm thành công!";
                 header("Location: index.php");
@@ -240,7 +240,7 @@ class SanPham
             return "Lỗi: " . $e->getMessage();
         }
     }
-    
+
 
     //Xoa nhan vien
     public function delete($id)
@@ -263,5 +263,52 @@ class SanPham
         $query = "SELECT * FROM sanpham ORDER BY SoLuongBan DESC LIMIT 5";
         $result = $this->db->select($query);
         return $result;
+    }
+
+    // show sản phẩm hot trend 
+
+    public function showProductsByCategory($categoryID)
+    {
+        // Kết nối tới CSDL và thực hiện truy vấn
+        if ($this->db) {
+            // Truy vấn sản phẩm theo loại sản phẩm
+            $sql = "SELECT * FROM sanpham WHERE IDLoaiSanPham = $categoryID";
+
+            // Sử dụng phương thức select của lớp Database để thực thi câu lệnh
+            $result = $this->db->select($sql);
+            if ($result === false) {
+                echo "SQL Error: " . mysqli_error($this->db->link);
+            } else {
+                // echo "Số lượng sản phẩm tìm thấy: " . mysqli_num_rows($result);
+            }
+
+            // Kiểm tra nếu có sản phẩm
+            if ($result && mysqli_num_rows($result) > 0) {
+                // Lưu tất cả sản phẩm vào mảng và trả về
+                $sanpham = [];
+                while ($product = mysqli_fetch_assoc($result)) {
+                    $sanpham[] = $product;
+                }
+
+                // Truyền dữ liệu vào view
+                // Sử dụng phương thức view() của controller để gọi view và truyền biến vào
+                return $this->view('sanpham', ['sanphamList' => $sanpham]);
+            } else {
+                echo 'Không có sản phẩm';
+                return []; // Không có sản phẩm nào, trả về mảng rỗng
+            }
+        }
+        return []; // Trường hợp không kết nối được với CSDL
+    }
+
+    public function view($view, $data = [])
+    {
+        extract($data); // Tạo biến từ mảng dữ liệu
+        $viewPath = __DIR__ . '/../clients/pages/' . $view . '.php'; // Đảm bảo đường dẫn đúng từ thư mục controller
+        if (file_exists($viewPath)) {
+            require_once $viewPath; // Gọi file view nếu tồn tại
+        } else {
+            echo "View not found: " . $viewPath;
+        }
     }
 }

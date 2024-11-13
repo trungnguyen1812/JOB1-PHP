@@ -1,7 +1,7 @@
 <?php
 $filepath = realpath(dirname(__FILE__));
-include $filepath . '/../lib/session.php';
-include $filepath . '/../lib/database.php';
+include_once $filepath . '/../lib/session.php';
+include_once $filepath . '/../lib/database.php';
 ?>
 <?php
 class NhanVien
