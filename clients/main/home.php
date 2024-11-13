@@ -5,6 +5,7 @@ include_once '../../controller/sanpham.php';
 
 include_once '../layouts/header.php';
 
+$sanpham = new  Sanpham();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include_once '../../controller/khachhang.php';
