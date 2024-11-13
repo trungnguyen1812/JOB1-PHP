@@ -269,37 +269,28 @@ class SanPham
 
     public function showProductsByCategory($categoryID)
     {
-        // Kết nối tới CSDL và thực hiện truy vấn
+        $sanpham = [];
         if ($this->db) {
-            // Truy vấn sản phẩm theo loại sản phẩm
             $sql = "SELECT * FROM sanpham WHERE IDLoaiSanPham = $categoryID";
-
-            // Sử dụng phương thức select của lớp Database để thực thi câu lệnh
             $result = $this->db->select($sql);
-            if ($result === false) {
-                echo "SQL Error: " . mysqli_error($this->db->link);
-            } else {
-                // echo "Số lượng sản phẩm tìm thấy: " . mysqli_num_rows($result);
-            }
-
-            // Kiểm tra nếu có sản phẩm
+    
             if ($result && mysqli_num_rows($result) > 0) {
-                // Lưu tất cả sản phẩm vào mảng và trả về
-                $sanpham = [];
                 while ($product = mysqli_fetch_assoc($result)) {
                     $sanpham[] = $product;
                 }
-
-                // Truyền dữ liệu vào view
-                // Sử dụng phương thức view() của controller để gọi view và truyền biến vào
-                return $this->view('sanpham', ['sanphamList' => $sanpham]);
             } else {
-                echo 'Không có sản phẩm';
-                return []; // Không có sản phẩm nào, trả về mảng rỗng
+                echo "Không có sản phẩm nào cho loại sản phẩm với ID = $categoryID<br>";
             }
+        } else {
+            echo "Không kết nối được CSDL.<br>";
         }
-        return []; // Trường hợp không kết nối được với CSDL
+    
+        // Kiểm tra dữ liệu trả về
+      
+        return $sanpham;
     }
+    
+
 
     public function view($view, $data = [])
     {
