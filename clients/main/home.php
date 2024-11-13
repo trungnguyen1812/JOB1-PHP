@@ -1,17 +1,39 @@
+
 <?php
 session_start();
 
 include_once '../../controller/sanpham.php';
-
 include_once '../layouts/header.php';
 
-$sanpham = new  Sanpham();
+$sanpham = new Sanpham();
 
+// Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  include_once '../../controller/khachhang.php';
-  $khachhang = new KhachHang();
-  $result_register = $khachhang->register($_POST);
-  echo "<script>alert('" . $result_register . "')</script>";
+    include_once '../../controller/khachhang.php';
+    $khachhang = new KhachHang();
+    $result_register = $khachhang->register($_POST);
+
+    // If registration is successful, store user data in session
+    if ($result_register === 'Đăng ký thành công!') {
+        $_SESSION['name'] = $_POST['hoten'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['password'] = $_POST['password'];
+        
+        // Redirect to refresh the page to hide the form
+        header("Location: register.php");
+        exit();
+    }
+
+    echo "<script>alert('" . $result_register . "')</script>";
+}
+
+// Check if user is logged in (i.e. data is stored in session)
+if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['password'])) {
+    // User is logged in, hide the registration form
+    $formVisibility = 'display: none;';
+} else {
+    // User is not logged in, show the registration form
+    $formVisibility = 'display: block;';
 }
 ?>
 <div id="main-content">
@@ -139,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
   </section>
+
   <section id="foodies" class="my-5">
     <div class="container my-5 py-5">
       <div class="section-header d-md-flex justify-content-between align-items-center">
@@ -163,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="single-product.html">
+                <a href="../pages/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
@@ -341,35 +364,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </section>
 
 
-  <section id="register" style="background: url('../images/background-img.png') no-repeat;">
-    <div class="container ">
-      <div class="row my-5 py-5">
-        <div class="offset-md-3 col-md-6 my-5 ">
-          <h2 class="display-3 fw-normal text-center">Giảm 20% <span class="text-primary">cho lần mua đầu tiên
-            </span>
-          </h2>
-          <form action="register.php" method="post">
-            <div class="mb-3">
-              <input type="text" class="form-control form-control-lg" name="hoten" id="hoten"
-                placeholder="Họ tên của bạn...." required>
+  <section id="register" style="background: url('../images/background-img.png') no-repeat; <?php echo $formVisibility; ?>">
+    <div class="container">
+        <div class="row my-5 py-5">
+            <div class="offset-md-3 col-md-6 my-5">
+                <h2 class="display-3 fw-normal text-center">Giảm 20% <span class="text-primary">cho lần mua đầu tiên</span></h2>
+                <form action="register.php" method="post">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" name="hoten" id="hoten" placeholder="Họ tên của bạn...." required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Địa chỉ email của bạn ......" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Repeat Password" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark btn-lg rounded-1">Đăng ký ngay</button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-              <input type="email" class="form-control form-control-lg" name="email" id="email"
-                placeholder="Địa chỉ email của bạn ......" required>
-            </div>
-            <div class="mb-3">
-              <input type="password" class="form-control form-control-lg" name="password" id="password"
-                placeholder="Repeat Password" required>
-            </div>
-
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-dark btn-lg rounded-1">Đăng ký ngay</button>
-            </div>
-          </form>
         </div>
-      </div>
     </div>
-  </section>
+</section> 
+
+ 
 
 </div>
 <?php include '../layouts/footer.php'; ?>

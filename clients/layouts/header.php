@@ -171,7 +171,7 @@ if (isset($_SESSION['userId'])) {
       <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
         <div class="col-sm-4 col-lg-3 text-center text-sm-start">
           <div class="main-logo">
-            <a href="home.php">
+            <a href="../main/home.php">
               <img src="../images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
@@ -265,28 +265,32 @@ if (isset($_SESSION['userId'])) {
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
-                <a href="home.php" class="nav-link active">Trang chủ</a>
+                <a href="../main/home.php" class="nav-link active">Trang chủ</a>
               </li>
            
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Gấu Bông</a>
+                <a href="../pages/gaubong.php" class="nav-link">Gấu Bông</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Điện Tử</a>
+                <a href="../pages/dientu.php" class="nav-link">Điện Tử</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Đồ Gỗ</a>
+                <a href="../pages/dogo.php" class="nav-link">Đồ Gỗ</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Đồ Thủ Công</a>
+                <a href="../pages/dothucong.php" class="nav-link">Đồ Thủ Công</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Xe</a>
+                <a href="../pages/xe.php" class="nav-link">Xe</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="../pages/sanpham.php" class="nav-link">Sản Phẩm</a>
               </li>
 
               <li class="nav-item">
