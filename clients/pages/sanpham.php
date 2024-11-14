@@ -1,19 +1,31 @@
 <?php
+ob_start();
 session_start();
+
 
 include_once '../../controller/sanpham.php';
 
-include_once '../layouts/header.php';
+include '../layouts/header.php';
 
 $sanpham = new  Sanpham();
 
 $dssanpham = $sanpham->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../../controller/khachhang.php';
-    $khachhang = new KhachHang();
-    $result_register = $khachhang->register($_POST);
-    echo "<script>alert('" . $result_register . "')</script>";
+    if (isset($_POST['model']) && $_POST['model']=='giohang') {
+        if (!isset($_SESSION['userId'])) {
+            // $_SESSION['error'] = "Đăng nhập để thực hiện mua hàng.";
+            // header('Location: ../main/login.php');
+            // exit();
+        } else {
+            $result = $giohang->insert($_SESSION['userId'], $_POST['idsanpham']);
+            ?>
+            <script>
+                alert('<?= $result ?>');
+            </script>
+            <?php
+        }
+    }
 }
 ?>
 <div id="main-content">
@@ -76,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="item cat col-md-4 col-lg-3 my-4">
                             <div class="card position-relative">
                                 <a href="chitietsanpham.php?id=<?= $value['IDSanPham'] ?>">
-                                    <img style="width: 306px; height: 279px;" src="/<?php echo $value['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
+                                    <img style="width: 306px; height: 279px;" src="/<?php echo $value['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $value['TenSanPham']; ?>">
                                 </a>
                                 <div class="card-body p-0">
                                     <a href="single-product.html">
@@ -93,9 +105,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </span>
                                         <h3 class="secondary-font text-primary"><?php echo number_format($value['Gia'], 0); ?> VND</h3>
                                         <div class="d-flex flex-wrap mt-3">
-                                            <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                                <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-                                            </a>
+                                            <form action="sanpham.php" method="POST">
+                                                <input type="hidden" name="model" value="giohang" />
+                                                <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                                                <button type="submit" class="btn-cart me-3 px-4 pt-3 pb-3">
+                                                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+                                                </button>
+                                            </form>
                                             <a href="#" class="btn-wishlist px-4 pt-3">
                                                 <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                                             </a>
