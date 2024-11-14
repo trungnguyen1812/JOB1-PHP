@@ -99,7 +99,7 @@ if (isset($_SESSION['userId'])) {
           <h4 class="text-center mb-3">
             <div class="text-primary">Bạn chưa đăng nhập.</div>
             <div>
-              Hãy <a class="btn btn-primary p-1" href="login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
+              Hãy <a class="btn btn-primary p-1" href="../main/login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
             </div>
           </h4>
         </div>
@@ -270,31 +270,31 @@ if (isset($_SESSION['userId'])) {
            
 
               <li class="nav-item">
-                <a href="../pages/gaubong.php" class="nav-link">Gấu Bông</a>
+                <a href="../main/gaubong.php" class="nav-link">Gấu Bông</a>
               </li>
 
               <li class="nav-item">
-                <a href="../pages/dientu.php" class="nav-link">Điện Tử</a>
+                <a href="../main/dientu.php" class="nav-link">Điện Tử</a>
               </li>
 
               <li class="nav-item">
-                <a href="../pages/dogo.php" class="nav-link">Đồ Gỗ</a>
+                <a href="../main/dogo.php" class="nav-link">Đồ Gỗ</a>
               </li>
 
               <li class="nav-item">
-                <a href="../pages/dothucong.php" class="nav-link">Đồ Thủ Công</a>
+                <a href="../main/dothucong.php" class="nav-link">Đồ Thủ Công</a>
               </li>
 
               <li class="nav-item">
-                <a href="../pages/xe.php" class="nav-link">Xe</a>
+                <a href="../main/xe.php" class="nav-link">Xe</a>
               </li>
 
               <li class="nav-item">
-                <a href="../pages/sanpham.php" class="nav-link">Sản Phẩm</a>
+                <a href="../main/sanpham.php" class="nav-link">Sản Phẩm</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Blog</a>
+                <a href="main.php" class="nav-link">Blog</a>
               </li>
 
               <li class="nav-item">
