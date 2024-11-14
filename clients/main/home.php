@@ -247,7 +247,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
           <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="single-product.html">
+                <a href="../pages/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
