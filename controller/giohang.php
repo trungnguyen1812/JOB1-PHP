@@ -21,7 +21,7 @@ class GioHang
             $giohang_sanpham = $this->db->select($query);
             if ($giohang_sanpham) {
                 $data = $giohang_sanpham->fetch_assoc();
-                $query = "UPDATE GioHang SET SoLuong = ".($data['SoLuong']+1)." WHERE IDGioHang = ".$data['IDGioHang'];
+                $query = "UPDATE GioHang SET SoLuong = " . ($data['SoLuong'] + 1) . " WHERE IDGioHang = " . $data['IDGioHang'];
                 $result = $this->db->update($query);
                 ?>
                 <script>alert("aaaa")</script>
@@ -31,7 +31,7 @@ class GioHang
                 $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong) VALUES ($idkh, $idsp, 1)";
                 $result = $this->db->insert($query);
             }
-            
+
             if (!$result) {
                 // header('Location: sanpham.php');
                 return "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
@@ -41,7 +41,7 @@ class GioHang
             }
         } catch (\Exception $e) {
             ?>
-                <script>alert("bbbbbnnnnnn")</script>
+            <script>alert("bbbbbnnnnnn")</script>
             <?php
             return (string) $e;
         }
@@ -51,13 +51,20 @@ class GioHang
     public function update($id, $soluong)
     {
         try {
-             
+
         } catch (\Exception $e) {
             return (string) $e;
         }
     }
-    public function delete()
+    public function delete($id)
     {
+        try {
+            $query = "DELETE FROM GioHang WHERE IDGioHang = '$id'";
+            $result = $this->db->delete($query);
+            return $result;
+        } catch (\Exception $e) {
+            return (string) $e;
+        }
     }
 
     // Lay toan bo gio hang voi tai khoan dang nhap

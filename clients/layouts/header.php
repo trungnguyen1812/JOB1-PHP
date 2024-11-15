@@ -9,7 +9,7 @@ define('BASE_PATH', '/');
 $filepathHeader = realpath(dirname(__FILE__));
 // Trong file header.php
 if (isset($_SESSION['userId'])) {
-  include $filepathHeader . '/../../controller/giohang.php';
+  include_once $filepathHeader . '/../../controller/giohang.php';
   $giohang = new GioHang();
   $giohang_user = $giohang->getByIDKhachHang($_SESSION['userId']);
   $giohang_soluong = $giohang_user == false ? 0 : mysqli_num_rows($giohang_user);
@@ -72,6 +72,23 @@ if (isset($_SESSION['userId'])) {
     body.sticky-padding {
       padding-top: 160px;
     }
+
+    /* CSS hien thi gio hang */
+    .tensanpham {
+      width: 40%;
+    }
+
+    .giasanpham {
+      width: 20%;
+    }
+
+    .soluong {
+      width: 20%;
+    }
+
+    .tong {
+      width: 20%;
+    }
   </style>
 </head>
 
@@ -86,7 +103,8 @@ if (isset($_SESSION['userId'])) {
   </div>
 
   <!-- Gio hang khi duoc mo -->
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart"
+    style="width: 700px;">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -107,38 +125,59 @@ if (isset($_SESSION['userId'])) {
         <div class="order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Giỏ hàng</span>
-            <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?></span>
+            <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?> Sản phẩm</span>
           </h4>
           <ul class="list-group mb-3">
             <?php
             if ($giohang_soluong == 0) {
               echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
             } else {
-              $tongtien = 0;
-              foreach ($giohang_user as $key => $value) {
-                ?>
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                  <div>
-                    <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
-                    <small class="text-body-secondary">Giá x Số lượng :
-                      <?php echo $value['Gia'] . ' x ' . $value['SoLuong'] ?></small>
-                  </div>
-                  <span class="text-body-secondary">
-                    <?php
-                    $tongtien += $value['Gia'] * $value['SoLuong'];
-                    echo $value['Gia'] * $value['SoLuong'];
-                    ?> VNĐ
-                  </span>
-                </li>
-                <?php
-              }
-            } ?>
+              ?>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th class="tensanpham">Tên Sản Phẩm</th>
+                    <th class="text-center dongia">Đơn Giá</th>
+                    <th class="text-center soluong">Số Lượng</th>
+                    <th class="text-center tong">Tổng Tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $tongtien = 0;
+                  foreach ($giohang_user as $key => $value) {
+                    ?>
+                    <tr>
+                      <td class="">
+                        <?= $value['TenSanPham'] ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['Gia'] ?>
+                      </td>
+                      <td class="text-center">
+                        <?php echo $value['SoLuong'] ?>
+                      </td>
+                      <td class="text-center">
+                        <?php
+                        $tongtien += $value['Gia'] * $value['SoLuong'];
+                        echo $value['Gia'] * $value['SoLuong'];
+                        ?> VNĐ
+                      </td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            <?php } ?>
             <li class="list-group-item d-flex justify-content-between">
               <span class="fw-bold">Tổng tiền: </span>
               <strong><?= $tongtien ?> VNĐ</strong>
             </li>
           </ul>
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          <div class="text-center">
+            <a href="../main/checkout.php">
+              <button class="btn btn-primary btn-lg" type="submit">Checkout</button>
+            </a>
+          </div>
         </div>
       <?php } ?>
     </div>

@@ -1,7 +1,6 @@
 <footer id="footer" class="my-5">
     <div class="container py-5 my-5">
       <div class="row">
-
         <div class="col-md-3">
           <div class="footer-menu">
             <img width="160" height="50" src="../images/logo.png" alt="logo">

@@ -77,4 +77,11 @@ class KhachHang
         $result = $this->db->select($query);
         return $result;
     }
+
+    // GetByID
+    function getByID($id) {
+        $query = "SELECT * FROM KhachHang WHERE IDKhachHang = '$id'";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
