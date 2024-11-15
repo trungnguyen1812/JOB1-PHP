@@ -6,10 +6,10 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Dang nhap';
 define('BASE_PATH', '/');
 
 // Dinh nghia duong dan cua file
-$filepath = realpath(dirname(__FILE__));
+$filepathHeader = realpath(dirname(__FILE__));
 // Trong file header.php
 if (isset($_SESSION['userId'])) {
-  include $filepath . '/../../controller/giohang.php';
+  include $filepathHeader . '/../../controller/giohang.php';
   $giohang = new GioHang();
   $giohang_user = $giohang->getByIDKhachHang($_SESSION['userId']);
   $giohang_soluong = $giohang_user == false ? 0 : mysqli_num_rows($giohang_user);
@@ -19,7 +19,7 @@ if (isset($_SESSION['userId'])) {
 <html lang="en">
 
 <head>
-  <title>Waggy - Free eCommerce Pet Shop HTML Website Template</title>
+  <title>Teddy - Trang chủ</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,52 +28,51 @@ if (isset($_SESSION['userId'])) {
   <meta name="author" content="">
   <meta name="keywords" content="">
   <meta name="description" content="">
-</head>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<!-- <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/css/vendor.css">
-<link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/style.css"> -->
-<link rel="stylesheet" type="text/css" href="../css/vendor.css">
-<link rel="stylesheet" type="text/css" href="../style.css">
+  <!-- <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/css/vendor.css">
+  <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/style.css"> -->
+  <link rel="stylesheet" type="text/css" href="../css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="../style.css">
 
-<link rel="stylesheet" href="../css/hieuung.css">
+  <link rel="stylesheet" href="../css/hieuung.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
-  rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet">
 
-<style>
-  /* Thêm CSS cho sticky header */
-  html,
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+  <style>
+    /* Thêm CSS cho sticky header */
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-  }
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    }
 
-  /* Thêm padding để tránh nội dung bị che khuất khi header trở nên sticky */
-  body {
-    padding-top: 0;
-    transition: padding-top 0.3s ease;
-  }
+    /* Thêm padding để tránh nội dung bị che khuất khi header trở nên sticky */
+    body {
+      padding-top: 0;
+      transition: padding-top 0.3s ease;
+    }
 
-  body.sticky-padding {
-    padding-top: 160px;
-  }
-</style>
+    body.sticky-padding {
+      padding-top: 160px;
+    }
+  </style>
 </head>
 
 <body>
@@ -117,7 +116,7 @@ if (isset($_SESSION['userId'])) {
             } else {
               $tongtien = 0;
               foreach ($giohang_user as $key => $value) {
-            ?>
+                ?>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                   <div>
                     <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
@@ -131,7 +130,7 @@ if (isset($_SESSION['userId'])) {
                     ?> VNĐ
                   </span>
                 </li>
-            <?php
+                <?php
               }
             } ?>
             <li class="list-group-item d-flex justify-content-between">
@@ -267,7 +266,7 @@ if (isset($_SESSION['userId'])) {
               <li class="nav-item">
                 <a href="../main/home.php" class="nav-link active">Trang chủ</a>
               </li>
-           
+
 
               <li class="nav-item">
                 <a href="../main/gaubong.php" class="nav-link">Gấu Bông</a>
@@ -312,7 +311,7 @@ if (isset($_SESSION['userId'])) {
                   if (isset($_SESSION['username'])) { ?>
                     <a href=""><?= $_SESSION['username'] ?></a> |
 
-                    <a href="logout.php" title="Đăng xuất">
+                    <a href="../main/logout.php" title="Đăng xuất">
                       <?php include '../images/logout.svg' ?>
                     </a>
                   <?php } else { ?>
