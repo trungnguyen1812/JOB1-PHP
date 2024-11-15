@@ -29,7 +29,9 @@ if (isset($_SESSION['userId'])) {
   <meta name="keywords" content="">
   <meta name="description" content="">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="icon" href="../images/iconlogo.jpg" type="image/x-icon">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -72,6 +74,28 @@ if (isset($_SESSION['userId'])) {
     body.sticky-padding {
       padding-top: 160px;
     }
+    
+    .item.cat.col-md-4.col-lg-3.my-4 .card {
+  background-color: #F9F3EC;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.item.cat.col-md-4.col-lg-3.my-4 .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart {
+  background-color: #FFD700; /* Màu nền vàng */
+  color: #fff; /* Chữ màu trắng */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart:hover {
+  background-color: #FFC300; /* Màu nền khi hover */
+  color: #fff; /* Chữ vẫn màu trắng khi hover */
+} 
 
     /* CSS hien thi gio hang */
     .tensanpham {
