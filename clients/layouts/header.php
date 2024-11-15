@@ -86,18 +86,16 @@ if (isset($_SESSION['userId'])) {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart,
-.item.cat.col-md-4.col-lg-3.my-4 .card .btn-wishlist {
-  background-color: #FDE8D9;
-  color: #333;
+.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart {
+  background-color: #FFD700; /* Màu nền vàng */
+  color: #fff; /* Chữ màu trắng */
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart:hover,
-.item.cat.col-md-4.col-lg-3.my-4 .card .btn-wishlist:hover {
-  background-color: #E0C8B8;
-  color: #000;
-}
+.item.cat.col-md-4.col-lg-3.my-4 .card .btn-cart:hover {
+  background-color: #FFC300; /* Màu nền khi hover */
+  color: #fff; /* Chữ vẫn màu trắng khi hover */
+} 
   </style>
 </head>
 
