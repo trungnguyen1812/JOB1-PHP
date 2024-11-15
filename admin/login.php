@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>Đăng nhập QL</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100">
+		<div style="background: url('../clients/images/background-img.png') no-repeat; " class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/clients/images/banner-img.png" alt="IMG">
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 				<form  action="login.php" method="POST" class="login100-form validate-form">
 					<span class="login100-form-title">
-						Đăng nhập <span style="color: antiquewhite;">Admin</span>
+						Đăng nhập <span style="color: #FFCC66;">Admin</span>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
