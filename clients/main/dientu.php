@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h2 class="display-3 fw-normal">Điện Tử</h2>
                 <div class="mb-4 mb-md-0"></div>
                 <div>
-                    <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                    <a href="../main/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                         Mua Ngay
                         <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                             <use xlink:href="#arrow-right"></use>

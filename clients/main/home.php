@@ -168,7 +168,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
         <h2 class="display-3 fw-normal">Sản Phẩm Hot Trend</h2>
         <div class="mb-4 mb-md-0"></div>
         <div>
-          <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          <a href="../main/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
             Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
@@ -186,7 +186,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
           <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="../pages/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
+                <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
@@ -229,7 +229,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
         <h2 class="display-3 fw-normal">Gấu Bông</h2>
         <div class="mb-4 mb-md-0"></div>
         <div>
-          <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          <a href="../main/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
             Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
@@ -247,7 +247,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
           <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="../pages/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
+                <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
