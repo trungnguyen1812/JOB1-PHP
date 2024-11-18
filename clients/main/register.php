@@ -42,9 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <div class="mb-3">
                                 <input type="password" class="form-control form-control-lg" name="password" id="password"
-                                    placeholder="Repeat Password" required >
+                                    placeholder="Repeat Password" required>
                             </div>
-
+                            <div>
+                                <a href="login.php">Ấn để <span style="color: #DEAD6F;">quay lại</span></a>
+                            </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-dark btn-lg rounded-1">Đăng ký ngay</button>
                             </div>

@@ -1,39 +1,55 @@
-
 <?php
 session_start();
 
-include_once '../../controller/sanpham.php';
-include_once '../layouts/header.php';
+// Include required files
+require_once '../../controller/sanpham.php';
+require_once '../../controller/khachhang.php';
+require_once '../layouts/header.php';
 
 $sanpham = new Sanpham();
+$message = '';
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../../controller/khachhang.php';
+  // Validate input data
+  $hoten = trim($_POST['hoten']);
+  $email = trim($_POST['email']);
+  $password = trim($_POST['password']);
+
+  // Basic validation
+  if (empty($hoten) || empty($email) || empty($password)) {
+    $message = "Vui lòng điền đầy đủ thông tin!";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $message = "Email không hợp lệ!";
+  } elseif (strlen($password) < 6) {
+    $message = "Mật khẩu phải có ít nhất 6 ký tự!";
+  } else {
     $khachhang = new KhachHang();
-    $result_register = $khachhang->register($_POST);
+    $result_register = $khachhang->register([
+      'hoten' => $hoten,
+      'email' => $email,
+      'password' => password_hash($password, PASSWORD_DEFAULT) // Hash password for security
+    ]);
 
-    // If registration is successful, store user data in session
     if ($result_register === 'Đăng ký thành công!') {
-        $_SESSION['name'] = $_POST['hoten'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['password'] = $_POST['password'];
-        
-        // Redirect to refresh the page to hide the form
-        header("Location: register.php");
-        exit();
-    }
+      // Store user data in session
+      $_SESSION['loggedin'] = true;
+      $_SESSION['name'] = $hoten;
+      $_SESSION['email'] = $email;
 
-    echo "<script>alert('" . $result_register . "')</script>";
+      // Redirect to home page or dashboard
+      header("Location: index.php");
+      exit();
+    } else {
+      $message = $result_register;
+    }
+  }
 }
 
-// Check if user is logged in (i.e. data is stored in session)
-if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['password'])) {
-    // User is logged in, hide the registration form
-    $formVisibility = 'display: none;';
-} else {
-    // User is not logged in, show the registration form
-    $formVisibility = 'display: block;';
+// Check if user is already logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+  header("Location: index.php"); // Redirect if already logged in
+  exit();
 }
 ?>
 <div id="main-content">
@@ -128,19 +144,19 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
       <div class="row my-5">
 
         <div class="col text-center">
-          <a href="#" class="categories-item">
+          <a href="dogo.php" class="categories-item">
             <iconify-icon class="category-icon" icon="mingcute:toy-horse-line"></iconify-icon>
             <h5>Đồ Gỗ</h5>
           </a>
         </div>
         <div class="col text-center">
-          <a href="#" class="categories-item">
+          <a href="dientu.php" class="categories-item">
             <iconify-icon class="category-icon" icon="material-symbols:smart-toy-outline"></iconify-icon>
             <h5>Đồ Điện</h5>
           </a>
         </div>
         <div class="col text-center">
-          <a href="#" class="categories-item">
+          <a href="dothucong.php" class="categories-item">
 
             <iconify-icon class="category-icon" icon="svg-spinners:wind-toy"></iconify-icon>
             <h5>Đồ Thủ Công</h5>
@@ -331,9 +347,9 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">At the core of our practice is the idea that cities are the
-                      incubators of our
-                      greatest achievements, and the best hope for a sustainable future.</p>
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                      vườn ươm của chúng tôi
+                      thành tựu lớn nhất và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>
                   </div>
                 </div>
@@ -344,9 +360,9 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">At the core of our practice is the idea that cities are the
-                      incubators of our
-                      greatest achievements, and the best hope for a sustainable future.</p>
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                      nơi ươm mầm cho
+                      những thành tựu lớn nhất của chúng tôi, và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>
                   </div>
                 </div>
@@ -364,31 +380,8 @@ if (isset($_SESSION['name']) && isset($_SESSION['email']) && isset($_SESSION['pa
   </section>
 
 
-  <section id="register" style="background: url('../images/background-img.png') no-repeat; <?php echo $formVisibility; ?>">
-    <div class="container">
-        <div class="row my-5 py-5">
-            <div class="offset-md-3 col-md-6 my-5">
-                <h2 class="display-3 fw-normal text-center">Giảm 20% <span class="text-primary">cho lần mua đầu tiên</span></h2>
-                <form action="register.php" method="post">
-                    <div class="mb-3">
-                        <input type="text" class="form-control form-control-lg" name="hoten" id="hoten" placeholder="Họ tên của bạn...." required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Địa chỉ email của bạn ......" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Repeat Password" required>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-dark btn-lg rounded-1">Đăng ký ngay</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section> 
 
- 
+
 
 </div>
 <?php include '../layouts/footer.php'; ?>
