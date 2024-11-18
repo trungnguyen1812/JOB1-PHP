@@ -408,9 +408,15 @@ if (isset($_SESSION['userId'])) {
                         <?= $_SESSION['username'] ?>
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                        <li><a class="dropdown-item" href="../main/profile.php?id=<?= $khachHangInfo['IDKhachHang'] ?>">Tài khoản</a></li>
-
+                        <li>
+                          <a class="dropdown-item" href="../main/profile.php?id=<?= $khachHangInfo['IDKhachHang'] ?>">Tài khoản</a>
+                        </li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="../main/lich-su-don-hang.php">Lịch sử đơn hàng</a>
+                        </li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>

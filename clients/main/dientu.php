@@ -102,9 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </span>
                                         <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
                                         <div class="d-flex flex-wrap mt-3">
-                                            <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                                <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-                                            </a>
+                                            <form action="sanpham.php" method="POST">
+                                                <input type="hidden" name="model" value="giohang" />
+                                                <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                                                <button style="border: none; border-radius: 5px;" type="submit"
+                                                    class="btn-cart me-3 px-4 pt-3 pb-3">
+                                                    <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+                                                </button>
+                                            </form>
                                             <a href="#" class="btn-wishlist px-4 pt-3">
                                                 <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                                             </a>

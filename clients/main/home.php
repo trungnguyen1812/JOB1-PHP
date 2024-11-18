@@ -203,7 +203,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
                 <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
-                  <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
+                  <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
+                    class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
                   <a href="single-product.html">
@@ -220,9 +221,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     </span>
                     <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
                     <div class="d-flex flex-wrap mt-3">
-                      <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                        <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-                      </a>
+                      <form action="sanpham.php" method="POST">
+                        <input type="hidden" name="model" value="giohang" />
+                        <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                        <button style="border: none; border-radius: 5px;" type="submit"
+                          class="btn-cart me-3 px-4 pt-3 pb-3">
+                          <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+                        </button>
+                      </form>
                       <a href="#" class="btn-wishlist px-4 pt-3">
                         <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                       </a>
@@ -264,7 +270,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
                 <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
-                  <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
+                  <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
+                    class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
                 <div class="card-body p-0">
                   <a href="single-product.html">
@@ -281,9 +288,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     </span>
                     <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
                     <div class="d-flex flex-wrap mt-3">
-                      <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                        <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-                      </a>
+                      <form action="sanpham.php" method="POST">
+                        <input type="hidden" name="model" value="giohang" />
+                        <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                        <button style="border: none; border-radius: 5px;" type="submit"
+                          class="btn-cart me-3 px-4 pt-3 pb-3">
+                          <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+                        </button>
+                      </form>
                       <a href="#" class="btn-wishlist px-4 pt-3">
                         <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                       </a>
@@ -334,7 +346,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
+                      phố là
                       nơi ươm mầm cho
                       những thành tựu vĩ đại nhất của chúng tôi, và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>
@@ -347,7 +360,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
+                      phố là
                       vườn ươm của chúng tôi
                       thành tựu lớn nhất và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>
@@ -360,7 +374,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
-                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành phố là
+                    <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
+                      phố là
                       nơi ươm mầm cho
                       những thành tựu lớn nhất của chúng tôi, và là hy vọng tốt nhất cho một tương lai bền vững.</p>
                     <p class="text-black">- Joshima Lin</p>

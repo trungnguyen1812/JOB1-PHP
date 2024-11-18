@@ -16,7 +16,7 @@ $datagiohang = $giohang->getByIDKhachHang($_SESSION['userId']);
 
 // Du lieu khach hang (Thong tin dat hang)
 $khachhang = new KhachHang();
-$datakhachhang = $khachhang->getByID($_SESSION['userId'])->fetch_assoc();
+$datakhachhang = $khachhang->getByID($_SESSION['userId']);
 
 include_once '../layouts/header.php';
 
