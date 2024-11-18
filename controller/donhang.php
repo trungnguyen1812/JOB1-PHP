@@ -20,16 +20,28 @@ class DonHang
             $giohang = new GioHang();
             $datagiohang = $giohang->getByIDKhachHang($data['id']);
             $idkhach = $data['id'];
-            $hoten = $data['hoten'];
+            // $hoten = $data['hoten'];
             $diachi = $data['diachi'];
             $sdt = $data['sdt'];
-            ?>
-            <script>
-                alert("aaa");
-            </script>
-            <?php
-            return "Đặt hàng thành công.";
+            $tongtien = $data['tongtien'];
+            $thoigian = date("Y-m-d");
+            $query = "INSERT INTO DonHang(IDKhachHang, TongGia, TrangThai, TrangThaiVanChuyen, NgayTao, IDNhanVien, DiaChi, SDT) ".
+                    "VALUES ('$idkhach', '$tongtien', 0, 0, '$thoigian', null, '$diachi', '$sdt')";
+            // $result = $this->db->insert($query);
+            
+            
+            $lastDonHang = $this->db->select("SELECT IDDonHang FROM DonHang ORDER BY IDDonHang DESC LIMIT 1")->fetch_assoc();
+            // if ($result) {
+                foreach ($datagiohang as $key => $value) {
+                    $query = "INSERT INTO ChiTietDonHang(IDDonHang, IDSanPham, SoLuong, Gia, TrangThai) VALUES ".
+                            " VALUES ()";
+                };
+            // }
+            // return "Đặt hàng thành công.";
         } catch (Exception $e) {
+            ?>
+            <script>alert('<?php echo $e?>')</script>
+            <?php
         }
     }
 

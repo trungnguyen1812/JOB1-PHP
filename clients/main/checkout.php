@@ -88,6 +88,7 @@ include_once '../layouts/header.php';
                         <input type="text" class="form-control" id="sdtx" name="sdt" value="<?= $datakhachhang['SDT'] ?>" placeholder="Địa chỉ" required="">
                         <!-- <div class="invalid-feedback">Vui lòng nhập số điiẹn thoại.</div> -->
                     </div>
+                    <input type="hidden" name="tongtien" value="<?= $thanhtien ?>">
                     <hr class="mb-4">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Đặt Hàng</button>
                 </form>
