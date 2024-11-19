@@ -21,6 +21,11 @@ if (isset($_SESSION['userId'])) {
   }
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['giohang_del'])) {
+
+  }
+}
 
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Dang nhap';
@@ -216,6 +221,12 @@ if (isset($_SESSION['userId'])) {
                         $tongtien += $value['Gia'] * $value['SoLuong'];
                         echo $value['Gia'] * $value['SoLuong'];
                         ?> VNĐ
+                      </td>
+                      <td class="text-center" style="width: 10%">
+                        <form action="../../controller/giohang_xoa.php" method="post">
+                          <input type="hidden" name="id" value="<?= $value['IDGioHang'] ?>">
+                          <input type="submit" value="Xoá">
+                        </form>
                       </td>
                     </tr>
                   <?php } ?>

@@ -223,7 +223,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <div class="d-flex flex-wrap mt-3">
                       <form action="sanpham.php" method="POST">
                         <input type="hidden" name="model" value="giohang" />
-                        <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                        <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
                         <button style="border: none; border-radius: 5px;" type="submit"
                           class="btn-cart me-3 px-4 pt-3 pb-3">
                           <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
@@ -290,7 +290,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <div class="d-flex flex-wrap mt-3">
                       <form action="sanpham.php" method="POST">
                         <input type="hidden" name="model" value="giohang" />
-                        <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                        <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
                         <button style="border: none; border-radius: 5px;" type="submit"
                           class="btn-cart me-3 px-4 pt-3 pb-3">
                           <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
