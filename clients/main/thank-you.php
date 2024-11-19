@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 include_once '../layouts/header.php';
 ?>
 <div class="container">

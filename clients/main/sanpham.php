@@ -7,12 +7,12 @@ include_once '../../controller/sanpham.php';
 
 include '../layouts/header.php';
 
-$sanpham = new  Sanpham();
+$sanpham = new Sanpham();
 
 $dssanpham = $sanpham->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['model']) && $_POST['model']=='giohang') {
+    if (isset($_POST['model']) && $_POST['model'] == 'giohang') {
         if (!isset($_SESSION['userId'])) {
             // $_SESSION['error'] = "Đăng nhập để thực hiện mua hàng.";
             // header('Location: ../main/login.php');
@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <div class="content-wrapper col-md-7 p-5 mb-5">
                                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                                <h2 class="banner-title display-1 fw-normal">Sản phẩm tốt nhất<span class="text-primary">cho bạn</span>
+                                <h2 class="banner-title display-1 fw-normal">Sản phẩm tốt nhất<span
+                                        class="text-primary">cho bạn</span>
                                 </h2>
                             </div>
                         </div>
@@ -84,11 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
                 if ($dssanpham) {
                     foreach ($dssanpham as $key => $value) {
-                ?>
+                        ?>
                         <div class="item cat col-md-4 col-lg-3 my-4">
                             <div class="card position-relative">
                                 <a href="chitietsanpham.php?id=<?= $value['IDSanPham'] ?>">
-                                    <img style="width: 306px; height: 279px;" src="/<?php echo $value['HinhAnh']; ?>" class="img-fluid rounded-4" alt="<?php echo $value['TenSanPham']; ?>">
+                                    <img style="width: 306px; height: 279px;" src="/<?php echo $value['HinhAnh']; ?>"
+                                        class="img-fluid rounded-4" alt="<?php echo $value['TenSanPham']; ?>">
                                 </a>
                                 <div class="card-body p-0">
                                     <a href="single-product.html">
@@ -103,12 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                                             5.0
                                         </span>
-                                        <h3 class="secondary-font text-primary"><?php echo number_format($value['Gia'], 0); ?> VND</h3>
+                                        <h3 class="secondary-font text-primary"><?php echo number_format($value['Gia'], 0); ?>
+                                            VND</h3>
                                         <div class="d-flex flex-wrap mt-3">
                                             <form action="sanpham.php" method="POST">
                                                 <input type="hidden" name="model" value="giohang" />
                                                 <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
-                                                <button type="submit" class="btn-cart me-3 px-4 pt-3 pb-3">
+                                                <button style="border: none; border-radius: 5px;" type="submit"
+                                                    class="btn-cart me-3 px-4 pt-3 pb-3">
                                                     <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                                                 </button>
                                             </form>
@@ -120,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>
                         </div>
-                <?php }
+                    <?php }
                 } ?>
             </div>
         </div>
