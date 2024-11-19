@@ -2,7 +2,10 @@
 include "../../../lib/session.php";
 if (!Session::get('username')) {
   header("Location: ../../login.php");
+  exit();
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -184,7 +184,7 @@ if (isset($_SESSION['userId'])) {
         <div class="order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Giỏ hàng</span>
-            <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?> Sản phẩm</span>
+            <span class="badge bg-primary rounded-circle pt-2"><?php echo $giohang_soluong ?> Sản phẩm</span>
           </h4>
           <?php
           if ($giohang_soluong == 0) {

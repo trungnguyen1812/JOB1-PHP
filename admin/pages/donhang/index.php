@@ -1,5 +1,5 @@
 <?php
-include "../../../controller/donhang.php";
+include_once "../../../controller/donhang.php";
 $donhang = new DonHang();
 $donhang_0 = $donhang->getAllByStatus(0);
 $donhang_1 = $donhang->getAllByStatus(1);
@@ -8,7 +8,6 @@ $donhang_3 = $donhang->getAllByStatus(3);
 $donhang_4 = $donhang->getAllByStatus(4);
 
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../../controller/donhang.php';
     $donhang = new DonHang();
     $donhang->update($_POST['id'], $_POST['trangthai']);
 }

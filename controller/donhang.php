@@ -69,7 +69,9 @@ class DonHang
                 "TrangThaiVanChuyen = '$trangthai'" .
                 "WHERE IDDonHang = '$id'";
             $result = $this->db->update($query);
-            header("Location:index.php");
+            $previousPage = $_SERVER['HTTP_REFERER'];
+            // Chuyển hướng về trang trước
+            header("Location: $previousPage");
         } catch (\Exception $e) {
             //throw $th;
         }
@@ -79,7 +81,8 @@ class DonHang
     // }
 
     // Get data theo trang thai
-    public function getAllByStatus($status) {
+    public function getAllByStatus($status)
+    {
         try {
             $query = "SELECT dh.*, kh.HoTen FROM DonHang dh JOIN KhachHang kh ON dh.IDKhachHang = kh.IDKhachHang WHERE TrangThaiVanChuyen = $status ORDER BY IDDonHang DESC";
             $result = $this->db->select($query);
@@ -89,7 +92,16 @@ class DonHang
         }
     }
 
-    public function getByIDKhachHang($id)
+
+
+    public function getByIDKhachHang($id, $status)
     {
+        try {
+            $query = "SELECT dh.*, kh.HoTen FROM DonHang dh JOIN KhachHang kh ON dh.IDKhachHang = kh.IDKhachHang WHERE TrangThaiVanChuyen = $status AND kh.IDKhachHang = $id  ORDER BY IDDonHang DESC";
+            $result = $this->db->select($query);
+            return $result;
+        } catch (\Exception $e) {
+            //throw $th;
+        }
     }
 }
