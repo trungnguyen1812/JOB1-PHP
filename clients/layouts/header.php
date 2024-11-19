@@ -161,8 +161,8 @@ if (isset($_SESSION['userId'])) {
   </div> -->
 
   <!-- Gio hang khi duoc mo -->
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart"
-    aria-labelledby="My Cart" style="width: 700px;">
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart"
+    style="width: 700px;">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -186,12 +186,13 @@ if (isset($_SESSION['userId'])) {
             <span class="text-primary">Giỏ hàng</span>
             <span class="badge bg-primary rounded-circle pt-2"><?= $giohang_soluong ?> Sản phẩm</span>
           </h4>
-          <ul class="list-group mb-3">
-            <?php
-            if ($giohang_soluong == 0) {
-              echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
-            } else {
+          <?php
+          if ($giohang_soluong == 0) {
+            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
+          } else {
             ?>
+            <ul class="list-group mb-3">
+
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -205,7 +206,7 @@ if (isset($_SESSION['userId'])) {
                   <?php
                   $tongtien = 0;
                   foreach ($giohang_user as $key => $value) {
-                  ?>
+                    ?>
                     <tr>
                       <td class="">
                         <?= $value['TenSanPham'] ?>
@@ -232,17 +233,17 @@ if (isset($_SESSION['userId'])) {
                   <?php } ?>
                 </tbody>
               </table>
-            <?php } ?>
-            <li class="list-group-item d-flex justify-content-between">
-              <span class="fw-bold">Tổng tiền: </span>
-              <strong><?= $tongtien ?> VNĐ</strong>
-            </li>
-          </ul>
-          <div class="text-center">
-            <a href="../main/checkout.php">
-              <button class="btn btn-primary btn-lg" type="submit">Checkout</button>
-            </a>
-          </div>
+              <li class="list-group-item d-flex justify-content-between">
+                <span class="fw-bold">Tổng tiền: </span>
+                <strong><?= $tongtien ?> VNĐ</strong>
+              </li>
+            </ul>
+            <div class="text-center">
+              <a href="../main/checkout.php">
+                <button class="btn btn-primary btn-lg" type="submit">Checkout</button>
+              </a>
+            </div>
+          <?php } ?>
         </div>
       <?php } ?>
     </div>
@@ -351,13 +352,12 @@ if (isset($_SESSION['userId'])) {
 
         </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header justify-content-center">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
@@ -415,12 +415,14 @@ if (isset($_SESSION['userId'])) {
                   <?php
                   if (isset($_SESSION['username'])) { ?>
                     <div class="dropdown d-inline">
-                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <?= $_SESSION['username'] ?>
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li>
-                          <a class="dropdown-item" href="../main/profile.php?id=<?= $khachHangInfo['IDKhachHang'] ?>">Tài khoản</a>
+                          <a class="dropdown-item" href="../main/profile.php?id=<?= $khachHangInfo['IDKhachHang'] ?>">Tài
+                            khoản</a>
                         </li>
                         <li>
                           <hr class="dropdown-divider">
@@ -442,11 +444,10 @@ if (isset($_SESSION['userId'])) {
 
                 </li>
                 <li class="">
-                  <a href="home.php" class="mx-3" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                  <a href="home.php" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                    aria-controls="offcanvasCart">
                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                    <span
-                      class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
                       <?= $giohang_soluong ?? 0 ?>
                     </span>
                   </a>
