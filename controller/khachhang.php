@@ -101,7 +101,7 @@ class KhachHang
     public function update($data)
     {
         // Đường dẫn đến thư mục chứa ảnh
-        $targetDir = __DIR__ . '/../../imgUploads/';
+        $targetDir = __DIR__ . '/../imgUploads/';
         $uniqueFileName = '';
         $relativePath = '';
         $targetFile = '';

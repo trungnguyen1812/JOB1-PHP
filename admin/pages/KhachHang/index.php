@@ -1,11 +1,8 @@
 <?php
-include_once __DIR__ . '../../../../controller/sanpham.php';
-$sanpham = new sanpham();
-$dssanpham = $sanpham->getAll();
+include_once __DIR__ . '../../../../controller/khachhang.php';
+$khachhang = new KhachHang();
+$dskhachhang = $khachhang->getAll();
 
-if (isset($_GET['delete-id'])) {
-    $result = $sanpham->delete($_GET['delete-id']);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,13 +18,13 @@ if (isset($_GET['delete-id'])) {
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/admin/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- <script src="https:/kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
+    <link href="/admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link id="pagestyle" href="/admin/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -43,9 +40,9 @@ if (isset($_GET['delete-id'])) {
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản Phẩm</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Khách hàng</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Sản Phẩm</h6>
+                    <h6 class="font-weight-bolder mb-0">Khách hàng</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -56,7 +53,7 @@ if (isset($_GET['delete-id'])) {
                         </div>
                     </div>
                     <ul class="navbar-nav  justify-content-end">
-                      
+
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -163,10 +160,7 @@ if (isset($_GET['delete-id'])) {
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Danh sách sản phẩm</h6>
-                            <a class="btn btn-primary" href="create.php">Thêm Mới</a>
-                        </div>
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -174,69 +168,68 @@ if (isset($_GET['delete-id'])) {
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9" width="10%">
-                                                Mã sản phẩm</th>
+                                                Mã khách hàng</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9 ps-2">
-                                                Tên sản phẩm</th>
+                                                Tên khách hàng</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Giá</th>
+                                                Email</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Số lượng</th>
+                                                Địa chỉ</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
-                                                Mô tả</th>
+                                                SDT</th>
                                             <th class="text-secondary opacity-9"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if ($dssanpham) {
-                                            foreach ($dssanpham as $key => $value) {
-                                                ?>
+                                        if ($dskhachhang) {
+                                            foreach ($dskhachhang as $key => $value) {
+                                        ?>
                                                 <tr>
                                                     <td class="align-middle text-center text-sm">
                                                         <p class="text-xs font-weight-bold mb-0">
-                                                            <?= $value['IDSanPham'] ?>
+                                                            <?= $value['IDKhachHang'] ?>
                                                         </p>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-2 py-1">
-                                                            <img width="70" height="70" src="/<?= $value['HinhAnh'] ?>" alt="">
+                                                            <img width="70" height="70"
+                                                                src="/<?=$value['HinhAnhKhachHang'] ?? 'admin/upload/userpng.png'?>"
+                                                                alt="">
+
+
                                                             &nbsp; &nbsp;
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"><?= $value['TenSanPham'] ?></h6>
-                                                                <p class="text-xs text-secondary mb-0"><?= $value['TenLoaiSanPham'] ?>
-                                                                </p>
+                                                                <h6 class="mb-0 text-sm"><?= $value['HoTen'] ?></h6>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['Gia'] ?></span>
+                                                            class="text-secondary text-xs font-weight-bold"><?= $value['Email'] ?></span>
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SoLuong'] ?></span>
+                                                            class="text-secondary text-xs font-weight-bold"><?= $value['DiaChi'] ?></span>
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['MoTa'] ?></span>
+                                                            class="text-secondary text-xs font-weight-bold"><?= $value['SDT'] ?></span>
                                                     </td>
                                                     <td class="align-middle">
-                                                        <a href="edit.php?id=<?= $value['IDSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
+                                                        <a href="detail.php?id=<?= $value['IDKhachHang'] ?>" class="text-secondary font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Edit user">
-                                                            Chỉnh sửa
+                                                            Chi tiết
                                                         </a>
                                                         |
-                                                        <a href="?delete-id=<?= $value['IDSanPham']?>" class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Xoá
-                                                        </a>
+
                                                     </td>
                                                 </tr>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </tbody>
                                 </table>
