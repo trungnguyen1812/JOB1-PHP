@@ -61,7 +61,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Nhân Viên</span>
+          <span class="nav-link-text ms-1">Admin</span>
         </a>
       </li>
       <?php } ?>

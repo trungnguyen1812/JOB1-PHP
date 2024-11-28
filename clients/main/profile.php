@@ -171,7 +171,7 @@ if (isset($_SESSION['error_message'])) {
         <div class="containerProfile">
             <!-- Left Panel -->
             <div class="left-panel">
-                <img id="profileImg" src="<?= isset($khachhangUpdate['HinhAnhKhachHang']) && !empty($khachhangUpdate['HinhAnhKhachHang']) ? '../uploads/' . htmlspecialchars($khachhangUpdate['HinhAnhKhachHang']) : '../images/avatarDefault.png' ?>" alt="Profile Picture">
+                <img id="profileImg" src="/<?= $khachhangUpdate['HinhAnhKhachHang']?>" alt="Profile Picture">
                 <button type="button" id="changeImageButton">Đổi hình ảnh</button>
                 <input type="file" name="HinhAnhKhachHang" id="imageInput" accept="image/*">
             </div>
