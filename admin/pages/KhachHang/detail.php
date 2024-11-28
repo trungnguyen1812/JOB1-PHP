@@ -1,7 +1,9 @@
 <?php
-    include_once '../../../controller/khachhang.php';
-    $khachhang = new KhachHang();
-    $dskhachhang = $khachhang->getById($_GET['id']);
+include_once "../../../lib/session.php";
+session_start();
+include_once '../../../controller/khachhang.php';
+$khachhang = new KhachHang();
+$dskhachhang = $khachhang->getById($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@
     <link href="/admin/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="/admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-   
+
     <link href="/admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/admin/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
@@ -163,8 +165,8 @@
                     <!-- Cột bên trái: Các ô nhập văn bản -->
                     <div class="form-column">
                         <label for="TenSanPham">Product Name</label>
-                        <input disabled type="text" id="TenSanPham" name="TenSanPham" value="<?= $dskhachhang['HoTen'] ?>"
-                            required>
+                        <input disabled type="text" id="TenSanPham" name="TenSanPham"
+                            value="<?= $dskhachhang['HoTen'] ?>" required>
 
                         <label for="Gia">Price</label>
                         <input disabled type="number" id="Gia" name="Gia" value="<?= $dskhachhang['Email'] ?>" required>
@@ -174,20 +176,25 @@
                             required>
 
                         <label for="MoTa">Description</label>
-                        <textarea disabled id="MoTa" name="MoTa" rows="4" required><?= $dskhachhang['DiaChi'] ?></textarea>
+                        <textarea disabled id="MoTa" name="MoTa" rows="4"
+                            required><?= $dskhachhang['DiaChi'] ?></textarea>
 
-                       
+
                     </div>
 
                     <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
                     <div class="form-column-right">
                         <label for="HinhAnh">Product Image</label>
-                        <input disabled type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
+                        <input disabled type="file" id="HinhAnh" name="HinhAnh" accept="image/*"
+                            onchange="previewImage(event)">
 
                         <!-- Xem trước ảnh -->
-                        <img id="image-preview" src="/<?= $dskhachhang['HinhAnhKhachHang'] ?? 'admin/upload/userpng.png' ?>" alt="Preview Image" style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
+                        <img id="image-preview"
+                            src="/<?= $dskhachhang['HinhAnhKhachHang'] ?? 'admin/upload/userpng.png' ?>"
+                            alt="Preview Image"
+                            style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
 
-                       
+
                     </div>
 
                 </form>
@@ -199,7 +206,7 @@
                     const file = event.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             imagePreview.src = e.target.result;
                             imagePreview.style.display = 'block'; // Hiện ảnh preview
                         }
@@ -313,8 +320,7 @@
                         onclick="navbarFixed(this)">
                 </div>
                 <hr class="horizontal dark my-sm-4">
-                <a class="btn bg-gradient-dark w-100"
-                    href="https://www.creative-tim.com/product/soft-ui-dashboard-pro">
+                <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro">
                 </a>
             </div>
         </div>

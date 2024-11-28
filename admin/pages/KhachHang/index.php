@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include_once __DIR__ . '../../../../controller/khachhang.php';
 $khachhang = new KhachHang();
 $dskhachhang = $khachhang->getAll();

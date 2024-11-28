@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include "../../../controller/sanpham.php";
 $sanpham = new SanPham();
 $loaisanpham  = $sanpham->getLoaiSanPham();

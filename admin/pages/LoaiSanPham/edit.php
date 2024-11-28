@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include "../../../controller/loaisanpham.php";
 $loaisanpham = new LoaiSanPham();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
