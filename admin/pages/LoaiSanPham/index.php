@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include_once __DIR__ . '../../../../controller/loaisanpham.php';
 $loaisanpham = new LoaiSanPham();
 $dsloaisanpham = $loaisanpham->getAll();

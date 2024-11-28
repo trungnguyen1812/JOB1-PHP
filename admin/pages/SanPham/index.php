@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . '../../../../controller/sanpham.php';
+session_start();
 $sanpham = new sanpham();
 $dssanpham = $sanpham->getAll();
 
@@ -203,7 +204,7 @@ if (isset($_GET['delete-id'])) {
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-2 py-1">
-                                                            <img width="70" height="70" src="/<?= $value['HinhAnh'] ?>" alt="">
+                                                            <img width="70" height="70" src="../../../<?= $value['HinhAnh'] ?>" alt="">
                                                             &nbsp; &nbsp;
                                                             <div class="d-flex flex-column justify-content-center">
                                                                 <h6 class="mb-0 text-sm"><?= $value['TenSanPham'] ?></h6>

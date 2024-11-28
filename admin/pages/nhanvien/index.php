@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include "../../../controller/nhanvien.php";
 $nhanvien = new NhanVien();
 $dsnhanvien = $nhanvien->getAll();

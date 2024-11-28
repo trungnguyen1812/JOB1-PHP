@@ -1,10 +1,12 @@
 <?php
-include '../controller/nhanvien.php';
-$nhanvien = new NhanVien();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	include '../controller/admin.php';
+	$admin = new Admin();
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $login_check = $nhanvien->login($email, $password);
+    $login_check = $admin->login($email, $password);
+	if ($login_check) exit();
 }
 
 ?>

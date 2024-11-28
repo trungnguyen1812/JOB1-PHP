@@ -31,6 +31,8 @@ class DonHang
 
 
             $lastDonHang = $this->db->select("SELECT IDDonHang FROM DonHang ORDER BY IDDonHang DESC LIMIT 1")->fetch_assoc();
+            // $lastDonHang = $lastDonHang!= null ? $lastDonHang-> : 0;
+
             $iddonhang = $lastDonHang['IDDonHang'];
             if ($result) {
                 foreach ($datagiohang as $key => $value) {

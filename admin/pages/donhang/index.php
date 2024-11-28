@@ -1,4 +1,6 @@
 <?php
+include_once "../../../lib/session.php";
+session_start();
 include_once "../../../controller/donhang.php";
 $donhang = new DonHang();
 $donhang_0 = $donhang->getAllByStatus(0);
