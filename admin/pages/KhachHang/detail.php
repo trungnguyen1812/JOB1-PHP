@@ -143,11 +143,11 @@ $dskhachhang = $khachhang->getById($_GET['id']);
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Update Product</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Khách hàng</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Update Product</h6>
+                    <h6 class="font-weight-bolder mb-0">Khách hàng</h6>
                 </nav>
             </div>
         </nav>
@@ -155,7 +155,7 @@ $dskhachhang = $khachhang->getById($_GET['id']);
         <div class="container-fluid py-4">
 
             <div class="card-header pb-0 d-flex justify-content-between">
-                <h6>Update Product Information</h6>
+                <h6>Thông tin khách hàng</h6>
             </div>
             <hr>
             <div class="form-container">
@@ -164,18 +164,17 @@ $dskhachhang = $khachhang->getById($_GET['id']);
 
                     <!-- Cột bên trái: Các ô nhập văn bản -->
                     <div class="form-column">
-                        <label for="TenSanPham">Product Name</label>
+                        <label for="TenSanPham">Tên khách hàng</label>
                         <input disabled type="text" id="TenSanPham" name="TenSanPham"
                             value="<?= $dskhachhang['HoTen'] ?>" required>
 
-                        <label for="Gia">Price</label>
-                        <input disabled type="number" id="Gia" name="Gia" value="<?= $dskhachhang['Email'] ?>" required>
+                     
 
-                        <label for="SoLuong">Quantity</label>
+                        <label for="SoLuong">Số điện thoại</label>
                         <input disabled type="number" id="SoLuong" name="SoLuong" value="<?= $dskhachhang['SDT'] ?>"
                             required>
 
-                        <label for="MoTa">Description</label>
+                        <label for="MoTa">Địa chỉ</label>
                         <textarea disabled id="MoTa" name="MoTa" rows="4"
                             required><?= $dskhachhang['DiaChi'] ?></textarea>
 
@@ -184,7 +183,7 @@ $dskhachhang = $khachhang->getById($_GET['id']);
 
                     <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
                     <div class="form-column-right">
-                        <label for="HinhAnh">Product Image</label>
+                        <label for="HinhAnh">Ảnh khách hàng</label>
                         <input disabled type="file" id="HinhAnh" name="HinhAnh" accept="image/*"
                             onchange="previewImage(event)">
 

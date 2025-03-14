@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>TeddyShop</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 
@@ -41,7 +41,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Dashboard</span>
+          <span class="nav-link-text ms-1">Trang Chủ</span>
         </a>
       </li>
       <li class="nav-item">
@@ -61,10 +61,10 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Admin</span>
+          <span class="nav-link-text ms-1">Nhân Viên</span>
         </a>
       </li>
-      <?php } ?>
+     
       <li class="nav-item">
         <a class="nav-link" href="../../pages/SanPham/index.php">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -106,6 +106,7 @@
           <span class="nav-link-text ms-1">Loại Sản Phẩm</span>
         </a>
       </li>
+      <?php } ?>
       <li class="nav-item">
         <a class="nav-link  " href="../../pages/donhang/index.php">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -128,7 +129,7 @@
       </li>
 
       <li class="nav-item mt-3">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Tài Khoản</h6>
       </li>
       <?php
       if ($_SESSION['role']=="admin") {
@@ -156,7 +157,7 @@
       </li>
       <?php } ?>
       <li class="nav-item">
-        <a class="nav-link  " href="../../pages/sign-in.php">
+        <a class="nav-link  " href="/admin/logout.php">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>document</title>
@@ -172,7 +173,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Sign Out</span>
+          <span class="nav-link-text ms-1">Đăng xuất</span>
         </a>
       </li>
 

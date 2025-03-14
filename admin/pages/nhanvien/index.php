@@ -18,7 +18,7 @@ if (isset($_GET['delete-id'])) {
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <title>
-        Soft UI Dashboard by Creative Tim
+        Teddy Shop
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -51,11 +51,7 @@ if (isset($_GET['delete-id'])) {
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                    aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
-                        </div>
+                       
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                        
@@ -250,36 +246,10 @@ if (isset($_GET['delete-id'])) {
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>,
-                                made with <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                    Tim</a>
-                                for a better web.
-                            </div>
+                            
                         </div>
                         <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                        target="_blank">Creative Tim</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                        target="_blank">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://creative-tim.com/blog" class="nav-link text-muted"
-                                        target="_blank">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                        target="_blank">License</a>
-                                </li>
-                            </ul>
+                            
                         </div>
                     </div>
                 </div>

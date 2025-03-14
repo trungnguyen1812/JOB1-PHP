@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Include required files
+
 require_once '../../controller/sanpham.php';
 require_once '../../controller/khachhang.php';
 require_once '../layouts/header.php';
@@ -9,14 +9,15 @@ require_once '../layouts/header.php';
 $sanpham = new Sanpham();
 $message = '';
 
-// Check if the form was submitted
+// Kiểm tra biểu mẫu đã được gửi chưa
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // Validate input data
+
+  // Xác thực dữ liệu đầu vào bao gồm họ tên, email và mật khẩu
   $hoten = trim($_POST['hoten']);
   $email = trim($_POST['email']);
   $password = trim($_POST['password']);
 
-  // Basic validation
+  // Các xác thực thông tin cơ bản
   if (empty($hoten) || empty($email) || empty($password)) {
     $message = "Vui lòng điền đầy đủ thông tin!";
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -32,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     if ($result_register === 'Đăng ký thành công!') {
-      // Store user data in session
+      // Lưu trữ dữ liệu người dùng trong Session
       $_SESSION['loggedin'] = true;
       $_SESSION['name'] = $hoten;
       $_SESSION['email'] = $email;
 
-      // Redirect to home page or dashboard
+      // Chuyển hướng đến trang chủ hoặc bảng điều khiển
       header("Location: index.php");
       exit();
     } else {
@@ -46,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 
-// Check if user is already logged in
+// Kiểm tra xem người dùng đã đăng nhập chưa
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-  header("Location: index.php"); // Redirect if already logged in
+  header("Location: index.php"); // Chuyển hướng nếu đã đăng nhập
   exit();
 }
 ?>
@@ -66,7 +67,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
                 <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -84,7 +85,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
                 <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -102,7 +103,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
                 <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   Mua Ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -322,7 +323,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
           <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
           <h2 class="banner-title display-1 fw-normal">Thanh Lý !!!
           </h2>
-          <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
             Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
@@ -385,7 +386,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
             </div>
 
-            <div class="swiper-pagination"></div>
+          
 
           </div>
         </div>

@@ -33,7 +33,7 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
           <h1 class="product-title"><?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?></h1>
           <p class="product-price"><?php echo number_format($sanphamUpdate['Gia'], 0); ?> VND</p>
 
-          <!-- Xếp hạng sản phẩm -->
+          <!-- Xếp hạng sản phẩm mặc định là 5 sao-->
           <div class="rating">
             <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
             <span class="rating-text">5.0</span>
@@ -48,7 +48,7 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
 
           </div>
 
-          <!-- Nút chức năng -->
+          <!-- Nút chức năng thêm vào giỏ hàng-->
           <div class="d-flex flex-wrap mt-3">
             <form action="sanpham.php" method="POST">
               <input type="hidden" name="model" value="giohang" />

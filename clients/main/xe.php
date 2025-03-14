@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <section id="foodies" class="my-5">
         <div class="container my-5 py-5">
             <div class="section-header d-md-flex justify-content-between align-items-center">
-                <h2 class="display-3 fw-normal">Gấu Bông</h2>
+                <h2 class="display-3 fw-normal">Xe</h2>
                 <div class="mb-4 mb-md-0"></div>
                 <div>
-                    <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                    <a href="xe.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                         Mua Ngay
                         <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                             <use xlink:href="#arrow-right"></use>

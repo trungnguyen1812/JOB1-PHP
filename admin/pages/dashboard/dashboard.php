@@ -40,17 +40,14 @@ if (!Session::get('username')) {
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Trang chủ</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder mb-0">Trang chủ</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
+          
           </div>
           <ul class="navbar-nav  justify-content-end">
            
@@ -764,30 +761,10 @@ if (!Session::get('username')) {
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
+              
             </div>
             <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
+              
             </div>
           </div>
         </div>

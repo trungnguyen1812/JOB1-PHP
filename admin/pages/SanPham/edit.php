@@ -149,11 +149,11 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Trang</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Update Product</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sửa sản phẩm</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Update Product</h6>
+                    <h6 class="font-weight-bolder mb-0">Sửa sản phẩm</h6>
                 </nav>
             </div>
         </nav>
@@ -161,53 +161,52 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
         <div class="container-fluid py-4">
 
             <div class="card-header pb-0 d-flex justify-content-between">
-                <h6>Update Product Information</h6>
+                <h6>Chỉnh sửa thông tin sản phẩm</h6>
             </div>
             <hr>
             <div class="form-container">
-                <form style="width: 100%;" action="edit.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="IDSanPham" value="<?= $sanphamUpdate['IDSanPham'] ?>">
+            <form style="width: 100%;" action="edit.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="IDSanPham" value="<?= $sanphamUpdate['IDSanPham'] ?>">
 
-                    <!-- Cột bên trái: Các ô nhập văn bản -->
-                    <div class="form-column">
-                        <label for="TenSanPham">Product Name</label>
-                        <input type="text" id="TenSanPham" name="TenSanPham" value="<?= $sanphamUpdate['TenSanPham'] ?>"
-                            required>
+    <!-- Cột bên trái: Các ô nhập văn bản -->
+    <div class="form-column">
+        <label for="TenSanPham">Tên Sản Phẩm</label>
+        <input type="text" id="TenSanPham" name="TenSanPham" value="<?= $sanphamUpdate['TenSanPham'] ?>" required>
 
-                        <label for="Gia">Price</label>
-                        <input type="number" id="Gia" name="Gia" value="<?= $sanphamUpdate['Gia'] ?>" required>
+        <label for="Gia">Giá</label>
+        <input type="number" id="Gia" name="Gia" value="<?= $sanphamUpdate['Gia'] ?>" required>
 
-                        <label for="SoLuong">Quantity</label>
-                        <input type="number" id="SoLuong" name="SoLuong" value="<?= $sanphamUpdate['SoLuong'] ?>"
-                            required>
+        <label for="SoLuong">Số Lượng</label>
+        <input type="number" id="SoLuong" name="SoLuong" value="<?= $sanphamUpdate['SoLuong'] ?>" required>
 
-                        <label for="MoTa">Description</label>
-                        <textarea id="MoTa" name="MoTa" rows="4" required><?= $sanphamUpdate['MoTa'] ?></textarea>
+        <label for="MoTa">Mô Tả</label>
+        <textarea id="MoTa" name="MoTa" rows="4" required><?= $sanphamUpdate['MoTa'] ?></textarea>
 
-                        <label for="IDLoaiSanPham">Product Category</label>
-                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
-                            <?php foreach ($loaisanpham as $loaisanpham): ?>
-                                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>" <?= ($sanphamUpdate['IDLoaiSanPham'] == $loaisanpham['IDLoaiSanPham']) ? 'selected' : '' ?>>
-                                    <?= $loaisanpham['TenLoaiSanPham'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+        <label for="IDLoaiSanPham">Danh Mục Sản Phẩm</label>
+        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
+            <?php foreach ($loaisanpham as $loaisanpham): ?>
+                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>" <?= ($sanphamUpdate['IDLoaiSanPham'] == $loaisanpham['IDLoaiSanPham']) ? 'selected' : '' ?>>
+                    <?= $loaisanpham['TenLoaiSanPham'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                    <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
-                    <div class="form-column-right">
-                        <label for="HinhAnh">Product Image</label>
-                        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
+    <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
+    <div class="form-column-right">
+        <label for="HinhAnh">Hình Ảnh Sản Phẩm</label>
+        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
 
-                        <!-- Xem trước ảnh -->
-                        <img id="image-preview" src="/<?= $sanphamUpdate['HinhAnh'] ?>" alt="Preview Image" style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
+        <!-- Xem trước ảnh -->
+        <img id="image-preview" src="/<?= $sanphamUpdate['HinhAnh'] ?>" alt="Xem trước ảnh" style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
 
-                        <div class="submit-btn">
-                            <button type="submit">Save</button>
-                        </div>
-                    </div>
+        <div class="submit-btn">
+            <button type="submit">Lưu</button>
+        </div>
+    </div>
 
-                </form>
+</form>
+
             </div>
 
             <script>

@@ -4,7 +4,7 @@
         <div class="col-md-3">
           <div class="footer-menu">
             <img width="160" height="50" src="../images/logo.png" alt="logo">
-            <p class="blog-paragraph fs-6 mt-3">Subscribe to our newsletter to get updates about our grand offers.</p>
+            <p class="blog-paragraph fs-6 mt-3">Đăng ký nhận bản tin của chúng tôi để nhận thông tin cập nhật về các ưu đãi lớn của chúng tôi.</p>
             <div class="social-links">
               <ul class="d-flex list-unstyled gap-2">
                 <li class="social">
@@ -39,55 +39,45 @@
         </div>
         <div class="col-md-3">
           <div class="footer-menu">
-            <h3>Quick Links</h3>
+            <h3>Liên kết nhanh</h3>
             <ul class="menu-list list-unstyled">
               <li class="menu-item">
-                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Trang chủ</a>
+              </li>
+             
+              <li class="menu-item">
+                <a href="#" class="nav-link">Dịch vụ</a>
               </li>
               <li class="menu-item">
-                <a href="#" class="nav-link">About us</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="nav-link">Offer </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="nav-link">Services</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="nav-link">Conatct Us</a>
+                <a href="#" class="nav-link">Liên hệ</a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-md-3">
           <div class="footer-menu">
-            <h3>Help Center</h5>
+            <h3>Trung tâm trợ giúp</h5>
               <ul class="menu-list list-unstyled">
+                
                 <li class="menu-item">
-                  <a href="#" class="nav-link">FAQs</a>
+                  <a href="#" class="nav-link">Trả lại & Hoàn tiền</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Payment</a>
+                  <a href="#" class="nav-link">Đặt Hàng</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">Returns & Refunds</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Checkout</a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="nav-link">Delivery Information</a>
+                  <a href="#" class="nav-link">Thông tin giao hàng</a>
                 </li>
               </ul>
           </div>
         </div>
         <div class="col-md-3">
           <div>
-            <h3>Our Newsletter</h3>
-            <p class="blog-paragraph fs-6">Subscribe to our newsletter to get updates about our grand offers.</p>
+            <h3>Bản tin của chúng tôi!</h3>
+            <p class="blog-paragraph fs-6">Đăng ký nhận bản tin của chúng tôi để nhận thông tin cập nhật về các ưu đãi lớn của chúng tôi.</p>
             <div class="search-bar border rounded-pill border-dark-subtle px-2">
               <form class="text-center d-flex align-items-center" action="" method="">
-                <input type="text" class="form-control border-0 bg-transparent" placeholder="Enter your email here" />
+                <input type="text" class="form-control border-0 bg-transparent" placeholder="Nhập email của bạn tại đây" />
                 <iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
               </form>
             </div>
@@ -103,13 +93,10 @@
       <hr class="m-0">
       <div class="row mt-3">
         <div class="col-md-6 copyright">
-          <p class="secondary-font">© 2023 Waggy. All rights reserved.</p>
+          <p class="secondary-font">© 2024 Waggy. All rights reserved.</p>
         </div>
         <div class="col-md-6 text-md-end">
-          <p class="secondary-font">Free HTML Template by <a href="https://templatesjungle.com/" target="_blank"
-              class="text-decoration-underline fw-bold text-black-50"> TemplatesJungle</a> Distributed by <a
-              href="https://themewagon.com/" target="_blank" class="text-decoration-underline fw-bold text-black-50">
-              ThemeWagon</a></p>
+          <p class="secondary-font">Teddy Shop</p>
         </div>
       </div>
     </div>

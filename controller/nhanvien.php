@@ -40,7 +40,7 @@ class NhanVien
         return $result;
     }
 
-    //Lay tt nhan vien
+    //Lay thong tin nhan vien
     public function getByID($id)
     {
         $query =
@@ -72,7 +72,7 @@ class NhanVien
         }
     }
 
-    // Cap nhat tt nhan vien
+    // Cap nhat thong tin nhan vien
     public function update($data)
     {
         $id = $data['id'];

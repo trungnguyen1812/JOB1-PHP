@@ -13,7 +13,7 @@ class LoaiSanPham
     }
 
 
-    //Lay toan bo nhan vien
+    //Lay toan bo loai san pham
     public function getAll()
     {
         $query =
@@ -22,7 +22,7 @@ class LoaiSanPham
         return $result;
     }
 
-    //Lay tt nhan vien
+    //Lay thong tin loai san pham
     public function getByID($id)
     {
         $query =
@@ -31,7 +31,7 @@ class LoaiSanPham
         return $result;
     }
 
-    //show loại menu 
+    //show loại san pham
 
 
     public function insert($data)
@@ -53,7 +53,7 @@ class LoaiSanPham
     }
 
 
-    // Cap nhat tt nhan vien
+    // Cap nhat thong tin loai san pham
     public function update($data)
     {
         $id = $data['id'];
@@ -74,7 +74,7 @@ class LoaiSanPham
         }
     }
 
-    //Xoa nhan vien
+    //Xoa loai san pham
     public function delete($id)
     {
         $query = "DELETE FROM loaisanpham WHERE IDLoaiSanPham = '$id'";

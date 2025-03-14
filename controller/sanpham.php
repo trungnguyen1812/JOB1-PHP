@@ -13,7 +13,7 @@ class SanPham
     }
 
 
-    //Lay toan bo nhan vien
+    //Lay toan bo san pham
     public function getAll()
     {
         $sql = "SELECT s.*, l.TenLoaiSanPham 
@@ -33,7 +33,7 @@ class SanPham
     }
 
 
-    //Lay tt nhan vien
+    //Lay thong tin san pham
     public function getByID($id)
     {
         $query =
@@ -42,7 +42,7 @@ class SanPham
         return $result;
     }
 
-    //show loại menu 
+    //show san pham
 
     public function insert($data)
     {
@@ -135,7 +135,7 @@ class SanPham
         }
     }
 
-    // Cap nhat tt nhan vien
+    // Cap nhat thong tin san pham
     public function update($data)
     {
         // Đường dẫn đến thư mục chứa ảnh
@@ -242,7 +242,7 @@ class SanPham
     }
 
 
-    //Xoa nhan vien
+    //Xoa san pham
     public function delete($id)
     {
         $query = "DELETE FROM sanpham WHERE IDSanPham = '$id'";
