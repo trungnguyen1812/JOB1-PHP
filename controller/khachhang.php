@@ -20,6 +20,7 @@ class KhachHang
             $value = $result->fetch_assoc();
             Session::set('username', $value['HoTen']);
             Session::set('userId', $value['IDKhachHang']);
+            Session::set('role', 'khachHangUser');
             header("Location:home.php");
         } else {
             $alert = "Tên đăng nhập hoặc mật khẩu không đúng!";

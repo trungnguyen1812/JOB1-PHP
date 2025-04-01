@@ -3,14 +3,16 @@ session_start();
 
 
 require_once '../../controller/sanpham.php';
-require_once '../../controller/khachhang.php';
 require_once '../layouts/header.php';
 
 $sanpham = new Sanpham();
 $message = '';
 
+
+
+
 // Kiểm tra biểu mẫu đã được gửi chưa
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Xác thực dữ liệu đầu vào bao gồm họ tên, email và mật khẩu
   $hoten = trim($_POST['hoten']);
@@ -47,10 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 
-// Kiểm tra xem người dùng đã đăng nhập chưa
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-  header("Location: index.php"); // Chuyển hướng nếu đã đăng nhập
-  exit();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['model']) && $_POST['model'] == 'giohang') {
+    if (!isset($_SESSION['userId'])) {
+      // $_SESSION['error'] = "Đăng nhập để thực hiện mua hàng.";
+      // header('Location: ../main/login.php');
+      // exit();
+    } else {
+      $result = $giohang->insertPageHome($_SESSION['userId'], $_POST['idsanpham']);
+?>
+      <script>
+        alert('<?= $result ?>');
+      </script>
+<?php
+    }
+  }
 }
 ?>
 <div id="main-content">
@@ -64,15 +77,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <img src="../images/banner-img.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
-                </h2>
-                <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  Mua Ngay
-                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                    <use xlink:href="#arrow-right"></use>
-                  </svg>
-                </a>
+                <div class="secondary-font text-primary text-uppercase mb-4">Best seller !!</div>
+                <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span></h2>
+                <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Mua Ngay</a>
               </div>
             </div>
           </div>
@@ -82,11 +89,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <img src="../images/banner-img3.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
-                </h2>
+                <div class="secondary-font text-primary text-uppercase mb-4">Best seller !!</div>
+                <h2 class="banner-title display-1 fw-normal">Khám phá những ưu đãi <span class="text-primary">hấp dẫn</span></h2>
                 <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  Mua Ngay
+                  Xem ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
                   </svg>
@@ -100,11 +106,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 <img src="../images/banner-img4.png" class="img-fluid">
               </div>
               <div class="content-wrapper col-md-7 p-5 mb-5">
-                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                <h2 class="banner-title display-1 fw-normal">Điểm đến tốt nhất <span class="text-primary">cho bạn</span>
-                </h2>
+                <div class="secondary-font text-primary text-uppercase mb-4">Best seller !!</div>
+                <h2 class="banner-title display-1 fw-normal">Sản phẩm <span class="text-primary">ưu đãi tốt nhất</span></h2>
                 <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                  Mua Ngay
+                  Khám phá ngay
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
                   </svg>
@@ -113,29 +118,38 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             </div>
           </div>
         </div>
-
+        <!-- Pagination -->
+        <div class="swiper-pagination text-dark"></div>
+        <!-- Nút điều hướng -->
+        <div class="swiper-button-next text-dark"></div>
+        <div class="swiper-button-prev text-dark"></div>
       </div>
     </div>
   </section>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="../package/swiper-bundle.min.js"></script>
   <script>
-    // Swiper configuration với hiệu ứng slide từ phải sang trái
-    const swiper = new Swiper('.main-swiper', {
-      loop: true, // Để vòng lặp banner
-      effect: 'slide', // Sử dụng hiệu ứng slide
-      autoplay: {
-        delay: 5000, // Thời gian chuyển slide (5 giây)
-        disableOnInteraction: false, // Để autoplay tiếp tục khi người dùng tương tác
-      },
-      speed: 2000, // Tốc độ chuyển cảnh (2000ms = 2 giây)
-      slidesPerView: 1, // Hiển thị một slide tại một thời điểm
-      spaceBetween: 0, // Khoảng cách giữa các slide
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true, // Cho phép click vào các phân trang
-      },
-      direction: 'horizontal', // Chuyển cảnh theo chiều ngang (mặc định là từ trái sang phải)
+    document.addEventListener("DOMContentLoaded", function() {
+      const swiper = new Swiper(".main-swiper", {
+        loop: true, // Bật vòng lặp slide
+        autoplay: {
+          delay: 5000, // Chuyển slide mỗi 5 giây
+          disableOnInteraction: false, // Không dừng autoplay khi người dùng tương tác
+        },
+        speed: 2000, // Tốc độ trượt (2 giây)
+        slidesPerView: 1, // Hiển thị 1 slide mỗi lần
+        spaceBetween: 0,
+        direction: "horizontal", // Trượt ngang
+        rtl: true, // ✅ Trượt từ phải sang trái
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true, // Cho phép click vào pagination để điều hướng
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
     });
   </script>
 
@@ -207,12 +221,12 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
                     class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
-                <div class="card-body p-0">
+                <div class="card-body p-0 ">
                   <a href="single-product.html">
-                    <h3 class="card-title pt-4 m-0"><?php echo $product['TenSanPham']; ?></h3>
+                    <h3 class="card-title pt-4 m-0 d-flex justify-content-center"><?php echo $product['TenSanPham']; ?></h3>
                   </a>
-                  <div class="card-text">
-                    <span class="rating secondary-font">
+                  <div class="card-text ">
+                    <span class="rating secondary-font d-flex justify-content-center">
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
@@ -220,19 +234,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       5.0
                     </span>
-                    <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
-                    <div class="d-flex flex-wrap mt-3">
-                      <form action="sanpham.php" method="POST">
+                    <h3 class="secondary-font text-primary d-flex justify-content-center "><?php echo number_format($product['Gia'], 0); ?> VND</h3>
+                    <div class="d-flex justify-content-center">
+                      <form action="home.php" method="POST">
                         <input type="hidden" name="model" value="giohang" />
                         <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
-                        <button style="border: none; border-radius: 5px;" type="submit"
-                          class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+
+                        <button class="mb-3" type="submit">Thêm Giỏ Hàng
                         </button>
+
                       </form>
-                      <a href="#" class="btn-wishlist px-4 pt-3">
-                        <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                      </a>
+
                     </div>
                   </div>
                 </div>
@@ -274,12 +286,12 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
                     class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
-                <div class="card-body p-0">
+                <div class="card-body p-0 ">
                   <a href="single-product.html">
-                    <h3 class="card-title pt-4 m-0"><?php echo $product['TenSanPham']; ?></h3>
+                    <h3 class="card-title pt-4 m-0 d-flex justify-content-center"><?php echo $product['TenSanPham']; ?></h3>
                   </a>
-                  <div class="card-text">
-                    <span class="rating secondary-font">
+                  <div class="card-text ">
+                    <span class="rating secondary-font d-flex justify-content-center">
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
@@ -287,19 +299,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       5.0
                     </span>
-                    <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
-                    <div class="d-flex flex-wrap mt-3">
-                      <form action="sanpham.php" method="POST">
+                    <h3 class="secondary-font text-primary d-flex justify-content-center "><?php echo number_format($product['Gia'], 0); ?> VND</h3>
+                    <div class="d-flex justify-content-center">
+                      <form action="home.php" method="POST">
                         <input type="hidden" name="model" value="giohang" />
                         <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
-                        <button style="border: none; border-radius: 5px;" type="submit"
-                          class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+
+                        <button class="mb-3" type="submit">Thêm Giỏ Hàng
                         </button>
+
                       </form>
-                      <a href="#" class="btn-wishlist px-4 pt-3">
-                        <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                      </a>
+
                     </div>
                   </div>
                 </div>
@@ -313,38 +323,19 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     </div>
   </section>
 
-  <section id="banner-2" class="my-3" style="background: #F9F3EC;">
-    <div class="container">
-      <div class="row flex-row-reverse banner-content align-items-center">
-        <div class="img-wrapper col-12 col-md-6">
-          <img src="../images/banner-img2.png" class="img-fluid">
-        </div>
-        <div class="content-wrapper col-12 offset-md-1 col-md-5 p-5">
-          <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
-          <h2 class="banner-title display-1 fw-normal">Thanh Lý !!!
-          </h2>
-          <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            Mua Ngay
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <section id="testimonial">
     <div class="container my-5 py-5">
       <div class="row">
+        <h1 style="margin-left: 30%; color: #b87333;">Sứ mệnh của chúng tôi</h1>
         <div class="offset-md-1 col-md-10">
           <div class="swiper testimonial-swiper">
             <div class="swiper-wrapper">
 
               <div class="swiper-slide">
                 <div class="row ">
-                  <div class="col-2">
-                    <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
+                  <div class="col-1">
+                    <iconify-icon style="font-size: 100px;" icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
                     <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
@@ -357,8 +348,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
               </div>
               <div class="swiper-slide">
                 <div class="row ">
-                  <div class="col-2">
-                    <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
+                  <div class="col-1">
+                    <iconify-icon style="font-size: 100px;" icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
                     <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
@@ -371,8 +362,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
               </div>
               <div class="swiper-slide">
                 <div class="row ">
-                  <div class="col-2">
-                    <iconify-icon icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
+                  <div class="col-1">
+                    <iconify-icon style="font-size: 100px;" icon="ri:double-quotes-l" class="quote-icon text-primary"></iconify-icon>
                   </div>
                   <div class="col-md-10 mt-md-5 p-5 pt-0 pt-md-5">
                     <p class="testimonial-content fs-2">Cốt lõi trong hoạt động của chúng tôi là ý tưởng rằng các thành
@@ -386,7 +377,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
             </div>
 
-          
+
 
           </div>
         </div>

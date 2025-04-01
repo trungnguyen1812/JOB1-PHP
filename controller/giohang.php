@@ -13,7 +13,7 @@ class GioHang
     }
 
     // Them san pham vao gio hang
-    public function insert($idkh, $idsp)
+    public function insertPageSP($idkh, $idsp)
     {
         try {
             // Kiem tra san pham co trong gio hang hay chua
@@ -24,7 +24,6 @@ class GioHang
                 $query = "UPDATE GioHang SET SoLuong = " . ($data['SoLuong'] + 1) . " WHERE IDGioHang = " . $data['IDGioHang'];
                 $result = $this->db->update($query);
                 ?>
-                <script>alert("aaaa")</script>
                 <?php
             } else {
                 // $idkh -> ID khach hang;  $idsp -> ID san pham
@@ -33,7 +32,7 @@ class GioHang
             }
 
             if (!$result) {
-                // header('Location: sanpham.php');
+                
                 return "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
             } else {
                 header('Location: sanpham.php');
@@ -41,7 +40,41 @@ class GioHang
             }
         } catch (\Exception $e) {
             ?>
-            <script>alert("bbbbbnnnnnn")</script>
+            <?php
+            return (string) $e;
+        }
+    }
+
+
+    public function insertPageHome($idkh, $idsp)
+    {
+        try {
+            // Kiem tra san pham co trong gio hang hay chua
+            $query = "SELECT IDGioHang, SoLuong FROM GioHang WHERE IDKhachHang = '$idkh' AND IDSanPham = '$idsp'";
+            $giohang_sanpham = $this->db->select($query);
+            if ($giohang_sanpham) {
+                $data = $giohang_sanpham->fetch_assoc();
+                $query = "UPDATE GioHang SET SoLuong = " . ($data['SoLuong'] + 1) . " WHERE IDGioHang = " . $data['IDGioHang'];
+                $result = $this->db->update($query);
+                ?>
+                <?php
+            } else {
+                // $idkh -> ID khach hang;  $idsp -> ID san pham
+                $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong) VALUES ($idkh, $idsp, 1)";
+                $result = $this->db->insert($query);
+            }
+
+            if (!$result) {
+                
+                return "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
+            } else {
+                // header('Location: home.php');
+            
+             
+                return "Thêm vào giỏ hàng thành công.";
+            }
+        } catch (\Exception $e) {
+            ?>
             <?php
             return (string) $e;
         }

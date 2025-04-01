@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         // Swiper configuration với hiệu ứng slide từ phải sang trái
         const swiper = new Swiper('.main-swiper', {

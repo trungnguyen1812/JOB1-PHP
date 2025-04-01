@@ -90,16 +90,16 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
           <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="../pages/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
+                <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
                   <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
                     class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
                 </a>
-                <div class="card-body p-0">
+                <div class="card-body p-0 ">
                   <a href="single-product.html">
-                    <h3 class="card-title pt-4 m-0"><?php echo $product['TenSanPham']; ?></h3>
+                    <h3 class="card-title pt-4 m-0 d-flex justify-content-center"><?php echo $product['TenSanPham']; ?></h3>
                   </a>
-                  <div class="card-text">
-                    <span class="rating secondary-font">
+                  <div class="card-text ">
+                    <span class="rating secondary-font d-flex justify-content-center">
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
@@ -107,14 +107,17 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       5.0
                     </span>
-                    <h3 class="secondary-font text-primary"><?php echo number_format($product['Gia'], 0); ?> VND</h3>
-                    <div class="d-flex flex-wrap mt-3">
-                      <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                        <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-                      </a>
-                      <a href="#" class="btn-wishlist px-4 pt-3">
-                        <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                      </a>
+                    <h3 class="secondary-font text-primary d-flex justify-content-center "><?php echo number_format($product['Gia'], 0); ?> VND</h3>
+                    <div class="d-flex justify-content-center">
+                      <form action="home.php" method="POST">
+                        <input type="hidden" name="model" value="giohang" />
+                        <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
+
+                        <button class="mb-3" type="submit">Thêm Giỏ Hàng
+                        </button>
+
+                      </form>
+
                     </div>
                   </div>
                 </div>

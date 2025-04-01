@@ -49,4 +49,25 @@ class Session
       session_destroy();
       header("Location:login.php");
    }
+   //funtion role check login
+   public static function roleCheckAdmin()
+   {
+     if(self::get("role") =="khachHangUser") {
+       header("Location: ../../../clients/index.php");
+     }
+   }
+
+   public static function roleCheckClient()
+   {
+     if(self::get("role") =="admin") {
+       header("Location: ../../../admin/pages/dashboard/dashboard.php");
+     }
+   }
+
+   public static function isLogin(){
+      if(self::get("username")){
+         self::roleCheckAdmin();
+         self::roleCheckClient();
+      }
+   }
 }

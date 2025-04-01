@@ -199,7 +199,7 @@ if (isset($_SESSION['error_message'])) {
               
                 <div class="btn-container">
                     <button type="submit" class="btn">Chỉnh sửa</button>
-                    <a href="index.php" class="btn" style="background-color: #6c757d;">Hủy</a>
+                    <a href="../main/home.php" class="btn" style="background-color: #6c757d;">Hủy</a>
                 </div>
             </div>
         </div>

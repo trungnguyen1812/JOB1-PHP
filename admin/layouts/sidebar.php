@@ -1,3 +1,6 @@
+<?php 
+    Session::roleCheckAdmin();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

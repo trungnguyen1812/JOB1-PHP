@@ -1,7 +1,10 @@
 <?php
+
 // Hiển thị tên người dùng
 include_once realpath(__DIR__ . '/../../controller/khachhang.php');
 // echo "KhachHang đã được include thành công.<br>";
+
+Session::roleCheckClient();
 
 $khachhang = new KhachHang();
 // echo "KhachHang object được tạo thành công.<br>";
@@ -21,11 +24,6 @@ if (isset($_SESSION['userId'])) {
   }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (isset($_POST['giohang_del'])) {
-
-  }
-}
 
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Dang nhap';
@@ -61,19 +59,17 @@ if (isset($_SESSION['userId'])) {
 
   <link rel="icon" href="../images/iconlogo.jpg" type="image/x-icon">
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="../package/swiper-bundle.min.css">
   <!-- <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/css/vendor.css">
   <link rel="stylesheet" type="text/css" href=" </?php echo BASE_PATH; ?>clients/style.css"> -->
   <link rel="stylesheet" type="text/css" href="../css/vendor.css">
   <link rel="stylesheet" type="text/css" href="../style.css">
 
   <link rel="stylesheet" href="../css/hieuung.css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
     rel="stylesheet">
@@ -84,6 +80,7 @@ if (isset($_SESSION['userId'])) {
     body {
       max-width: 100%;
       overflow-x: hidden;
+
     }
 
     .sticky {
@@ -91,7 +88,7 @@ if (isset($_SESSION['userId'])) {
       top: 0;
       width: 100%;
       z-index: 1000;
-      background-color: white;
+      background-color: #b87333;
       box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
     }
 
@@ -147,6 +144,57 @@ if (isset($_SESSION['userId'])) {
     .tong {
       width: 20%;
     }
+
+    button {
+      border: solid 1px #b87333;
+      border-radius: 5px;
+      background-color: #fff;
+      /* Màu đồng */
+      color: #b87333;
+      padding: 10px 20px;
+      /* Màu vàng nhạt */
+    }
+
+    /* Hiệu ứng khi hover */
+    button:hover {
+      /* Viền vàng sáng hơn khi hover */
+      background-color: #a05c2e;
+      color: white !important;
+      /* Màu đồng đậm hơn */
+    }
+
+
+    header {
+      background-color: #b87333;
+      color: rgb(255, 255, 255);
+    }
+
+    ::placeholder {
+      color: white !important;
+      opacity: 1;
+      /* Giữ màu không bị mờ */
+    }
+
+    /* Dành riêng cho trình duyệt Safari & Firefox */
+    ::-webkit-input-placeholder {
+      color: white !important;
+    }
+
+    ::-moz-placeholder {
+      color: white !important;
+    }
+
+    :-ms-input-placeholder {
+      color: white !important;
+    }
+
+    ::-ms-input-placeholder {
+      color: white !important;
+    }
+
+    .container {
+      color: white;
+    }
   </style>
 </head>
 
@@ -190,7 +238,7 @@ if (isset($_SESSION['userId'])) {
           if ($giohang_soluong == 0) {
             echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
           } else {
-            ?>
+          ?>
             <ul class="list-group mb-3">
 
               <table class="table table-hover">
@@ -206,7 +254,7 @@ if (isset($_SESSION['userId'])) {
                   <?php
                   $tongtien = 0;
                   foreach ($giohang_user as $key => $value) {
-                    ?>
+                  ?>
                     <tr>
                       <td class="">
                         <?= $value['TenSanPham'] ?>
@@ -249,7 +297,7 @@ if (isset($_SESSION['userId'])) {
     </div>
   </div>
 
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
+  <div class="offcanvas offcanvas-end" style="color: white;" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -257,7 +305,7 @@ if (isset($_SESSION['userId'])) {
     <div class="offcanvas-body">
 
       <div class="order-md-last">
-        <h4 class="text-primary text-uppercase mb-3">
+        <h4 class="text-white text-uppercase mb-3">
           Search
         </h4>
         <div class="search-bar border rounded-2 border-dark-subtle">
@@ -284,7 +332,7 @@ if (isset($_SESSION['userId'])) {
         <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
           <div class="search-bar border rounded-2 px-3 border-dark-subtle">
             <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-              <input type="text" class="form-control border-0 bg-transparent"
+              <input type="text" class="form-control border-0 bg-transparent text-white"
                 placeholder="Tìm kiếm hơn 10.000 sản phẩm" />
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -295,14 +343,14 @@ if (isset($_SESSION['userId'])) {
         </div>
 
         <div
-          class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-          <div class="support-box text-end d-none d-xl-block">
-            <span class="fs-6 secondary-font text-muted">Phone</span>
-            <h5 class="mb-0">+980-34984089</h5>
+          class="col-sm-8  col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+          <div class="support-box text-end d-none d-xl-block " style="color: white;">
+            <span class="fs-6 secondary-font text-white">Phone</span>
+            <h5 class="mb-0 text-white">+980-34984089</h5>
           </div>
           <div class="support-box text-end d-none d-xl-block">
-            <span class="fs-6 secondary-font text-muted">Email</span>
-            <h5 class="mb-0">Teddy@gmail.com</h5>
+            <span class="fs-6 secondary-font text-white">Email</span>
+            <h5 class="mb-0  text-white">Teddy@gmail.com</h5>
           </div>
 
         </div>
@@ -369,40 +417,40 @@ if (isset($_SESSION['userId'])) {
 
             <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
               <li class="nav-item">
-                <a href="../main/home.php" class="nav-link active">Trang chủ</a>
+                <a href="../main/home.php" class="nav-link active text-white">Trang chủ</a>
               </li>
 
 
               <li class="nav-item">
-                <a href="../main/gaubong.php" class="nav-link">Gấu Bông</a>
+                <a href="../main/gaubong.php" class="nav-link text-white">Gấu Bông</a>
               </li>
 
               <li class="nav-item">
-                <a href="../main/dientu.php" class="nav-link">Điện Tử</a>
+                <a href="../main/dientu.php" class="nav-link text-white">Điện Tử</a>
               </li>
 
               <li class="nav-item">
-                <a href="../main/dogo.php" class="nav-link">Đồ Gỗ</a>
+                <a href="../main/dogo.php" class="nav-link text-white">Đồ Gỗ</a>
               </li>
 
               <li class="nav-item">
-                <a href="../main/dothucong.php" class="nav-link">Đồ Thủ Công</a>
+                <a href="../main/dothucong.php" class="nav-link text-white">Đồ Thủ Công</a>
               </li>
 
               <li class="nav-item">
-                <a href="../main/xe.php" class="nav-link">Xe</a>
+                <a href="../main/xe.php" class="nav-link text-white">Xe</a>
               </li>
 
               <li class="nav-item">
-                <a href="../main/sanpham.php" class="nav-link">Sản Phẩm</a>
+                <a href="../main/sanpham.php" class="nav-link text-white">Sản Phẩm</a>
               </li>
 
               <li class="nav-item">
-                <a href="main.php" class="nav-link">Blog</a>
+                <a href="main.php" class="nav-link text-white">Blog</a>
               </li>
 
               <li class="nav-item">
-                <a href="home.php" class="nav-link">Liên hệ</a>
+                <a href="home.php" class="nav-link text-white">Liên hệ</a>
               </li>
 
 
@@ -415,7 +463,7 @@ if (isset($_SESSION['userId'])) {
                   <?php
                   if (isset($_SESSION['username'])) { ?>
                     <div class="dropdown d-inline">
-                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                      <a class="dropdown-toggle  text-white" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <?= $_SESSION['username'] ?>
                       </a>
@@ -446,8 +494,8 @@ if (isset($_SESSION['userId'])) {
                 <li class="">
                   <a href="home.php" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                     aria-controls="offcanvasCart">
-                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative text-white "></iconify-icon>
+                    <span class="position-absolute translate-middle badge rounded-circle bg-dark pt-2">
                       <?= $giohang_soluong ?? 0 ?>
                     </span>
                   </a>

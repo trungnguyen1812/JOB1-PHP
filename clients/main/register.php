@@ -3,7 +3,7 @@ include '../../controller/khachhang.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $khachhang = new khachhang();
     $result_register = $khachhang->register($_POST);
-
+    
     echo "<script>alert('" . $result_register . "')</script>";
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 include '../../controller/khachhang.php';
+Session::isLogin();
 $khachhang = new khachhang();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
