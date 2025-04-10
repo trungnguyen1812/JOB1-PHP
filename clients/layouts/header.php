@@ -274,7 +274,7 @@ if (isset($_SESSION['userId'])) {
                       <td class="text-center" style="width: 10%">
                         <form action="../../controller/giohang_xoa.php" method="post">
                           <input type="hidden" name="id" value="<?= $value['IDGioHang'] ?>">
-                          <input type="submit" value="Xoá">
+                          <input type="submit" value="Xoá" style="border: none;background-color: #a05c2e;color: white;"> 
                         </form>
                       </td>
                     </tr>
@@ -288,7 +288,7 @@ if (isset($_SESSION['userId'])) {
             </ul>
             <div class="text-center">
               <a href="../main/checkout.php">
-                <button class="btn btn-primary btn-lg" type="submit">Checkout</button>
+                <button class="bm-3" type="submit">Checkout</button>
               </a>
             </div>
           <?php } ?>

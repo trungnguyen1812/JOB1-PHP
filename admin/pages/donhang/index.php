@@ -29,11 +29,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
@@ -100,7 +95,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                       
+
                     </div>
                 </div>
             </div>
@@ -136,7 +131,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if (!$donhang_0) {
                                         echo "Chưa có đơn hàng chờ xác nhận!";
                                     } else {
-                                        ?>
+                                    ?>
                                         <table class="table table-hover pt-5 w-100">
                                             <thead>
                                                 <tr>
@@ -145,7 +140,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     <th class="text-center">Địa chỉ</th>
                                                     <th class="text-center">SĐT</th>
                                                     <th class="text-center">Ngày Đặt</th>
-                                                <th class="text-center">Tổng tiền</th>
+                                                    <th class="text-center">Tổng tiền</th>
                                                     <th class="text-center">Xác Nhận</th>
                                                     <th class="text-center">Huỷ</th>
                                                 </tr>
@@ -153,7 +148,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tbody>
                                                 <?php
                                                 foreach ($donhang_0 as $key => $value) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td class="text-center"><?= $value['IDDonHang'] ?></td>
                                                         <td class="text-center">
@@ -168,8 +163,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <td class="text-center">
                                                             <?= $value['NgayTao'] ?>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <?= $value['TongGia'] ?>
+                                                        <td class="text-center" style="color: green;">
+                                                            <span class="text-center text-xs font-weight-bold">
+                                                                <?= number_format($value['TongGia'], 0, ',', '.') ?>VND
+                                                            </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <form action="index.php" method="post">
@@ -188,12 +185,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -205,7 +202,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if (!$donhang_1) {
                                         echo "Chưa có đơn hàng đã xác nhận!";
                                     } else {
-                                        ?>
+                                    ?>
                                         <table class="table table-hover pt-5 w-100 w-100">
                                             <thead>
                                                 <th class="text-center">Mã đơn hàng</th>
@@ -220,7 +217,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tbody>
                                                 <?php
                                                 foreach ($donhang_1 as $key => $value) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td class="text-center"><?= $value['IDDonHang'] ?></td>
                                                         <td class="text-center">
@@ -235,8 +232,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <td class="text-center">
                                                             <?= $value['NgayTao'] ?>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <?= $value['TongGia'] ?>
+                                                        <td class="text-center" style="color: green;">
+                                                            <span class="text-center text-xs font-weight-bold">
+                                                                <?= number_format($value['TongGia'], 0, ',', '.') ?>VND
+                                                            </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <form action="index.php" method="post">
@@ -255,12 +254,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -272,7 +271,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if (!$donhang_2) {
                                         echo "Chưa có đơn hàng đang vận chuyển!";
                                     } else {
-                                        ?>
+                                    ?>
                                         <table class="table table-hover pt-5 w-100 w-100">
                                             <thead>
                                                 <th class="text-center">Mã đơn hàng</th>
@@ -287,7 +286,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tbody>
                                                 <?php
                                                 foreach ($donhang_2 as $key => $value) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td class="text-center"><?= $value['IDDonHang'] ?></td>
                                                         <td class="text-center">
@@ -302,8 +301,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <td class="text-center">
                                                             <?= $value['NgayTao'] ?>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <?= $value['TongGia'] ?>
+                                                        <td class="text-center" style="color: green;">
+                                                            <span class="text-center text-xs font-weight-bold">
+                                                                <?= number_format($value['TongGia'], 0, ',', '.') ?>VND
+                                                            </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <form action="index.php" method="post">
@@ -322,12 +323,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -339,7 +340,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if (!$donhang_3) {
                                         echo "Chưa có đơn hàng đã vận chuyển!";
                                     } else {
-                                        ?>
+                                    ?>
                                         <table class="table table-hover pt-5 w-100">
                                             <thead>
                                                 <th class="text-center">Mã đơn hàng</th>
@@ -352,7 +353,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tbody>
                                                 <?php
                                                 foreach ($donhang_3 as $key => $value) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td class="text-center">
                                                             <?= $value['IDDonHang'] ?>
@@ -369,16 +370,18 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <td class="text-center">
                                                             <?= $value['NgayTao'] ?>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <?= $value['TongGia'] ?>
+                                                        <td class="text-center" style="color: green;">
+                                                            <span class="text-center text-xs font-weight-bold">
+                                                                <?= number_format($value['TongGia'], 0, ',', '.') ?>VND
+                                                            </span>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -390,7 +393,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if (!$donhang_4) {
                                         echo "Chưa có đơn hàng bị huỷ!";
                                     } else {
-                                        ?>
+                                    ?>
                                         <table class="table table-hover pt-5 w-100">
                                             <thead>
                                                 <th class="text-center">Mã đơn hàng</th>
@@ -403,7 +406,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tbody>
                                                 <?php
                                                 foreach ($donhang_4 as $key => $value) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td class="text-center"><?= $value['IDDonHang'] ?></td>
                                                         <td class="text-center">
@@ -418,16 +421,18 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <td class="text-center">
                                                             <?= $value['NgayTao'] ?>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <?= $value['TongGia'] ?>
+                                                        <td class="text-center" style="color: red;">
+                                                            <span class="text-center text-xs font-weight-bold">
+                                                                <?= number_format($value['TongGia'], 0, ',', '.') ?>VND
+                                                            </span>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -440,10 +445,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
-                            
+
                         </div>
                         <div class="col-lg-6">
-                          
+
                         </div>
                     </div>
                 </div>

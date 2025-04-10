@@ -56,11 +56,9 @@ class SanPham
         $gia = floatval($data['Gia'] ?? 0);
         $soLuong = intval($data['SoLuong'] ?? 0);
         $moTa = trim($data['MoTa'] ?? '');
+        $percentSale = intval($data['PercentSale'] ?? 0);
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
-
-        if (empty($tenSanPham) || $gia <= 0 || $soLuong <= 0 || empty($moTa) || $idLoaiSanPham <= 0) {
-            return "Vui lòng điền đầy đủ thông tin hợp lệ!";
-        }
+        $saleValue =  floatval($data['SaleValue'] ?? 0);
 
         // Xử lý upload file hình ảnh
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {
@@ -94,13 +92,18 @@ class SanPham
             }
 
             $relativePath = 'imgUploads/' . $uniqueFileName;
+
+            // Tính SaleValue dựa trên giá và phần trăm giảm giá
+            if ($percentSale > 0) {
+                $saleValue = round($gia * (1 - ($percentSale / 100)), 2);
+            } else {
+                $saleValue = $gia; // Không giảm giá
+            }
         }
 
         try {
-
-
-            $query = "INSERT INTO sanpham (IDLoaiSanPham, TenSanPham, Gia, SoLuong, MoTa, HinhAnh) 
-                     VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO sanpham (IDLoaiSanPham, TenSanPham, Gia, SoLuong, MoTa, HinhAnh ,PercentSale ,SaleValue) 
+                     VALUES (?, ?, ?, ?, ?, ? , ? , ?)";
 
             $params = [
                 $idLoaiSanPham,
@@ -108,7 +111,9 @@ class SanPham
                 $gia,
                 $soLuong,
                 $moTa,
-                $relativePath
+                $relativePath,
+                $percentSale,
+                $saleValue,
             ];
 
             $result = $this->db->insertSP($query, $params);
@@ -151,7 +156,8 @@ class SanPham
         $soLuong = intval($data['SoLuong'] ?? 0);
         $moTa = trim($data['MoTa'] ?? '');
         $idSanPham = intval($data['IDSanPham'] ?? 0);  // IDSanPham là tham số cần thiết để cập nhật
-
+        $percentSale = intval($data['PercentSale'] ?? 0);
+        $saleValue =  floatval($data['SaleValue'] ?? 0);
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
 
         // Kiểm tra dữ liệu nhập
@@ -192,13 +198,20 @@ class SanPham
 
             $relativePath = 'imgUploads/' . $uniqueFileName;
         }
+        // Tính SaleValue dựa trên giá và phần trăm giảm giá
+        if ($percentSale > 0) {
+            $saleValue = round($gia * (1 - ($percentSale / 100)), 2);
+        } else {
+            $saleValue = $gia; // Không giảm giá
+        }
 
         try {
             // Nếu có hình ảnh mới, cập nhật cả đường dẫn hình ảnh
+            // If there's a new image
             if ($relativePath) {
                 $query = "UPDATE sanpham 
-                          SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ?, HinhAnh = ? 
-                          WHERE IDSanPham = ?";
+              SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ?, HinhAnh = ?, PercentSale = ?, SaleValue = ?
+              WHERE IDSanPham = ?";
                 $params = [
                     $idLoaiSanPham,
                     $tenSanPham,
@@ -206,20 +219,24 @@ class SanPham
                     $soLuong,
                     $moTa,
                     $relativePath,
-                    $idSanPham  // Thêm IDSanPham vào để cập nhật
+                    $percentSale,  // Add PercentSale parameter
+                    $saleValue,    // Add SaleValue parameter
+                    $idSanPham     // Move IDSanPham to the end as it's in the WHERE clause
                 ];
             } else {
-                // Nếu không có hình ảnh mới, chỉ cập nhật các trường khác
+                // If no new image
                 $query = "UPDATE sanpham 
-                          SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ? 
-                          WHERE IDSanPham = ?";
+              SET IDLoaiSanPham = ?, TenSanPham = ?, Gia = ?, SoLuong = ?, MoTa = ?, PercentSale = ?, SaleValue = ?
+              WHERE IDSanPham = ?";
                 $params = [
                     $idLoaiSanPham,
                     $tenSanPham,
                     $gia,
                     $soLuong,
                     $moTa,
-                    $idSanPham  // Thêm IDSanPham vào để cập nhật
+                    $percentSale,  // Add PercentSale parameter
+                    $saleValue,    // Add SaleValue parameter
+                    $idSanPham     // Move IDSanPham to the end as it's in the WHERE clause
                 ];
             }
 
@@ -273,7 +290,7 @@ class SanPham
         if ($this->db) {
             $sql = "SELECT * FROM sanpham WHERE IDLoaiSanPham = $categoryID";
             $result = $this->db->select($sql);
-    
+
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($product = mysqli_fetch_assoc($result)) {
                     $sanpham[] = $product;
@@ -284,12 +301,12 @@ class SanPham
         } else {
             echo "Không kết nối được CSDL.<br>";
         }
-    
+
         // Kiểm tra dữ liệu trả về
-      
+
         return $sanpham;
     }
-    
+
 
 
     public function view($view, $data = [])

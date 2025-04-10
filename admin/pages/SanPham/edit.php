@@ -165,47 +165,51 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
             </div>
             <hr>
             <div class="form-container">
-            <form style="width: 100%;" action="edit.php" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="IDSanPham" value="<?= $sanphamUpdate['IDSanPham'] ?>">
+                <form style="width: 100%;" action="edit.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="IDSanPham" value="<?= $sanphamUpdate['IDSanPham'] ?>">
 
-    <!-- Cột bên trái: Các ô nhập văn bản -->
-    <div class="form-column">
-        <label for="TenSanPham">Tên Sản Phẩm</label>
-        <input type="text" id="TenSanPham" name="TenSanPham" value="<?= $sanphamUpdate['TenSanPham'] ?>" required>
+                    <!-- Cột bên trái: Các ô nhập văn bản -->
+                    <div class="form-column">
+                        <label for="TenSanPham">Tên Sản Phẩm</label>
+                        <input type="text" id="TenSanPham" name="TenSanPham" value="<?= $sanphamUpdate['TenSanPham'] ?>" required>
 
-        <label for="Gia">Giá</label>
-        <input type="number" id="Gia" name="Gia" value="<?= $sanphamUpdate['Gia'] ?>" required>
+                        <label for="Gia">Giá</label>
+                        <input type="number" id="Gia" name="Gia" value="<?= $sanphamUpdate['Gia'] ?>" required>
 
-        <label for="SoLuong">Số Lượng</label>
-        <input type="number" id="SoLuong" name="SoLuong" value="<?= $sanphamUpdate['SoLuong'] ?>" required>
+                        <label for="SoLuong">Số Lượng</label>
+                        <input type="number" id="SoLuong" name="SoLuong" value="<?= $sanphamUpdate['SoLuong'] ?>" required>
 
-        <label for="MoTa">Mô Tả</label>
-        <textarea id="MoTa" name="MoTa" rows="4" required><?= $sanphamUpdate['MoTa'] ?></textarea>
+                        <label for="MoTa">Mô Tả</label>
+                        <textarea id="MoTa" name="MoTa" rows="4" required><?= $sanphamUpdate['MoTa'] ?></textarea>
 
-        <label for="IDLoaiSanPham">Danh Mục Sản Phẩm</label>
-        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
-            <?php foreach ($loaisanpham as $loaisanpham): ?>
-                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>" <?= ($sanphamUpdate['IDLoaiSanPham'] == $loaisanpham['IDLoaiSanPham']) ? 'selected' : '' ?>>
-                    <?= $loaisanpham['TenLoaiSanPham'] ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+                        <label for="IDLoaiSanPham">Danh Mục Sản Phẩm</label>
+                        <select class="form-select" id="IDLoaiSanPham" name="IDLoaiSanPham" required>
+                            <?php foreach ($loaisanpham as $loaisanpham): ?>
+                                <option value="<?= $loaisanpham['IDLoaiSanPham'] ?>" <?= ($sanphamUpdate['IDLoaiSanPham'] == $loaisanpham['IDLoaiSanPham']) ? 'selected' : '' ?>>
+                                    <?= $loaisanpham['TenLoaiSanPham'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 
-    <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
-    <div class="form-column-right">
-        <label for="HinhAnh">Hình Ảnh Sản Phẩm</label>
-        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
+                    <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
+                    <div class="form-column-right">
+                        <!-- nhập giá trị sale  -->
+                        <label for="PercentSale">Giảm giá</label>
+                        <input type="number" id="PercentSale" name="PercentSale" value="<?= $sanphamUpdate['PercentSale'] ?>" required>
 
-        <!-- Xem trước ảnh -->
-        <img id="image-preview" src="/<?= $sanphamUpdate['HinhAnh'] ?>" alt="Xem trước ảnh" style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
+                        <label for="HinhAnh">Hình Ảnh Sản Phẩm</label>
+                        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
 
-        <div class="submit-btn">
-            <button type="submit">Lưu</button>
-        </div>
-    </div>
+                        <!-- Xem trước ảnh -->
+                        <img id="image-preview" src="/<?= $sanphamUpdate['HinhAnh'] ?>" alt="Xem trước ảnh" style="max-width: 500px; max-height: 370px; display: block; object-fit: contain;">
 
-</form>
+                        <div class="submit-btn">
+                            <button type="submit">Lưu</button>
+                        </div>
+                    </div>
+
+                </form>
 
             </div>
 
@@ -222,6 +226,14 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
                         reader.readAsDataURL(file);
                     } else {
                         imagePreview.style.display = 'none'; // Ẩn ảnh preview nếu không có ảnh nào được chọn
+                    }
+                }
+                  //check sale value
+                  function checkSaleValue(){
+                    const value = parseInt(document.getElementById('PercentSale').value);
+                    if (value < 0 || value > 100) {
+                        alert("Giá trị giảm giá phải nằm trong khoảng từ 0 đến 100%.");
+                        document.getElementById('PercentSale').value = ""; // Xóa giá trị không hợp lệ
                     }
                 }
             </script>

@@ -105,18 +105,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                                             5.0
                                         </span>
-                                        <h3 class="secondary-font text-primary d-flex justify-content-center"><?php echo number_format($value['Gia'], 0); ?>
-                                            VND</h3>
-                                        <div class="d-flex flex-wrap mt-3 d-flex justify-content-center">
+
+                                        <!-- Fixed-height price container -->
+                                        <div class="price-container d-flex flex-column align-items-center justify-content-center" style="height: 80px;">
+                                            <?php if ($value['PercentSale'] > 0): ?>
+                                                <!-- Sale price -->
+                                                <h3 class="secondary-font text-primary mb-0">
+                                                    <?php echo number_format($value['SaleValue'], 0); ?>VND
+                                                </h3>
+                                                <!-- Original price with strikethrough -->
+                                                <h5 class="secondary-font text-muted">
+                                                    <del><?php echo number_format($value['Gia'], 0); ?>VND</del>
+                                                </h5>
+                                            <?php else: ?>
+                                                <!-- Only original price, centered vertically -->
+                                                <h3 class="secondary-font text-primary">
+                                                    <?php echo number_format($value['Gia'], 0); ?>VND
+                                                </h3>
+                                                <!-- Empty spacer to maintain consistent height -->
+                                                <div class="spacer" style="height: 24px;"></div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center">
                                             <form action="home.php" method="POST">
                                                 <input type="hidden" name="model" value="giohang" />
-                                                <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
-
-                                                <button class="mb-3" type="submit">Thêm Giỏ Hàng
-                                                </button>
-
+                                                <input type="hidden" name="idsanpham" value="<?= $value['IDSanPham'] ?>" />
+                                                <button class="mb-3" type="submit">Thêm Giỏ Hàng</button>
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>

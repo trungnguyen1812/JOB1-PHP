@@ -101,7 +101,7 @@ if (isset($_SESSION['error_message'])) {
             margin-top: 20px;
             padding: 10px 15px;
             font-size: 1rem;
-            background-color: #FFD700;
+            background-color: #b87333;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -109,7 +109,7 @@ if (isset($_SESSION['error_message'])) {
         }
 
         .left-panel button:hover {
-            background-color: #FFC300;
+            background-color:rgb(94, 73, 3);
         }
 
         .left-panel input[type="file"] {
@@ -172,7 +172,7 @@ if (isset($_SESSION['error_message'])) {
             <!-- Left Panel -->
             <div class="left-panel">
                 <img id="profileImg" src="/<?= $khachhangUpdate['HinhAnhKhachHang']?>" alt="Profile Picture">
-                <button type="button" id="changeImageButton">Đổi hình ảnh</button>
+                <button type="button" id="changeImageButton" class="mb-3">Đổi hình ảnh</button>
                 <input type="file" name="HinhAnhKhachHang" id="imageInput" accept="image/*">
             </div>
 
@@ -198,8 +198,8 @@ if (isset($_SESSION['error_message'])) {
                 </div>
               
                 <div class="btn-container">
-                    <button type="submit" class="btn">Chỉnh sửa</button>
-                    <a href="../main/home.php" class="btn" style="background-color: #6c757d;">Hủy</a>
+                    <button type="submit" class="mb-3">Chỉnh sửa</button>
+                    <a href="../main/home.php"  style="color: #b87333;">Quay lại trang chủ</a>
                 </div>
             </div>
         </div>

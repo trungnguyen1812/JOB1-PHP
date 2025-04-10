@@ -22,10 +22,9 @@ if (isset($_GET['delete-id'])) {
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
@@ -50,10 +49,10 @@ if (isset($_GET['delete-id'])) {
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                      
+
                     </div>
                     <ul class="navbar-nav  justify-content-end">
-                      
+
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -180,6 +179,12 @@ if (isset($_GET['delete-id'])) {
                                                 Giá</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                % giảm</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                                Giá giảm</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                                 Số lượng</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
@@ -191,7 +196,7 @@ if (isset($_GET['delete-id'])) {
                                         <?php
                                         if ($dssanpham) {
                                             foreach ($dssanpham as $key => $value) {
-                                                ?>
+                                        ?>
                                                 <tr>
                                                     <td class="align-middle text-center text-sm">
                                                         <p class="text-xs font-weight-bold mb-0">
@@ -209,9 +214,20 @@ if (isset($_GET['delete-id'])) {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-secondary text-xs font-weight-bold"><?= $value['Gia'] ?></span>
+                                                    <td id="Gia" style="color: green;">
+                                                        <span class="text-center text-xs font-weight-bold">
+                                                        <?= number_format($value['Gia'], 0, ',', '.') ?>VND
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: center;color: blue;" id="PercentSale">
+                                                        <span class="text-center text-xs font-weight-bold">
+                                                            <?= $value['PercentSale'] ?>%
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: center;color: red;" id="SaleValue">
+                                                        <span class="text-center text-xs font-weight-bold">
+                                                        <?= number_format($value['SaleValue'], 0, ',', '.') ?>  VND
+                                                        </span>
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         <span
@@ -227,13 +243,13 @@ if (isset($_GET['delete-id'])) {
                                                             Chỉnh sửa
                                                         </a>
                                                         |
-                                                        <a href="?delete-id=<?= $value['IDSanPham']?>" class="text-secondary font-weight-bold text-xs"
+                                                        <a href="?delete-id=<?= $value['IDSanPham'] ?>" class="text-secondary font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Edit user">
                                                             Xoá
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </tbody>
                                 </table>
@@ -246,10 +262,10 @@ if (isset($_GET['delete-id'])) {
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
-                            
+
                         </div>
                         <div class="col-lg-6">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -351,6 +367,38 @@ if (isset($_GET['delete-id'])) {
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+        document.addEventListener("DOMContentLoaded", function() {
+            var giaInput = document.getElementById('Gia');
+            var saleValueInput = document.getElementById('SaleValue');
+            var percentSaleInput = document.getElementById('PercentSale');
+            giaInput.addEventListener('input', function(e) {
+                // Xóa hết ký tự không phải số
+                let value = this.value.replace(/\D/g, '');
+
+                // Format lại: cứ 3 số chấm 1 cái
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                this.value = value;
+            });
+            saleValueInput.addEventListener('input', function(e) {
+                // Xóa hết ký tự không phải số
+                let value = this.value.replace(/\D/g, '');
+
+                // Format lại: cứ 3 số chấm 1 cái
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                this.value = value;
+            });
+            percentSaleInput.addEventListener('input', function(e) {
+                // Xóa hết ký tự không phải số
+                let value = this.value.replace(/\D/g, '');
+
+                // Format lại: cứ 3 số chấm 1 cái
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                this.value = value;
+            });
+        });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

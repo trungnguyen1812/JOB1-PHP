@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         echo "<script>alert('$result');</script>"; // Hiển thị thông báo thành công hoặc lỗi
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -21,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <link rel="icon" href="/clients/images/iconlogo.jpg" type="image/x-icon">
+
     <title>
         Soft UI Dashboard by Creative Tim
     </title>
@@ -165,10 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                      
+
                     </div>
                     <ul class="navbar-nav  justify-content-end">
-                      
+
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
@@ -303,19 +302,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <!-- Cột bên phải: Tải lên hình ảnh và xem trước -->
                     <div class="form-column-right">
+                        <!-- nhập giá trị sale  -->
+                        <label for="GiamGia">Giảm giá (%)</label>
+                        <input type="number" id="PercentSale" name="PercentSale" placeholder="0%" required >
+
                         <label for="HinhAnh">Hình ảnh sản phẩm</label>
-                        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)">
+                        <input type="file" id="HinhAnh" name="HinhAnh" accept="image/*" onchange="previewImage(event)" required>
 
                         <!-- Xem trước ảnh -->
-                        <img id="image-preview" alt="Xem trước hình ảnh sản phẩm" style="max-width: 500px; max-height: 370px; display: none; object-fit: contain;">
+                        <img id="image-preview" alt="Xem trước hình ảnh sản phẩm" style="max-width: 500px; max-height: 370px; display: none; object-fit: contain;" >
 
-                        <input type="submit" class="btn btn-success" value="Lưu" />
+                        <input type="submit" onclick="checkSaleValue()" class="btn btn-success" value="Lưu" />
                     </div>
 
                 </form>
             </div>
 
             <script>
+                //show review image 
                 function previewImage(event) {
                     const imagePreview = document.getElementById('image-preview');
                     const file = event.target.files[0];
@@ -328,6 +332,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         reader.readAsDataURL(file);
                     } else {
                         imagePreview.style.display = 'none'; // Ẩn ảnh preview nếu không có ảnh nào được chọn
+                    }
+                }
+                //check sale value
+                function checkSaleValue(){
+                    const value = parseInt(document.getElementById('PercentSale').value);
+                    if (value < 0 || value > 100) {
+                        alert("Giá trị giảm giá phải nằm trong khoảng từ 0 đến 100%.");
+                        document.getElementById('PercentSale').value = ""; // Xóa giá trị không hợp lệ
                     }
                 }
             </script>
@@ -344,7 +356,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     document.write(new Date().getFullYear())
                                 </script>,
                                 made with <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
+                                <a href="" class="font-weight-bold" target="_blank">Creative
                                     Tim</a>
                                 for a better web.
                             </div>
