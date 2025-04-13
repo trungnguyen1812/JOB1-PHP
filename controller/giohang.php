@@ -12,79 +12,69 @@ class GioHang
         $this->db = new Database();
     }
 
-    // Them san pham vao gio hang
-    public function insertPageSP($idkh, $idsp)
-    {
-        try {
-            // Kiem tra san pham co trong gio hang hay chua
-            $query = "SELECT IDGioHang, SoLuong FROM GioHang WHERE IDKhachHang = '$idkh' AND IDSanPham = '$idsp'";
-            $giohang_sanpham = $this->db->select($query);
-            if ($giohang_sanpham) {
-                $data = $giohang_sanpham->fetch_assoc();
-                $query = "UPDATE GioHang SET SoLuong = " . ($data['SoLuong'] + 1) . " WHERE IDGioHang = " . $data['IDGioHang'];
-                $result = $this->db->update($query);
-                ?>
-                <?php
-            } else {
-                // $idkh -> ID khach hang;  $idsp -> ID san pham
-                $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong) VALUES ($idkh, $idsp, 1)";
-                $result = $this->db->insert($query);
-            }
-
-            if (!$result) {
-                
-                return "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
-            } else {
-                header('Location: sanpham.php');
-                return "Thêm vào giỏ hàng thành công.";
-            }
-        } catch (\Exception $e) {
-            ?>
-            <?php
-            return (string) $e;
-        }
-    }
-
 
     public function insertPageHome($idkh, $idsp)
     {
         try {
-            // Kiem tra san pham co trong gio hang hay chua
+            // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
             $query = "SELECT IDGioHang, SoLuong FROM GioHang WHERE IDKhachHang = '$idkh' AND IDSanPham = '$idsp'";
             $giohang_sanpham = $this->db->select($query);
+
             if ($giohang_sanpham) {
                 $data = $giohang_sanpham->fetch_assoc();
-                $query = "UPDATE GioHang SET SoLuong = " . ($data['SoLuong'] + 1) . " WHERE IDGioHang = " . $data['IDGioHang'];
+                $query = "UPDATE GioHang SET SoLuong = SoLuong + 1 WHERE IDGioHang = " . $data['IDGioHang'];
                 $result = $this->db->update($query);
-                ?>
-                <?php
             } else {
-                // $idkh -> ID khach hang;  $idsp -> ID san pham
-                $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong) VALUES ($idkh, $idsp, 1)";
-                $result = $this->db->insert($query);
+                // Lấy thông tin sản phẩm
+                $query = "SELECT Gia, SaleValue FROM SanPham WHERE IDSanPham = '$idsp'";
+                $sanpham = $this->db->select($query);
+
+                if ($sanpham && $sp = $sanpham->fetch_assoc()) {
+                    $donGia = ($sp['SaleValue'] > 0) ? $sp['SaleValue'] : $sp['Gia'];
+
+                    $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong, DonGia)
+                              VALUES ('$idkh', '$idsp', 1, '$donGia')";
+                    $result = $this->db->insert($query);
+                } else {
+                    return "Không tìm thấy sản phẩm để thêm vào giỏ.";
+                }
             }
 
-            if (!$result) {
-                
-                return "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
-            } else {
-                // header('Location: home.php');
-            
-             
-                return "Thêm vào giỏ hàng thành công.";
-            }
+            return $result ? "Thêm vào giỏ hàng thành công." : "Thêm vào giỏ hàng không thành công. Xin hãy thử lại!";
         } catch (\Exception $e) {
-            ?>
-            <?php
-            return (string) $e;
+            return "Đã xảy ra lỗi: " . $e->getMessage();
         }
     }
 
+
+
+    // Add this method to your Giohang class
+    public function getCartItems($userId)
+    {
+        $query = "SELECT g.*, s.TenSanPham, s.Gia, s.PercentSale, 
+              CASE WHEN s.PercentSale > 0 
+                  THEN s.Gia - (s.Gia * s.PercentSale / 100) 
+                  ELSE 0 
+              END as SaleValue 
+              FROM GioHang g
+              JOIN SanPham s ON g.IDSanPham = s.IDSanPham
+              WHERE g.IDKhachHang = '$userId'";
+
+        $result = $this->db->select($query);
+
+        if ($result) {
+            $items = [];
+            while ($row = $result->fetch_assoc()) {
+                $items[] = $row;
+            }
+            return $items;
+        }
+        return [];
+    }
     // Cap nhat gio hang 
     public function update($id, $soluong)
     {
         try {
-
         } catch (\Exception $e) {
             return (string) $e;
         }

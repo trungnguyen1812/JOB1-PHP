@@ -4,7 +4,7 @@ session_start();
 include_once '../../controller/giohang.php';
 include_once '../../controller/khachhang.php';
 
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']=='POST') {
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     include_once '../../controller/donhang.php';
     $donhang = new DonHang();
     $donhang->insert($_POST);
@@ -12,14 +12,20 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']=='POST') {
 
 // Du lieu gio hang
 $giohang = new GioHang();
-$datagiohang = $giohang->getByIDKhachHang($_SESSION['userId']);
+$datagiohang_result = $giohang->getByIDKhachHang($_SESSION['userId']);
+// Convert mysqli_result to array
+$datagiohang = [];
+if ($datagiohang_result && $datagiohang_result->num_rows > 0) {
+    while ($row = $datagiohang_result->fetch_assoc()) {
+        $datagiohang[] = $row;
+    }
+}
 
 // Du lieu khach hang (Thong tin dat hang)
 $khachhang = new KhachHang();
 $datakhachhang = $khachhang->getByID($_SESSION['userId']);
 
 include_once '../layouts/header.php';
-
 ?>
 <style>
     .container {
@@ -39,31 +45,33 @@ include_once '../layouts/header.php';
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Giỏ hàng</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
+                    <span class="badge badge-secondary badge-pill"><?= count($datagiohang) ?></span>
                 </h4>   
-                <ul class="list-group mb-3 sticky-top">
+                <ul class="list-group mb-3">
                     <?php 
                     $thanhtien = 0;
                     foreach ($datagiohang as $key => $value) {
+                        $donGia = $value['DonGia'];
                     ?>
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 class="my-0"><?= $value['TenSanPham'] ?></h6>
-                            <small class="text-muted">Giá: <?= $value['Gia'] ?></small>
+                            <h6 class="my-0"><?= htmlspecialchars($value['TenSanPham']) ?></h6>
+                            <small class="text-muted">Giá: <?= number_format($donGia, 0) ?> VNĐ</small>
                             <br>
-                            <small class="text-muted">Số lượng: <?= $value['SoLuong']?></small>
+                            <small class="text-muted">Số lượng: <?= $value['SoLuong'] ?></small>
                         </div>
                         <span class="text-muted">
                             <?php 
-                            $thanhtien +=  $value['Gia'] * $value['SoLuong'];
-                            echo $value['Gia'] * $value['SoLuong'];
+                            $thanhTienItem = $donGia * $value['SoLuong'];
+                            $thanhtien += $thanhTienItem;
+                            echo number_format($thanhTienItem, 0) . ' VNĐ';
                             ?>
                         </span>
                     </li>
                     <?php } ?>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Thành tiền (VNĐ)</span>
-                        <strong><?= $thanhtien ?></strong>
+                        <strong><?= number_format($thanhtien, 0) ?> VNĐ</strong>
                     </li>
                 </ul>
             </div>
@@ -73,20 +81,17 @@ include_once '../layouts/header.php';
                 <form class="needs-validation" action="checkout.php" method="POST">
                     <input type="hidden" name="id" value="<?= $datakhachhang['IDKhachHang'] ?>">
                     <div class="mb-3">
-                        <label for="hoten">Họ tên</label>
+                        <label for="hoten" class="text-dark">Họ tên</label>
                         <input type="text" class="form-control" id="hoten" name="hoten" placeholder="Họ tên người nhận"
-                            value="<?= $datakhachhang['HoTen'] ?>" required="">
-                        <!-- <div class="invalid-feedback"> Valid first name is required. </div> -->
+                            value="<?= htmlspecialchars($datakhachhang['HoTen']) ?>" required="">
                     </div>
                     <div class="mb-3">
-                        <label for="address">Địa chỉ</label>
-                        <input type="text" class="form-control" id="diachi" name="diachi" value="<?= $datakhachhang['DiaChi'] ?>" placeholder="Địa chỉ" required="">
-                        <!-- <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn.</div> -->
+                        <label for="address" class="text-dark">Địa chỉ</label>
+                        <input type="text" class="form-control" id="diachi" name="diachi" value="<?= htmlspecialchars($datakhachhang['DiaChi']) ?>" placeholder="Địa chỉ" required="">
                     </div>
                     <div class="mb-3">
-                        <label for="address">Số điện thoại</label>
-                        <input type="text" class="form-control" id="sdtx" name="sdt" value="<?= $datakhachhang['SDT'] ?>" placeholder="Địa chỉ" required="">
-                        <!-- <div class="invalid-feedback">Vui lòng nhập số điiẹn thoại.</div> -->
+                        <label for="address" class="text-dark">Số điện thoại</label>
+                        <input type="text" class="form-control" id="sdt" name="sdt" value="<?= htmlspecialchars($datakhachhang['SDT']) ?>" placeholder="Số điện thoại" required="">
                     </div>
                     <input type="hidden" name="tongtien" value="<?= $thanhtien ?>">
                     <hr class="mb-4">
@@ -94,14 +99,7 @@ include_once '../layouts/header.php';
                 </form>
             </div>
         </div>
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© 2017-2019 Company Name</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-        </footer>
+        <hr class="mb-6">
     </div>
 </div>
 <?php

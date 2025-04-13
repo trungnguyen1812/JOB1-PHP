@@ -98,6 +98,7 @@
 <script src="../js/plugins.js"></script>
 <script src="../js/script.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script src="../js/addSanPham.js"></script>
 <script>
   window.onscroll = function() {
     stickyNav()

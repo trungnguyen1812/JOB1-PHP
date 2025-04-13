@@ -195,6 +195,7 @@ if (isset($_SESSION['userId'])) {
     .container {
       color: white;
     }
+    
   </style>
 </head>
 
@@ -203,44 +204,36 @@ if (isset($_SESSION['userId'])) {
     <!-- Các hình ảnh lá sẽ được thêm vào đây qua JavaScript -->
   </div>
 
-  <!-- <div class="preloader-wrapper">
-    <div class="preloader">
-    </div>
-  </div> -->
 
-  <!-- Gio hang khi duoc mo -->
+  <!-- Giỏ hàng khi được mở -->
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart"
     style="width: 700px;">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <!-- Xu ly tai khoan dang nhap hay chua -->
-      <?php
-      if (!isset($_SESSION['username'])) { ?>
+      <?php if (!isset($_SESSION['username'])) { ?>
+        <!-- Chưa đăng nhập -->
         <div class="order-md-last">
           <h4 class="text-center mb-3">
             <div class="text-primary">Bạn chưa đăng nhập.</div>
             <div>
-              Hãy <a class="btn btn-primary p-1" href="../main/login.php">Đăng nhập</a> để xem giỏ hàng của
-              bạn.
+              Hãy <a class="btn btn-primary p-1" href="../main/login.php">Đăng nhập</a> để xem giỏ hàng của bạn.
             </div>
           </h4>
         </div>
-        <!-- Neu dang dang nhap -->
       <?php } else { ?>
+        <!-- Đã đăng nhập -->
         <div class="order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Giỏ hàng</span>
-            <span class="badge bg-primary rounded-circle pt-2"><?php echo $giohang_soluong ?> Sản phẩm</span>
+            <span id="cart-count" class="badge bg-primary rounded-circle pt-2" data-cart-count="<?php echo $giohang_soluong ?>"><?php echo $giohang_soluong ?> Sản phẩm</span>
           </h4>
-          <?php
-          if ($giohang_soluong == 0) {
-            echo '<h4>Bạn chưa có gì trong giỏ hàng :(</h4>';
-          } else {
-          ?>
-            <ul class="list-group mb-3">
 
+          <?php if ($giohang_soluong == 0) { ?>
+            <h4>Bạn chưa có gì trong giỏ hàng :(</h4>
+          <?php } else { ?>
+            <ul class="list-group mb-3">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -248,47 +241,47 @@ if (isset($_SESSION['userId'])) {
                     <th class="text-center dongia">Đơn Giá</th>
                     <th class="text-center soluong">Số Lượng</th>
                     <th class="text-center tong">Tổng Tiền</th>
+                    <th class="text-center">Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $tongtien = 0;
-                  foreach ($giohang_user as $key => $value) {
+                  foreach ($giohang_user as $value) {
+                    $donGia = $value['DonGia']; // Giá đã lưu trong giỏ hàng
+                    $thanhtien = $donGia * $value['SoLuong'];
                   ?>
                     <tr>
-                      <td class="">
-                        <?= $value['TenSanPham'] ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $value['Gia'] ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo $value['SoLuong'] ?>
-                      </td>
+                      <td><?= htmlspecialchars($value['TenSanPham']) ?></td>
+                      <td style="width: 50px;" class="text-center"><?= number_format($donGia, 0) ?></td>
+                      <td class="text-center"><?= $value['SoLuong'] ?></td>
                       <td class="text-center">
                         <?php
-                        $tongtien += $value['Gia'] * $value['SoLuong'];
-                        echo $value['Gia'] * $value['SoLuong'];
-                        ?> VNĐ
+                        $tongtien += $thanhtien;
+                        echo number_format($thanhtien, 0) . ' VNĐ';
+                        ?>
                       </td>
                       <td class="text-center" style="width: 10%">
                         <form action="../../controller/giohang_xoa.php" method="post">
                           <input type="hidden" name="id" value="<?= $value['IDGioHang'] ?>">
-                          <input type="submit" value="Xoá" style="border: none;background-color: #a05c2e;color: white;"> 
+                          <input type="submit" value="Xoá" style="border: none; background-color: #a05c2e; color: white;">
                         </form>
                       </td>
                     </tr>
                   <?php } ?>
                 </tbody>
+
               </table>
+
               <li class="list-group-item d-flex justify-content-between">
-                <span class="fw-bold">Tổng tiền: </span>
-                <strong><?= $tongtien ?> VNĐ</strong>
+                <span class="fw-bold">Tổng tiền:</span>
+                <strong><?= number_format($tongtien, 0) ?> VNĐ</strong>
               </li>
             </ul>
+
             <div class="text-center">
               <a href="../main/checkout.php">
-                <button class="bm-3" type="submit">Checkout</button>
+                <button class="bm-3 btn btn-success" type="submit">Checkout</button>
               </a>
             </div>
           <?php } ?>
@@ -296,6 +289,7 @@ if (isset($_SESSION['userId'])) {
       <?php } ?>
     </div>
   </div>
+
 
   <div class="offcanvas offcanvas-end" style="color: white;" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">

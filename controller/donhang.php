@@ -78,10 +78,7 @@ class DonHang
             //throw $th;
         }
     }
-    // public function delete()
-    // {
-    // }
-
+ 
     // Get data theo trang thai
     public function getAllByStatus($status)
     {
