@@ -1,9 +1,37 @@
 <?php
+ob_start();
 session_start();
+
 include_once '../../controller/sanpham.php';
+include_once '../../controller/giohang.php';
 include_once '../layouts/header.php';
-$sanpham = new Sanpham();
-$sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
+
+$sanpham = new SanPham();
+$giohang = new GioHang();
+
+// Get product by ID
+$productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$sanphamUpdate = null;
+$result = $sanpham->getByID($productId); // Note: getByID (case-sensitive)
+if ($result && $result->num_rows > 0) {
+  $sanphamUpdate = $result->fetch_assoc();
+}
+
+// Handle add-to-cart POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['model']) && $_POST['model'] == 'giohang') {
+    if (!isset($_SESSION['userId'])) {
+      $_SESSION['error'] = "Đăng nhập để thực hiện mua hàng.";
+      header('Location: ../main/login.php');
+      exit();
+    } else {
+      $result = $giohang->insertPageHome($_SESSION['userId'], $_POST['idsanpham']);
+      $_SESSION['cart_message'] = $result;
+      header('Location: sanpham.php');
+      exit();
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -11,8 +39,17 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Tiết Sản Phẩm - <?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?></title>
+  <title>Chi Tiết Sản Phẩm - <?php echo $sanphamUpdate ? htmlspecialchars($sanphamUpdate['TenSanPham']) : 'Không Tìm Thấy'; ?></title>
   <link rel="stylesheet" href="../css/detail.css">
+  <style>
+    .btn-cart:hover h5 {
+      border-color: #b87333;
+    }
+    .btn-cart:hover h5 {
+      color: white;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -20,59 +57,79 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
   <!-- Section Chi Tiết Sản Phẩm -->
   <section class="product-details">
     <div class="container">
-      <div class="product-wrapper">
+      <?php if ($sanphamUpdate): ?>
+        <div class="product-wrapper">
+          <!-- Hình ảnh sản phẩm -->
+          <div class="product-image">
+            <img width="400" height="450" src="/<?php echo htmlspecialchars($sanphamUpdate['HinhAnh']); ?>"
+              alt="<?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?>" class="product-img">
+          </div>
 
-        <!-- Hình ảnh sản phẩm -->
-        <div class="product-image">
-          <img width="400" height="450" src="/<?php echo htmlspecialchars($sanphamUpdate['HinhAnh']); ?>"
-            alt="<?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?>" class="product-img">
+          <!-- Thông tin sản phẩm -->
+          <div class="product-info">
+            <h1 class="product-title"><?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?></h1>
+            <div class="price-container">
+              <?php if ($sanphamUpdate['PercentSale'] > 0): ?>
+                <!-- Sale price -->
+                <p class="product-price text-primary mb-0">
+                  <?= number_format($sanphamUpdate['SaleValue'], 0); ?> VND
+                </p>
+                <!-- Original price with strikethrough -->
+                <p class="product-price text-muted">
+                  <del><?= number_format($sanphamUpdate['Gia'], 0); ?> VND</del>
+                </p>
+              <?php else: ?>
+                <!-- Only original price -->
+                <p class="product-price text-primary">
+                  <?= number_format($sanphamUpdate['Gia'], 0); ?> VND
+                </p>
+              <?php endif; ?>
+            </div>
+
+            <!-- Xếp hạng sản phẩm -->
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              <span class="rating-text">5.0</span>
+            </div>
+
+            <!-- Mô tả sản phẩm -->
+            <div class="product-description">
+              <h3>Mô Tả Sản Phẩm</h3>
+              <p><?php echo htmlspecialchars($sanphamUpdate['MoTa']); ?></p>
+            </div>
+
+            <!-- Nút chức năng -->
+            <div class="d-flex flex-wrap mt-3">
+              <form method="POST" action="">
+                <input type="hidden" name="model" value="giohang" />
+                <input type="hidden" name="idsanpham" value="<?= $sanphamUpdate['IDSanPham'] ?>" />
+                <button style="border: none; border-radius: 5px;" type="submit" class="btn-cart me-3 px-4 pt-3 pb-3 ">
+                  <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
+                </button>
+              </form>
+              <a href="#" class="btn-wishlist px-4 pt-3">
+                <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <!-- Thông tin sản phẩm -->
-        <div class="product-info">
-          <h1 class="product-title"><?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?></h1>
-          <p class="product-price"><?php echo number_format($sanphamUpdate['Gia'], 0); ?> VND</p>
-
-          <!-- Xếp hạng sản phẩm mặc định là 5 sao-->
-          <div class="rating">
-            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-            <span class="rating-text">5.0</span>
-          </div>
-
-          <!-- Mô tả sản phẩm -->
-          <div class="product-description">
-            <h3>Mô Tả Sản Phẩm</h3>
-            <p>
-              <?php echo htmlspecialchars($sanphamUpdate['MoTa']); ?>
-            </p>
-
-          </div>
-
-          <!-- Nút chức năng thêm vào giỏ hàng-->
-          <div class="d-flex flex-wrap mt-3">
-            <form action="sanpham.php" method="POST">
-              <input type="hidden" name="model" value="giohang" />
-              <input type="hidden" name="idsanpham" value="<?= $sanphamUpdate['IDSanPham'] ?>" />
-              <button style="border: none; border-radius: 5px;" type="submit" class="btn-cart me-3 px-4 pt-3 pb-3">
-                <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
-              </button>
-            </form>
-            <a href="#" class="btn-wishlist px-4 pt-3">
-              <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-            </a>
-          </div>
+      <?php else: ?>
+        <div class="text-center">
+          <p>Sản phẩm không tồn tại hoặc đã bị xóa.</p>
+          <a href="sanpham.php" class="btn btn-primary">Quay lại danh sách sản phẩm</a>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
   </section>
 
+  <!-- Sản Phẩm Hot Trend -->
   <section id="foodies" class="my-5">
     <div class="container my-5 py-5">
       <div class="section-header d-md-flex justify-content-between align-items-center">
         <h2 class="display-3 fw-normal">Sản Phẩm Hot Trend</h2>
         <div class="mb-4 mb-md-0"></div>
         <div>
-          <a href="../pages/sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          <a href="sanpham.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 mb-3">
             Mua Ngay
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
@@ -84,21 +141,20 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
       <div class="isotope-container row">
         <?php
         $sanphamListHotTrend = $sanpham->showProductsByCategory(8);
+        if (!empty($sanphamListHotTrend)):
+          foreach ($sanphamListHotTrend as $product):
         ?>
-
-        <?php if (!empty($sanphamListHotTrend)): ?>
-          <?php foreach ($sanphamListHotTrend as $product): ?>
             <div class="item cat col-md-4 col-lg-3 my-4">
               <div class="card position-relative">
-                <a href="../main/chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
-                  <img style="width: 306px; height: 279px;" src="/<?php echo $product['HinhAnh']; ?>"
-                    class="img-fluid rounded-4" alt="<?php echo $product['TenSanPham']; ?>">
+                <a href="chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
+                  <img style="width: 306px; height: 279px;" src="/<?= htmlspecialchars($product['HinhAnh']) ?>"
+                    class="img-fluid rounded-4" alt="<?= htmlspecialchars($product['TenSanPham']) ?>">
                 </a>
-                <div class="card-body p-0 ">
-                  <a href="single-product.html">
-                    <h3 class="card-title pt-4 m-0 d-flex justify-content-center"><?php echo $product['TenSanPham']; ?></h3>
+                <div class="card-body p-0">
+                  <a href="chitietsanpham.php?id=<?= $product['IDSanPham'] ?>">
+                    <h3 class="card-title pt-4 m-0 d-flex justify-content-center"><?= htmlspecialchars($product['TenSanPham']) ?></h3>
                   </a>
-                  <div class="card-text ">
+                  <div class="card-text">
                     <span class="rating secondary-font d-flex justify-content-center">
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
@@ -107,17 +163,33 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                       5.0
                     </span>
-                    <h3 class="secondary-font text-primary d-flex justify-content-center "><?php echo number_format($product['Gia'], 0); ?> VND</h3>
+
+                    <div class="price-container d-flex flex-column align-items-center justify-content-center" style="height: 80px;">
+                      <?php if ($product['PercentSale'] > 0) : ?>
+                        <!-- Sale price -->
+                        <h3 class="secondary-font text-primary mb-0">
+                          <?= number_format($product['SaleValue'], 0) ?> VND
+                        </h3>
+                        <!-- Original price with strikethrough -->
+                        <h5 class="secondary-font text-muted">
+                          <del><?= number_format($product['Gia'], 0) ?> VND</del>
+                        </h5>
+                      <?php else : ?>
+                        <!-- Only original price, centered vertically -->
+                        <h3 class="secondary-font text-primary">
+                          <?= number_format($product['Gia'], 0) ?> VND
+                        </h3>
+                        <!-- Empty spacer to maintain consistent height -->
+                        <div class="spacer" style="height: 24px;"></div>
+                      <?php endif; ?>
+                    </div>
+
                     <div class="d-flex justify-content-center">
-                      <form action="home.php" method="POST">
+                      <form method="POST" action="">
                         <input type="hidden" name="model" value="giohang" />
                         <input type="hidden" name="idsanpham" value="<?= $product['IDSanPham'] ?>" />
-
-                        <button class="mb-3" type="submit">Thêm Giỏ Hàng
-                        </button>
-
+                        <button class="mb-3 type=" submit">Thêm Giỏ Hàng</button>
                       </form>
-
                     </div>
                   </div>
                 </div>
@@ -125,7 +197,9 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
             </div>
           <?php endforeach; ?>
         <?php else: ?>
-          <p>Không có sản phẩm hot trend.</p>
+          <div class="text-center">
+            <p>Không có sản phẩm hot trend.</p>
+          </div>
         <?php endif; ?>
       </div>
     </div>
