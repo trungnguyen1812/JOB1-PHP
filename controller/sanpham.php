@@ -319,4 +319,31 @@ class SanPham
             echo "View not found: " . $viewPath;
         }
     }
+
+    //search san pham 
+    public function getBySearch($search)
+    {
+        $search = '%' . $search . '%'; // Add wildcards for LIKE query
+        $query = "SELECT s.*, l.TenLoaiSanPham 
+                 FROM sanpham s 
+                 JOIN loaisanpham l 
+                 ON s.IDLoaiSanPham = l.IDLoaiSanPham 
+                 WHERE s.TenSanPham LIKE ?";
+
+        $stmt = $this->db->getConnection()->prepare($query);
+        if ($stmt === false) {
+            return [];
+        }
+        $stmt->bind_param('s', $search);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        $stmt->close();
+        return $data;
+    }
 }
