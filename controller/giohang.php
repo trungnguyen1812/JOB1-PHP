@@ -30,6 +30,8 @@ class GioHang
                 $sanpham = $this->db->select($query);
 
                 if ($sanpham && $sp = $sanpham->fetch_assoc()) {
+                    //Nếu giá khuyến mãi > 0 → dùng giá khuyến mãi.
+                    // Nếu không có giá khuyến mãi (giá khuyến mãi = 0 hoặc null) → dùng giá gốc.
                     $donGia = ($sp['SaleValue'] > 0) ? $sp['SaleValue'] : $sp['Gia'];
 
                     $query = "INSERT INTO GioHang(IDKhachHang, IDSanPham, SoLuong, DonGia)
@@ -46,22 +48,26 @@ class GioHang
         }
     }
 
-
-
     // Add this method to your Giohang class
     public function getCartItems($userId)
     {
-        $query = "SELECT g.*, s.TenSanPham, s.Gia, s.PercentSale, 
-              CASE WHEN s.PercentSale > 0 
-                  THEN s.Gia - (s.Gia * s.PercentSale / 100) 
-                  ELSE 0 
-              END as SaleValue 
-              FROM GioHang g
-              JOIN SanPham s ON g.IDSanPham = s.IDSanPham
-              WHERE g.IDKhachHang = '$userId'";
-
+        $query = "
+            SELECT 
+                g.*, 
+                s.TenSanPham, 
+                s.Gia, 
+                s.SaleValue,
+                CASE 
+                    WHEN s.SaleValue > 0 THEN s.SaleValue 
+                    ELSE s.Gia 
+                END AS DonGia
+            FROM GioHang g
+            JOIN SanPham s ON g.IDSanPham = s.IDSanPham
+            WHERE g.IDKhachHang = '$userId'
+        ";
+    
         $result = $this->db->select($query);
-
+    
         if ($result) {
             $items = [];
             while ($row = $result->fetch_assoc()) {
@@ -69,8 +75,10 @@ class GioHang
             }
             return $items;
         }
+    
         return [];
     }
+    
     // Cap nhat gio hang 
     public function update($id, $soluong)
     {

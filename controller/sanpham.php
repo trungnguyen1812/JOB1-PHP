@@ -56,9 +56,9 @@ class SanPham
         $gia = floatval($data['Gia'] ?? 0);
         $soLuong = intval($data['SoLuong'] ?? 0);
         $moTa = trim($data['MoTa'] ?? '');
-        $percentSale = intval($data['PercentSale'] ?? 0);
+        $percentSale = intval($data['PercentSale'] ?? 0);// khai báo biến % giảm 
         $hinhAnh = $_FILES['HinhAnh'] ?? null;
-        $saleValue =  floatval($data['SaleValue'] ?? 0);
+        $saleValue =  floatval($data['SaleValue'] ?? 0);// khai báo biến giá giảm 
 
         // Xử lý upload file hình ảnh
         if ($hinhAnh && $hinhAnh["error"] === UPLOAD_ERR_OK) {

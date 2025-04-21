@@ -287,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="number" id="Gia" name="Gia" required>
 
                         <label for="SoLuong">Số lượng</label>
-                        <input type="number" id="SoLuong" name="SoLuong" required>
+                        <input type="number" id="SoLuong" name="SoLuong" min="1" required>
 
                         <label for="MoTa">Mô tả</label>
                         <textarea id="MoTa" name="MoTa" rows="4" required></textarea>

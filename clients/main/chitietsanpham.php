@@ -11,10 +11,10 @@ $giohang = new GioHang();
 
 // Get product by ID
 $productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$sanphamUpdate = null;
+$chiTietSanPham = null;
 $result = $sanpham->getByID($productId); // Note: getByID (case-sensitive)
 if ($result && $result->num_rows > 0) {
-  $sanphamUpdate = $result->fetch_assoc();
+  $chiTietSanPham = $result->fetch_assoc();
 }
 
 // Handle add-to-cart POST
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Tiết Sản Phẩm - <?php echo $sanphamUpdate ? htmlspecialchars($sanphamUpdate['TenSanPham']) : 'Không Tìm Thấy'; ?></title>
+  <title>Chi Tiết Sản Phẩm - <?php echo $chiTietSanPham ? htmlspecialchars($chiTietSanPham['TenSanPham']) : 'Không Tìm Thấy'; ?></title>
   <link rel="stylesheet" href="../css/detail.css">
   <style>
     .btn-cart:hover h5 {
@@ -57,31 +57,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- Section Chi Tiết Sản Phẩm -->
   <section class="product-details">
     <div class="container">
-      <?php if ($sanphamUpdate): ?>
+      <?php if ($chiTietSanPham): ?>
         <div class="product-wrapper">
           <!-- Hình ảnh sản phẩm -->
           <div class="product-image">
-            <img width="400" height="450" src="/<?php echo htmlspecialchars($sanphamUpdate['HinhAnh']); ?>"
-              alt="<?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?>" class="product-img">
+            <img width="400" height="450" src="/<?php echo htmlspecialchars($chiTietSanPham['HinhAnh']); ?>"
+              alt="<?php echo htmlspecialchars($chiTietSanPham['TenSanPham']); ?>" class="product-img">
           </div>
 
           <!-- Thông tin sản phẩm -->
           <div class="product-info">
-            <h1 class="product-title"><?php echo htmlspecialchars($sanphamUpdate['TenSanPham']); ?></h1>
+            <h1 class="product-title"><?php echo htmlspecialchars($chiTietSanPham['TenSanPham']); ?></h1>
             <div class="price-container">
-              <?php if ($sanphamUpdate['PercentSale'] > 0): ?>
+              <?php if ($chiTietSanPham['PercentSale'] > 0): ?>
                 <!-- Sale price -->
                 <p class="product-price text-primary mb-0">
-                  <?= number_format($sanphamUpdate['SaleValue'], 0); ?> VND
+                  <?= number_format($chiTietSanPham['SaleValue'], 0); ?> VND
                 </p>
                 <!-- Original price with strikethrough -->
                 <p class="product-price text-muted">
-                  <del><?= number_format($sanphamUpdate['Gia'], 0); ?> VND</del>
+                  <del><?= number_format($chiTietSanPham['Gia'], 0); ?> VND</del>
                 </p>
               <?php else: ?>
                 <!-- Only original price -->
                 <p class="product-price text-primary">
-                  <?= number_format($sanphamUpdate['Gia'], 0); ?> VND
+                  <?= number_format($chiTietSanPham['Gia'], 0); ?> VND
                 </p>
               <?php endif; ?>
             </div>
@@ -95,14 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- Mô tả sản phẩm -->
             <div class="product-description">
               <h3>Mô Tả Sản Phẩm</h3>
-              <p><?php echo htmlspecialchars($sanphamUpdate['MoTa']); ?></p>
+              <p><?php echo htmlspecialchars($chiTietSanPham['MoTa']); ?></p>
             </div>
 
             <!-- Nút chức năng -->
             <div class="d-flex flex-wrap mt-3">
               <form method="POST" action="">
                 <input type="hidden" name="model" value="giohang" />
-                <input type="hidden" name="idsanpham" value="<?= $sanphamUpdate['IDSanPham'] ?>" />
+                <input type="hidden" name="idsanpham" value="<?= $chiTietSanPham['IDSanPham'] ?>" />
                 <button style="border: none; border-radius: 5px;" type="submit" class="btn-cart me-3 px-4 pt-3 pb-3 ">
                   <h5 class="text-uppercase m-0">Thêm Giỏ Hàng</h5>
                 </button>

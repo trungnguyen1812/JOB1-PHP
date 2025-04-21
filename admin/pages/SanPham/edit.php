@@ -177,7 +177,7 @@ $sanphamUpdate = mysqli_fetch_assoc($sanpham->getById($_GET['id']));
                         <input type="number" id="Gia" name="Gia" value="<?= $sanphamUpdate['Gia'] ?>" required>
 
                         <label for="SoLuong">Số Lượng</label>
-                        <input type="number" id="SoLuong" name="SoLuong" value="<?= $sanphamUpdate['SoLuong'] ?>" required>
+                        <input type="number" id="SoLuong" name="SoLuong" min="1" value="<?= $sanphamUpdate['SoLuong'] ?>" required>
 
                         <label for="MoTa">Mô Tả</label>
                         <textarea id="MoTa" name="MoTa" rows="4" required><?= $sanphamUpdate['MoTa'] ?></textarea>
